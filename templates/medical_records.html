@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}السجلات الطبية - بيت المسيح{% endblock %}
+
+{% block content %}
+<div id="medicalRecordsPage" class="page-content">
+    <div class="page-title">
+        <h2>السجلات الطبية</h2>
+        {% if current_user.user_role in ['admin', 'doctor', 'nurse'] %}
+        <a href="{{ url_for('medical.add') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> إضافة سجل طبي
+        </a>
+        {% endif %}
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>رقم السجل</th>
+                    <th>اسم المريض</th>
+                    <th>رقم الملف</th>
+                    <th>التشخيص</th>
+                    <th>العلاج</th>
+                    <th>التاريخ</th>
+                    <th>الطبيب المعالج</th>
+                    <th>الإجراءات</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in medical_records %}
+                <tr>
+                    <td>MR-{{ record.id }}</td>
+                    <td>{{ record.patient_name }}</td>
+                    <td>{{ record.patient_file_number }}</td>
+                    <td>{{ record.diagnosis[:50] }}{% if record.diagnosis|length > 50 %}...{% endif %}</td>
+                    <td>{{ record.treatment[:50] }}{% if record.treatment|length > 50 %}...{% endif %}</td>
+                    <td>{{ record.date|date_format('%Y-%m-%d') }}</td>
+                    <td>{{ record.doctor_name }}</td>
+                    <td>
+                        <div class="action-btns">
+                            <a href="{{ url_for('medical.view', id=record.id) }}" class="action-btn btn-view">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            {% if current_user.user_role in ['admin', 'doctor'] %}
+                            <a href="{{ url_for('medical.edit', id=record.id) }}" class="action-btn btn-edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            {% endif %}
+                            {% if current_user.user_role == 'admin' %}
+                            <button class="action-btn btn-delete" onclick="confirmDelete('medical_record', {{ record.id }}, 'السجل الطبي للمريض {{ record.patient_name }}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

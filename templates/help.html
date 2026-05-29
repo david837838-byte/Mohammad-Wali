@@ -1,0 +1,1838 @@
+{% extends "base.html" %}
+
+{% block title %}مركز المساعدة - بيت المسيح{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="page-title">
+        <h2><i class="fas fa-question-circle"></i> مركز المساعدة والدعم الفني</h2>
+        <div>
+            <button class="btn btn-primary" onclick="window.print()">
+                <i class="fas fa-print"></i> طباعة الدليل
+            </button>
+            <button class="btn btn-success" onclick="downloadUserGuide()">
+                <i class="fas fa-download"></i> تحميل الدليل
+            </button>
+        </div>
+    </div>
+
+    <div class="help-container">
+        <!-- الشريط الجانبي -->
+        <div class="help-sidebar">
+            <div class="help-search">
+                <input type="text" id="helpSearch" placeholder="ابحث في الدليل..." class="form-control">
+                <button class="btn-search" onclick="searchHelp()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="help-nav">
+                <h4><i class="fas fa-list"></i> فهرس المحتويات</h4>
+                <ul id="helpToc">
+                    <li><a href="#getting-started" onclick="scrollToSection('getting-started')"><i class="fas fa-play"></i> بدء الاستخدام</a></li>
+                    <li><a href="#dashboard" onclick="scrollToSection('dashboard')"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a></li>
+                    <li><a href="#patients" onclick="scrollToSection('patients')"><i class="fas fa-procedures"></i> إدارة المرضى</a></li>
+                    <li><a href="#medical" onclick="scrollToSection('medical')"><i class="fas fa-file-medical"></i> السجلات الطبية</a></li>
+                    <li><a href="#visits" onclick="scrollToSection('visits')"><i class="fas fa-calendar-check"></i> إدارة الزيارات</a></li>
+                    <li><a href="#reports" onclick="scrollToSection('reports')"><i class="fas fa-chart-bar"></i> التقارير والإحصائيات</a></li>
+                    <li><a href="#users" onclick="scrollToSection('users')"><i class="fas fa-users-cog"></i> إدارة المستخدمين</a></li>
+                    <li><a href="#settings" onclick="scrollToSection('settings')"><i class="fas fa-cogs"></i> الإعدادات</a></li>
+                    <li><a href="#troubleshooting" onclick="scrollToSection('troubleshooting')"><i class="fas fa-wrench"></i> استكشاف الأخطاء</a></li>
+                    <li><a href="#faq" onclick="scrollToSection('faq')"><i class="fas fa-question"></i> الأسئلة الشائعة</a></li>
+                </ul>
+            </div>
+
+            <div class="quick-links">
+                <h4><i class="fas fa-bolt"></i> روابط سريعة</h4>
+                <div class="quick-link-item" onclick="window.location.href='/patients'">
+                    <i class="fas fa-procedures"></i> الذهاب إلى المرضى
+                </div>
+                <div class="quick-link-item" onclick="window.location.href='/medical'">
+                    <i class="fas fa-file-medical"></i> الذهاب إلى السجلات الطبية
+                </div>
+                <div class="quick-link-item" onclick="window.location.href='/reports'">
+                    <i class="fas fa-chart-line"></i> الذهاب إلى التقارير
+                </div>
+            </div>
+
+            <div class="help-contact">
+                <h4><i class="fas fa-headset"></i> اتصل بنا</h4>
+                <p>لديك سؤال أو مشكلة؟</p>
+                <div class="contact-methods">
+                    <p><i class="fas fa-envelope"></i> <strong>البريد الإلكتروني:</strong><br>support@hospital-system.com</p>
+                    <p><i class="fas fa-phone"></i> <strong>الهاتف:</strong><br>800 123 4567</p>
+                    <p><i class="fas fa-clock"></i> <strong>ساعات العمل:</strong><br>الأحد - الخميس: 8 صباحاً - 5 مساءً</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="help-content">
+            <!-- بدء الاستخدام -->
+            <section id="getting-started" class="help-section">
+                <h3><i class="fas fa-play-circle"></i> بدء الاستخدام</h3>
+                
+                <div class="help-card">
+                    <h4>👋 الترحيب بالنظام</h4>
+                    <p>مرحباً بك في بيت المسيح، نظام متكامل لإدارة كافة العمليات الطبية والإدارية في المؤسسات الصحية.</p>
+                    <p>تم تصميم النظام ليكون سهل الاستخدام ويوفر جميع الأدوات التي تحتاجها لإدارة عملك بكفاءة.</p>
+                </div>
+
+                <div class="help-card">
+                    <h4>🔐 تسجيل الدخول الأول</h4>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>فتح صفحة تسجيل الدخول</h5>
+                                <p>افتح المتصفح واذهب إلى العنوان: <code>http://localhost:5000</code></p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>إدخال بيانات الدخول</h5>
+                                <p>استخدم بيانات الدخول الافتراضية:</p>
+                                <ul>
+                                    <li><strong>مدير النظام:</strong> admin / admin123</li>
+                                    <li><strong>طبيب:</strong> doctor1 / doctor123</li>
+                                    <li><strong>ممرض/ة:</strong> nurse1 / nurse123</li>
+                                    <li><strong>مشاهد:</strong> viewer / view123</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>اختيار الدور</h5>
+                                <p>اختر الدور المناسب من قائمة الأدوار</p>
+                                <img src="/static/images/login-role-select.png" alt="اختيار الدور" class="help-image">
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h5>الدخول للنظام</h5>
+                                <p>اضغط على زر "تسجيل الدخول" للدخول إلى لوحة التحكم</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <strong>ملاحظة هامة:</strong> يجب تغيير كلمات المرور الافتراضية بعد أول دخول لأسباب أمنية.
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>🎯 فهم الصلاحيات</h4>
+                    <p>يحتوي النظام على 4 مستويات من الصلاحيات:</p>
+                    <div class="permissions-grid">
+                        <div class="permission-card role-admin">
+                            <h5><i class="fas fa-user-shield"></i> مدير النظام</h5>
+                            <ul>
+                                <li>إدارة جميع المستخدمين</li>
+                                <li>التحكم الكامل في النظام</li>
+                                <li>تصدير واستيراد البيانات</li>
+                                <li>تعديل الإعدادات</li>
+                            </ul>
+                        </div>
+                        <div class="permission-card role-doctor">
+                            <h5><i class="fas fa-user-md"></i> طبيب</h5>
+                            <ul>
+                                <li>إدارة المرضى</li>
+                                <li>إضافة السجلات الطبية</li>
+                                <li>جدولة الزيارات</li>
+                                <li>عرض التقارير</li>
+                            </ul>
+                        </div>
+                        <div class="permission-card role-nurse">
+                            <h5><i class="fas fa-user-nurse"></i> ممرض/ممرضة</h5>
+                            <ul>
+                                <li>إضافة المرضى</li>
+                                <li>تحديث المعلومات الأساسية</li>
+                                <li>عرض السجلات</li>
+                                <li>إدارة الزيارات البسيطة</li>
+                            </ul>
+                        </div>
+                        <div class="permission-card role-view">
+                            <h5><i class="fas fa-eye"></i> مشاهد</h5>
+                            <ul>
+                                <li>عرض البيانات فقط</li>
+                                <li>لا يمكن التعديل أو الحذف</li>
+                                <li>عرض التقارير</li>
+                                <li>بحث في البيانات</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- لوحة التحكم -->
+            <section id="dashboard" class="help-section">
+                <h3><i class="fas fa-tachometer-alt"></i> لوحة التحكم</h3>
+                
+                <div class="help-card">
+                    <h4>📊 نظرة عامة على لوحة التحكم</h4>
+                    <p>لوحة التحكم هي الصفحة الرئيسية التي تظهر بعد تسجيل الدخول، وتحتوي على:</p>
+                    
+                    <div class="dashboard-components">
+                        <div class="component">
+                            <h5><i class="fas fa-chart-pie"></i> بطاقات الإحصائيات</h5>
+                            <p>تعرض إحصائيات سريعة عن النظام:</p>
+                            <ul>
+                                <li>عدد المرضى المسجلين</li>
+                                <li>عدد الأطباء النشطين</li>
+                                <li>عدد المستخدمين</li>
+                                <li>عدد الزيارات اليوم</li>
+                            </ul>
+                        </div>
+                        <div class="component">
+                            <h5><i class="fas fa-users"></i> أحدث المرضى</h5>
+                            <p>جدول يعرض آخر 5 مرضى تم تسجيلهم</p>
+                        </div>
+                        <div class="component">
+                            <h5><i class="fas fa-bell"></i> الإشعارات</h5>
+                            <p>إشعارات هامة تتطلب انتباهك</p>
+                        </div>
+                        <div class="component">
+                            <h5><i class="fas fa-calendar-day"></i> الزيارات القادمة</h5>
+                            <p>زيارات اليوم والزيارات المجدولة</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>🔄 تحديث البيانات</h4>
+                    <p>للتأكد من رؤية أحدث البيانات:</p>
+                    <ol>
+                        <li>اضغط على زر <strong>تحديث</strong> في الأعلى</li>
+                        <li>أو اضغط <kbd>F5</kbd> على الكيبورد</li>
+                        <li>أو انتظر تحديث تلقائي كل دقيقة</li>
+                    </ol>
+                </div>
+
+                <div class="help-card">
+                    <h4>🚀 النصائح السريعة</h4>
+                    <div class="tips">
+                        <div class="tip">
+                            <i class="fas fa-mouse-pointer"></i>
+                            <p>مرر مؤشر الفأرة على البطاقات الإحصائية لعرض تفاصيل إضافية</p>
+                        </div>
+                        <div class="tip">
+                            <i class="fas fa-search"></i>
+                            <p>استخدم البحث السريع في الأعلى للعثور على أي شيء بسرعة</p>
+                        </div>
+                        <div class="tip">
+                            <i class="fas fa-star"></i>
+                            <p>اضغط على زر النجمة بجانب الأسماء لإضافتها للمفضلة</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- إدارة المرضى -->
+            <section id="patients" class="help-section">
+                <h3><i class="fas fa-procedures"></i> إدارة المرضى</h3>
+                
+                <div class="help-card video-guide">
+                    <h4>🎥 دليل مرئي لإضافة مريض</h4>
+                    <div class="video-placeholder">
+                        <i class="fas fa-video"></i>
+                        <p>اضغط للتشغيل: "كيفية إضافة مريض جديد"</p>
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>➕ إضافة مريض جديد</h4>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>الذهاب إلى قسم المرضى</h5>
+                                <p>من القائمة الجانبية، اضغط على <strong>"المرضى"</strong></p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>فتح نموذج الإضافة</h5>
+                                <p>اضغط على زر <button class="btn-small btn-primary"><i class="fas fa-plus"></i> إضافة مريض جديد</button></p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>ملء بيانات المريض</h5>
+                                <p>املأ جميع الحقول المطلوبة (*):</p>
+                                <table class="field-table">
+                                    <tr>
+                                        <th>الحقل</th>
+                                        <th>الوصف</th>
+                                        <th>مطلوب</th>
+                                    </tr>
+                                    <tr>
+                                        <td>اسم المريض</td>
+                                        <td>الاسم الكامل للمريض</td>
+                                        <td>✓</td>
+                                    </tr>
+                                    <tr>
+                                        <td>العمر</td>
+                                        <td>عمر المريض بالأرقام</td>
+                                        <td>✓</td>
+                                    </tr>
+                                    <tr>
+                                        <td>الجنس</td>
+                                        <td>ذكر أو أنثى</td>
+                                        <td>✓</td>
+                                    </tr>
+                                    <tr>
+                                        <td>رقم الهاتف</td>
+                                        <td>رقم الهاتف النشط</td>
+                                        <td>✓</td>
+                                    </tr>
+                                    <tr>
+                                        <td>العنوان</td>
+                                        <td>عنوان السكن</td>
+                                        <td>✓</td>
+                                    </tr>
+                                    <tr>
+                                        <td>التشخيص الأولي</td>
+                                        <td>التشخيص المبدئي</td>
+                                        <td>✗</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h5>حفظ البيانات</h5>
+                                <p>اضغط على <button class="btn-small btn-success"><i class="fas fa-save"></i> حفظ المريض</button></p>
+                                <p>سيتم توليد <strong>رقم ملف تلقائياً</strong> للمريض</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>🔍 البحث عن المرضى</h4>
+                    <p>للبحث عن مريض معين:</p>
+                    <div class="search-methods">
+                        <div class="method">
+                            <h5><i class="fas fa-search"></i> البحث السريع</h5>
+                            <p>اكتب في مربع البحث أعلى الجدول:</p>
+                            <input type="text" placeholder="ابحث بالاسم أو رقم الملف..." class="form-control demo-input" readonly>
+                            <p>يمكن البحث بـ: الاسم، رقم الملف، رقم الهاتف</p>
+                        </div>
+                        <div class="method">
+                            <h5><i class="fas fa-filter"></i> التصفية المتقدمة</h5>
+                            <p>استخدم عوامل التصفية:</p>
+                            <ul>
+                                <li>حسب الجنس</li>
+                                <li>حسب العمر</li>
+                                <li>حسب الحالة</li>
+                                <li>حسب تاريخ التسجيل</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>✏️ تعديل بيانات المريض</h4>
+                    <ol>
+                        <li>ابحث عن المريض المطلوب</li>
+                        <li>اضغط على زر <button class="btn-small btn-edit"><i class="fas fa-edit"></i></button></li>
+                        <li>قم بالتعديلات المطلوبة</li>
+                        <li>اضغط على <button class="btn-small btn-success">تحديث</button></li>
+                    </ol>
+                    <div class="note">
+                        <strong>ملاحظة:</strong> يمكن للممرضين والأطباء والمديرين التعديل، بينما يمكن للمشاهدين العرض فقط.
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>👁️ عرض تفاصيل المريض</h4>
+                    <p>لعرض كافة معلومات المريض:</p>
+                    <ol>
+                        <li>اضغط على زر <button class="btn-small btn-view"><i class="fas fa-eye"></i></button></li>
+                        <li>أو اضغط على اسم المريض في الجدول</li>
+                    </ol>
+                    <p>ستظهر صفحة تحتوي على:</p>
+                    <ul>
+                        <li>المعلومات الشخصية</li>
+                        <li>السجلات الطبية</li>
+                        <li>تاريخ الزيارات</li>
+                        <li>التقارير المرتبطة</li>
+                    </ul>
+                </div>
+
+                <div class="help-card warning">
+                    <h4>⚠️ حذف المريض</h4>
+                    <p><strong>هذا الإجراء للمديرين فقط!</strong></p>
+                    <p>لحذف مريض:</p>
+                    <ol>
+                        <li>اضغط على زر <button class="btn-small btn-danger"><i class="fas fa-trash"></i></button></li>
+                        <li>ستظهر نافذة تأكيد</li>
+                        <li>اكتب "تأكيد" في المربع</li>
+                        <li>اضغط على زر الحذف</li>
+                    </ol>
+                    <div class="warning-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>تحذير:</strong> هذا الإجراء لا يمكن التراجع عنه ويمحو جميع السجلات المرتبطة بالمريض!
+                    </div>
+                </div>
+            </section>
+
+            <!-- السجلات الطبية -->
+            <section id="medical" class="help-section">
+                <h3><i class="fas fa-file-medical"></i> السجلات الطبية</h3>
+                
+                <div class="help-card">
+                    <h4>📝 فهم السجلات الطبية</h4>
+                    <p>السجلات الطبية هي سجل كامل لتاريخ المريض الطبي، وتشمل:</p>
+                    <div class="record-types">
+                        <div class="record-type">
+                            <h5><i class="fas fa-stethoscope"></i> التشخيص</h5>
+                            <p>تشخيص الحالة المرضية</p>
+                        </div>
+                        <div class="record-type">
+                            <h5><i class="fas fa-pills"></i> العلاج</h5>
+                            <p>العلاج الموصوف والأدوية</p>
+                        </div>
+                        <div class="record-type">
+                            <h5><i class="fas fa-notes-medical"></i> الملاحظات</h5>
+                            <p>ملاحظات إضافية من الطبيب</p>
+                        </div>
+                        <div class="record-type">
+                            <h5><i class="fas fa-calendar-alt"></i> المتابعة</h5>
+                            <p>مواعيد المتابعة والتقارير</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>➕ إضافة سجل طبي جديد</h4>
+                    <ol>
+                        <li>اذهب إلى قسم <strong>"السجلات الطبية"</strong></li>
+                        <li>اضغط على <button class="btn-small btn-primary"><i class="fas fa-plus"></i> إضافة سجل طبي</button></li>
+                        <li>اختر المريض من القائمة المنسدلة</li>
+                        <li>املأ الحقول:
+                            <ul>
+                                <li><strong>التشخيص:</strong> الحالة المرضية</li>
+                                <li><strong>العلاج:</strong> الخطة العلاجية</li>
+                                <li><strong>الملاحظات:</strong> معلومات إضافية</li>
+                                <li><strong>التاريخ:</strong> تاريخ الفحص (افتراضي: اليوم)</li>
+                            </ul>
+                        </li>
+                        <li>اضغط على <button class="btn-small btn-success">حفظ السجل</button></li>
+                    </ol>
+                </div>
+
+                <div class="help-card">
+                    <h4>📋 نماذج السجلات الجاهزة</h4>
+                    <p>للتسريع، يمكنك استخدام النماذج الجاهزة:</p>
+                    <div class="templates">
+                        <select class="form-control" onchange="loadTemplate(this.value)">
+                            <option value="">اختر نموذجاً جاهزاً</option>
+                            <option value="checkup">فحص دوري</option>
+                            <option value="prescription">روشتة دواء</option>
+                            <option value="lab">تقرير مختبر</option>
+                            <option value="xray">تقرير أشعة</option>
+                        </select>
+                        <div class="template-preview">
+                            <h5>معاينة النموذج:</h5>
+                            <div id="templateContent"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>📄 إرفاق المستندات</h4>
+                    <p>يمكنك إرفاق مستندات مع السجلات:</p>
+                    <ol>
+                        <li>في نموذج السجل، اضغط على <button class="btn-small"><i class="fas fa-paperclip"></i> إرفاق ملف</button></li>
+                        <li>اختر الملف من جهازك</li>
+                        <li>الأنواع المسموحة: PDF, JPG, PNG, DOC</li>
+                        <li>الحجم الأقصى: 10MB</li>
+                    </ol>
+                    <div class="note">
+                        <strong>ملاحظة:</strong> المستندات المحملة تكون مرئية فقط للمستخدمين المصرح لهم.
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>🖨️ طباعة السجلات</h4>
+                    <p>لطباعة سجل طبي:</p>
+                    <ol>
+                        <li>افتح السجل المطلوب</li>
+                        <li>اضغط على <button class="btn-small"><i class="fas fa-print"></i> طباعة</button></li>
+                        <li>اختر إعدادات الطباعة:
+                            <ul>
+                                <li><input type="checkbox" checked> تضمين الترويسة</li>
+                                <li><input type="checkbox" checked> تضمين التوقيع</li>
+                                <li><input type="checkbox"> طباعة خلفية</li>
+                            </ul>
+                        </li>
+                        <li>اضغط على زر الطباعة</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- إدارة الزيارات -->
+            <section id="visits" class="help-section">
+                <h3><i class="fas fa-calendar-check"></i> إدارة الزيارات</h3>
+                
+                <div class="help-card">
+                    <h4>📅 جدولة زيارة جديدة</h4>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>اختيار المريض</h5>
+                                <p>ابحث عن المريض أو اختره من القائمة</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>تحديد التاريخ والوقت</h5>
+                                <p>استخدم التقويم لاختيار التاريخ المناسب</p>
+                                <input type="date" class="form-control demo-input" value="{{ current_date }}" readonly>
+                                <input type="time" class="form-control demo-input" value="10:00" readonly>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>تحديد نوع الزيارة</h5>
+                                <select class="form-control demo-input" readonly>
+                                    <option>فحص دوري</option>
+                                    <option>متابعة علاج</option>
+                                    <option>تحليل مخبري</option>
+                                    <option>أشعة</option>
+                                    <option>استشارة</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h5>حجز الموعد</h5>
+                                <p>اضغط على <button class="btn-small btn-success">حجز الموعد</button></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>👁️ عرض التقويم</h4>
+                    <p>لعرض جميع المواعيد بشكل تقويمي:</p>
+                    <ol>
+                        <li>اضغط على زر <button class="btn-small"><i class="fas fa-calendar-alt"></i> عرض التقويم</button></li>
+                        <li>استخدم الأسهم للتنقل بين الأشهر</li>
+                        <li>اضغط على اليوم لرؤية المواعيد</li>
+                        <li>اضغط على الموعد لعرض تفاصيله</li>
+                    </ol>
+                    <div class="calendar-view">
+                        <div class="calendar-header">
+                            <button><i class="fas fa-chevron-right"></i></button>
+                            <h5>يناير 2024</h5>
+                            <button><i class="fas fa-chevron-left"></i></button>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="day-header">أحد</div>
+                            <div class="day-header">إثنين</div>
+                            <div class="day-header">ثلاثاء</div>
+                            <div class="day-header">أربعاء</div>
+                            <div class="day-header">خميس</div>
+                            <div class="day-header">جمعة</div>
+                            <div class="day-header">سبت</div>
+                            <!-- أيام الشهر -->
+                            <div class="day">1</div>
+                            <div class="day">2</div>
+                            <div class="day has-visit">3 <span class="visit-count">2</span></div>
+                            <!-- ... -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>🔔 تذكيرات المواعيد</h4>
+                    <p>لتفعيل التذكيرات:</p>
+                    <ol>
+                        <li>اذهب إلى إعدادات الملف الشخصي</li>
+                        <li>اختر "التنبيهات والإشعارات"</li>
+                        <li>حدد أنواع التنبيهات:
+                            <ul>
+                                <li><input type="checkbox" checked> قبل الموعد بساعة</li>
+                                <li><input type="checkbox"> قبل الموعد بيوم</li>
+                                <li><input type="checkbox"> عبر البريد الإلكتروني</li>
+                                <li><input type="checkbox"> عبر الرسائل النصية</li>
+                            </ul>
+                        </li>
+                        <li>حفظ الإعدادات</li>
+                    </ol>
+                </div>
+
+                <div class="help-card">
+                    <h4>🔄 إدارة حالات الزيارات</h4>
+                    <p>تحديث حالة الزيارة:</p>
+                    <div class="status-options">
+                        <div class="status-option status-scheduled">
+                            <h5><i class="fas fa-clock"></i> مجدول</h5>
+                            <p>الزيارة مسجلة ولم تتم بعد</p>
+                        </div>
+                        <div class="status-option status-completed">
+                            <h5><i class="fas fa-check-circle"></i> مكتمل</h5>
+                            <p>تمت الزيارة بنجاح</p>
+                            <button class="btn-small">تحديث للحالة</button>
+                        </div>
+                        <div class="status-option status-cancelled">
+                            <h5><i class="fas fa-times-circle"></i> ملغى</h5>
+                            <p>ألغيت الزيارة</p>
+                            <input type="text" placeholder="سبب الإلغاء..." class="form-control">
+                        </div>
+                        <div class="status-option status-rescheduled">
+                            <h5><i class="fas fa-calendar-times"></i> مؤجل</h5>
+                            <p>تم تأجيل الزيارة</p>
+                            <input type="date" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- التقارير والإحصائيات -->
+            <section id="reports" class="help-section">
+                <h3><i class="fas fa-chart-bar"></i> التقارير والإحصائيات</h3>
+                
+                <div class="help-card">
+                    <h4>📈 أنواع التقارير المتاحة</h4>
+                    <div class="report-types">
+                        <div class="report-type">
+                            <h5><i class="fas fa-users"></i> تقرير المرضى</h5>
+                            <p>جميع بيانات المرضى مع إمكانية التصفية</p>
+                            <button class="btn-small" onclick="generateReport('patients')">إنشاء التقرير</button>
+                        </div>
+                        <div class="report-type">
+                            <h5><i class="fas fa-calendar-alt"></i> تقرير الزيارات</h5>
+                            <p>الزيارات في فترة محددة مع تحليل</p>
+                            <button class="btn-small" onclick="generateReport('visits')">إنشاء التقرير</button>
+                        </div>
+                        <div class="report-type">
+                            <h5><i class="fas fa-file-medical"></i> تقرير السجلات</h5>
+                            <p>السجلات الطبية مع إحصائيات التشخيصات</p>
+                            <button class="btn-small" onclick="generateReport('medical')">إنشاء التقرير</button>
+                        </div>
+                        <div class="report-type">
+                            <h5><i class="fas fa-chart-pie"></i> تقرير إحصائي</h5>
+                            <p>إحصائيات عامة وأرقام رئيسية</p>
+                            <button class="btn-small" onclick="generateReport('stats')">إنشاء التقرير</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>⚙️ تخصيص التقارير</h4>
+                    <p>لإنشاء تقرير مخصص:</p>
+                    <div class="report-customization">
+                        <div class="custom-step">
+                            <h5>1. اختيار نوع التقرير</h5>
+                            <select class="form-control">
+                                <option>تقرير المرضى</option>
+                                <option>تقرير الزيارات</option>
+                                <option>تقرير السجلات الطبية</option>
+                                <option>تقرير مالي</option>
+                            </select>
+                        </div>
+                        <div class="custom-step">
+                            <h5>2. تحديد الفترة الزمنية</h5>
+                            <div class="date-range">
+                                <input type="date" class="form-control" placeholder="من تاريخ">
+                                <span>إلى</span>
+                                <input type="date" class="form-control" placeholder="إلى تاريخ">
+                            </div>
+                        </div>
+                        <div class="custom-step">
+                            <h5>3. اختيار الأعمدة</h5>
+                            <div class="columns-select">
+                                <label><input type="checkbox" checked> الاسم</label>
+                                <label><input type="checkbox" checked> العمر</label>
+                                <label><input type="checkbox"> الجنس</label>
+                                <label><input type="checkbox" checked> الهاتف</label>
+                                <label><input type="checkbox"> العنوان</label>
+                                <label><input type="checkbox"> التشخيص</label>
+                            </div>
+                        </div>
+                        <div class="custom-step">
+                            <h5>4. تنسيق التقرير</h5>
+                            <select class="form-control">
+                                <option>Excel (.xlsx)</option>
+                                <option>PDF (.pdf)</option>
+                                <option>Word (.docx)</option>
+                                <option>CSV (.csv)</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary">إنشاء التقرير</button>
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>📊 قراءة الرسوم البيانية</h4>
+                    <div class="charts-guide">
+                        <div class="chart-type">
+                            <h5><i class="fas fa-chart-bar"></i> الأعمدة</h5>
+                            <p>لمقارنة القيم بين الفئات</p>
+                            <div class="chart-demo bar-chart"></div>
+                        </div>
+                        <div class="chart-type">
+                            <h5><i class="fas fa-chart-pie"></i> الدائرية</h5>
+                            <p>لعرض النسب المئوية</p>
+                            <div class="chart-demo pie-chart"></div>
+                        </div>
+                        <div class="chart-type">
+                            <h5><i class="fas fa-chart-line"></i> الخطية</h5>
+                            <p>لمتابعة التغير عبر الزمن</p>
+                            <div class="chart-demo line-chart"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>📤 تصدير التقارير</h4>
+                    <p>لتصدير أي تقرير:</p>
+                    <div class="export-options">
+                        <div class="export-option">
+                            <h5><i class="fas fa-file-excel"></i> إلى Excel</h5>
+                            <p>مثالي للتحليل والطباعة</p>
+                            <button class="btn-small btn-success">تصدير Excel</button>
+                        </div>
+                        <div class="export-option">
+                            <h5><i class="fas fa-file-pdf"></i> إلى PDF</h5>
+                            <p>للحفظ والمشاركة</p>
+                            <button class="btn-small btn-danger">تصدير PDF</button>
+                        </div>
+                        <div class="export-option">
+                            <h5><i class="fas fa-print"></i> طباعة مباشرة</h5>
+                            <p>للاستخدام الفوري</p>
+                            <button class="btn-small btn-warning">طباعة</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- إدارة المستخدمين -->
+            <section id="users" class="help-section">
+                <h3><i class="fas fa-users-cog"></i> إدارة المستخدمين</h3>
+                
+                <div class="help-card warning">
+                    <h4>⚠️ صلاحيات المديرين فقط</h4>
+                    <p>هذا القسم متاح فقط لمستخدمي دور <strong>"مدير النظام"</strong>.</p>
+                    <p>إذا كنت لا ترى هذا القسم، فأنت لا تملك الصلاحيات الكافية.</p>
+                </div>
+
+                <div class="help-card">
+                    <h4>👤 إضافة مستخدم جديد</h4>
+                    <ol>
+                        <li>اذهب إلى قسم <strong>"إدارة المستخدمين"</strong></li>
+                        <li>اضغط على <button class="btn-small btn-primary"><i class="fas fa-user-plus"></i> إضافة مستخدم جديد</button></li>
+                        <li>املأ البيانات الأساسية:
+                            <ul>
+                                <li><strong>الاسم الكامل</strong> (مطلوب)</li>
+                                <li><strong>اسم المستخدم</strong> (مطلوب، فريد)</li>
+                                <li><strong>كلمة المرور</strong> (6 أحرف على الأقل)</li>
+                            </ul>
+                        </li>
+                        <li>اختر الدور المناسب</li>
+                        <li>اضغط على <button class="btn-small btn-success">حفظ المستخدم</button></li>
+                    </ol>
+                </div>
+
+                <div class="help-card">
+                    <h4>🔐 سياسة كلمات المرور</h4>
+                    <div class="password-policy">
+                        <div class="policy-rule">
+                            <i class="fas fa-check-circle"></i>
+                            <span>6 أحرف على الأقل</span>
+                        </div>
+                        <div class="policy-rule">
+                            <i class="fas fa-check-circle"></i>
+                            <span>تحتوي على أرقام</span>
+                        </div>
+                        <div class="policy-rule">
+                            <i class="fas fa-check-circle"></i>
+                            <span>لا تحتوي على اسم المستخدم</span>
+                        </div>
+                        <div class="policy-rule">
+                            <i class="fas fa-check-circle"></i>
+                            <span>تتغير كل 90 يوماً</span>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <strong>نصيحة أمنية:</strong> استخدم كلمات مرور قوية ولا تشاركها مع أحد.
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>🔄 إعادة تعيين كلمة المرور</h4>
+                    <p>إذا نسي المستخدم كلمة المرور:</p>
+                    <ol>
+                        <li>ابحث عن المستخدم في الجدول</li>
+                        <li>اضغط على <button class="btn-small"><i class="fas fa-key"></i> إعادة تعيين</button></li>
+                        <li>ستظهر كلمة مرور مؤقتة</li>
+                        <li>أعطِ الكلمة للمستخدم لتسجيل الدخول</li>
+                        <li>يجب على المستخدم تغييرها بعد أول دخول</li>
+                    </ol>
+                </div>
+
+                <div class="help-card">
+                    <h4>📊 مراقبة نشاط المستخدمين</h4>
+                    <p>لعرض نشاط المستخدمين:</p>
+                    <div class="activity-monitoring">
+                        <div class="activity-item">
+                            <h5><i class="fas fa-sign-in-alt"></i> آخر تسجيل دخول</h5>
+                            <p>عرض آخر مرة سجل فيها المستخدم دخول</p>
+                        </div>
+                        <div class="activity-item">
+                            <h5><i class="fas fa-history"></i> سجل النشاط</h5>
+                            <p>جميع الإجراءات التي قام بها المستخدم</p>
+                        </div>
+                        <div class="activity-item">
+                            <h5><i class="fas fa-exclamation-triangle"></i> محاولات فاشلة</h5>
+                            <p>محاولات تسجيل دخول فاشلة</p>
+                        </div>
+                        <div class="activity-item">
+                            <h5><i class="fas fa-user-clock"></i> وقت الجلسة</h5>
+                            <p>مدة بقاء المستخدم مسجلاً دخول</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- الإعدادات -->
+            <section id="settings" class="help-section">
+                <h3><i class="fas fa-cogs"></i> الإعدادات</h3>
+                
+                <div class="help-card">
+                    <h4>⚙️ إعدادات النظام العامة</h4>
+                    <div class="settings-categories">
+                        <div class="setting-category">
+                            <h5><i class="fas fa-hospital"></i> إعدادات المؤسسة</h5>
+                            <ul>
+                                <li>اسم المستشفى/العيادة</li>
+                                <li>الشعار</li>
+                                <li>معلومات الاتصال</li>
+                                <li>العنوان</li>
+                            </ul>
+                        </div>
+                        <div class="setting-category">
+                            <h5><i class="fas fa-bell"></i> الإشعارات والتنبيهات</h5>
+                            <ul>
+                                <li>إشعارات البريد الإلكتروني</li>
+                                <li>التنبيهات داخل النظام</li>
+                                <li>تذكيرات المواعيد</li>
+                                <li>الإشعارات العاجلة</li>
+                            </ul>
+                        </div>
+                        <div class="setting-category">
+                            <h5><i class="fas fa-print"></i> إعدادات الطباعة</h5>
+                            <ul>
+                                <li>تنسيق التقارير</li>
+                                <li>رأس وتذييل الصفحة</li>
+                                <li>إعدادات الطابعة</li>
+                                <li>نماذج الطباعة</li>
+                            </ul>
+                        </div>
+                        <div class="setting-category">
+                            <h5><i class="fas fa-database"></i> إدارة البيانات</h5>
+                            <ul>
+                                <li>نسخ احتياطي</li>
+                                <li>استعادة البيانات</li>
+                                <li>تصدير البيانات</li>
+                                <li>حذف البيانات</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>📊 تكامل Google Sheets</h4>
+                    <p>لربط النظام مع Google Sheets:</p>
+                    <div class="integration-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>إنشاء جدول Google Sheets</h5>
+                                <p>اذهب إلى drive.google.com وأنشئ جدولاً جديداً</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>نسخ معرف الجدول</h5>
+                                <p>انسخ ID الجدول من الرابط</p>
+                                <code>https://docs.google.com/spreadsheets/d/<strong>ID_HERE</strong>/edit</code>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>إضافة المعرف في النظام</h5>
+                                <p>الصق ID في حقل "معرف جدول Google Sheets"</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h5>اختبار الاتصال</h5>
+                                <p>اضغط على <button class="btn-small"><i class="fas fa-plug"></i> اختبار الاتصال</button></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>💾 النسخ الاحتياطي</h4>
+                    <p>لإنشاء نسخة احتياطية من البيانات:</p>
+                    <div class="backup-options">
+                        <div class="backup-option">
+                            <h5><i class="fas fa-cloud-download-alt"></i> نسخ احتياطي تلقائي</h5>
+                            <p>ضبط النسخ التلقائي:</p>
+                            <select class="form-control">
+                                <option>يومياً</option>
+                                <option>أسبوعياً</option>
+                                <option>شهرياً</option>
+                                <option>معطلة</option>
+                            </select>
+                        </div>
+                        <div class="backup-option">
+                            <h5><i class="fas fa-download"></i> نسخ احتياطي يدوي</h5>
+                            <p>لإنشاء نسخة فورية:</p>
+                            <button class="btn-small btn-success">إنشاء نسخة احتياطية</button>
+                        </div>
+                        <div class="backup-option">
+                            <h5><i class="fas fa-upload"></i> استعادة بيانات</h5>
+                            <p>لاستعادة نسخة سابقة:</p>
+                            <input type="file" class="form-control" accept=".json,.backup">
+                            <button class="btn-small btn-warning">استعادة</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- استكشاف الأخطاء -->
+            <section id="troubleshooting" class="help-section">
+                <h3><i class="fas fa-wrench"></i> استكشاف الأخطاء وإصلاحها</h3>
+                
+                <div class="help-card error">
+                    <h4>🔴 مشاكل شائعة وحلولها</h4>
+                    
+                    <div class="problem-solution">
+                        <div class="problem">
+                            <h5><i class="fas fa-times-circle"></i> لا يمكن تسجيل الدخول</h5>
+                            <p><strong>الأعراض:</strong> تظهر رسالة "اسم المستخدم أو كلمة المرور غير صحيحة"</p>
+                        </div>
+                        <div class="solution">
+                            <h5><i class="fas fa-check-circle"></i> الحلول:</h5>
+                            <ol>
+                                <li>تأكد من صحة اسم المستخدم وكلمة المرور</li>
+                                <li>تحقق من أن زر Caps Lock غير مفعل</li>
+                                <li>جرب تصفير كلمة المرور (للمديرين فقط)</li>
+                                <li>اتصل بالدعم إذا استمرت المشكلة</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="problem-solution">
+                        <div class="problem">
+                            <h5><i class="fas fa-times-circle"></i> النظام بطيء</h5>
+                            <p><strong>الأعراض:</strong> تأخير في تحميل الصفحات أو استجابة النظام</p>
+                        </div>
+                        <div class="solution">
+                            <h5><i class="fas fa-check-circle"></i> الحلول:</h5>
+                            <ol>
+                                <li>تحديث الصفحة (F5)</li>
+                                <li>مسح ذاكرة التخزين المؤقت للمتصفح</li>
+                                <li>تأكد من سرعة الإنترنت</li>
+                                <li>أغلق التبويبات غير الضرورية</li>
+                                <li>اتصل بالدعم إذا استمرت المشكلة</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="problem-solution">
+                        <div class="problem">
+                            <h5><i class="fas fa-times-circle"></i> لا يمكن إضافة بيانات</h5>
+                            <p><strong>الأعراض:</strong> لا يتم حفظ البيانات أو تظهر رسائل خطأ</p>
+                        </div>
+                        <div class="solution">
+                            <h5><i class="fas fa-check-circle"></i> الحلول:</h5>
+                            <ol>
+                                <li>تأكد من ملء جميع الحقول المطلوبة (*)</li>
+                                <li>تحقق من صحة تنسيق البيانات (أرقام، تواريخ)</li>
+                                <li>تأكد من أنك تملك الصلاحيات الكافية</li>
+                                <li>حاول استخدام متصفح مختلف</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="problem-solution">
+                        <div class="problem">
+                            <h5><i class="fas fa-times-circle"></i> خطأ في الطباعة</h5>
+                            <p><strong>الأعراض:</strong> لا تطبع الطابعة أو تظهر صفحات فارغة</p>
+                        </div>
+                        <div class="solution">
+                            <h5><i class="fas fa-check-circle"></i> الحلول:</h5>
+                            <ol>
+                                <li>تأكد من توصيل الطابعة وتشغيلها</li>
+                                <li>جرب طباعة صفحة اختبار من الطابعة</li>
+                                <li>استخدم خاصية "حفظ كـ PDF" ثم اطبع الملف</li>
+                                <li>تحقق من إعدادات الطابعة في النظام</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-card">
+                    <h4>📞 التواصل مع الدعم الفني</h4>
+                    <p>إذا لم تجد حلاً لمشكلتك:</p>
+                    <div class="support-contact">
+                        <div class="contact-method">
+                            <h5><i class="fas fa-phone-alt"></i> الهاتف</h5>
+                            <p>800 123 4567</p>
+                            <p>ساعات العمل: 8 ص - 5 م</p>
+                        </div>
+                        <div class="contact-method">
+                            <h5><i class="fas fa-envelope"></i> البريد الإلكتروني</h5>
+                            <p>support@hospital-system.com</p>
+                            <p>الرد خلال 24 ساعة عمل</p>
+                        </div>
+                        <div class="contact-method">
+                            <h5><i class="fas fa-comments"></i> الدردشة المباشرة</h5>
+                            <p>متاحة خلال ساعات العمل</p>
+                            <button class="btn-small btn-primary">ابدأ محادثة</button>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <strong>للمساعدة السريعة:</strong> أرفق لقطة شاشة للخطأ وصف المشكلة بالتفصيل.
+                    </div>
+                </div>
+            </section>
+
+            <!-- الأسئلة الشائعة -->
+            <section id="faq" class="help-section">
+                <h3><i class="fas fa-question"></i> الأسئلة الشائعة (FAQ)</h3>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h5>كيف يمكنني تغيير كلمة المرور؟</h5>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>لتغيير كلمة المرور:</p>
+                            <ol>
+                                <li>اضغط على اسمك في الزاوية اليمنى العليا</li>
+                                <li>اختر "البروفايل الشخصي"</li>
+                                <li>ادخل كلمة المرور الحالية</li>
+                                <li>ادخل كلمة المرور الجديدة</li>
+                                <li>اضغط على "حفظ التغييرات"</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h5>كيف يمكنني تصدير جميع بيانات المرضى؟</h5>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>لتصدير بيانات المرضى:</p>
+                            <ol>
+                                <li>اذهب إلى قسم "التقارير"</li>
+                                <li>اختر "تقرير المرضى"</li>
+                                <li>اضغط على زر "تصدير إلى Excel"</li>
+                                <li>اختر الموقع لحفظ الملف</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h5>هل يمكنني استخدام النظام على الهاتف؟</h5>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>نعم، النظام متجاوب ويعمل على:</p>
+                            <ul>
+                                <li>الهواتف الذكية</li>
+                                <li>الأجهزة اللوحية</li>
+                                <li>أجهزة الكمبيوتر</li>
+                            </ul>
+                            <p>ببساطة افتح المتصفح على جهازك واذهب إلى عنوان النظام.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h5>كيف يمكنني استعادة بيانات محذوفة؟</h5>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>لاستعادة البيانات المحذوفة:</p>
+                            <ol>
+                                <li>اذهب إلى "الإعدادات"</li>
+                                <li>اختر "إدارة البيانات"</li>
+                                <li>اضغط على "استعادة من نسخة احتياطية"</li>
+                                <li>اختر النسخة الاحتياطية المناسبة</li>
+                                <li>اضغط على "استعادة"</li>
+                            </ol>
+                            <div class="warning">
+                                <strong>تحذير:</strong> الاستعادة تحل محل البيانات الحالية.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h5>ماذا أفعل إذا نسيت اسم المستخدم؟</h5>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>إذا نسيت اسم المستخدم:</p>
+                            <ol>
+                                <li>اتصل بمدير النظام في مؤسستك</li>
+                                <li>أو اتصل بالدعم الفني على 800 123 4567</li>
+                                <li>قدم معلومات الهوية للتحقق</li>
+                                <li>سيتم تزويدك باسم المستخدم</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<style>
+/* الهيكل الرئيسي */
+.help-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.help-sidebar {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.help-content {
+    flex: 1;
+}
+
+.help-section {
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.help-section:last-child {
+    border-bottom: none;
+}
+
+/* الشريط الجانبي */
+.help-search {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.help-search input {
+    padding-right: 40px;
+}
+
+.btn-search {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+.help-nav {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.help-nav h4 {
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primary);
+}
+
+.help-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.help-nav li {
+    margin-bottom: 8px;
+}
+
+.help-nav a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--dark);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.help-nav a:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.help-nav a i {
+    margin-left: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.quick-links {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.quick-links h4 {
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+}
+
+.quick-link-item {
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-right: 3px solid transparent;
+}
+
+.quick-link-item:hover {
+    background: var(--primary);
+    color: white;
+    border-right-color: var(--primary-dark);
+}
+
+.quick-link-item i {
+    margin-left: 10px;
+}
+
+.help-contact {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.help-contact h4 {
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+}
+
+.contact-methods p {
+    margin: 10px 0;
+    color: var(--gray);
+}
+
+.contact-methods i {
+    color: var(--primary);
+    margin-left: 10px;
+    width: 20px;
+}
+
+/* المحتوى الرئيسي */
+.help-content h3 {
+    color: var(--primary-dark);
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.help-card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    border-right: 4px solid var(--primary);
+}
+
+.help-card h4 {
+    color: var(--dark);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* الخطوات */
+.steps {
+    margin: 20px 0;
+}
+
+.step {
+    display: flex;
+    margin-bottom: 25px;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h5 {
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+/* الأزرار الصغيرة */
+.btn-small {
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-small.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-small.btn-success {
+    background: var(--secondary);
+    color: white;
+}
+
+.btn-small.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-small.btn-warning {
+    background: var(--warning);
+    color: white;
+}
+
+.btn-small.btn-edit {
+    background: var(--secondary);
+    color: white;
+}
+
+.btn-small.btn-view {
+    background: var(--primary);
+    color: white;
+}
+
+/* الجداول */
+.field-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+.field-table th, .field-table td {
+    padding: 12px;
+    text-align: right;
+    border: 1px solid #ddd;
+}
+
+.field-table th {
+    background: #f8f9fa;
+    font-weight: bold;
+}
+
+.field-table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* الإشعارات والتحذيرات */
+.note, .warning {
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.note {
+    background: #e8f0fe;
+    border-right: 4px solid var(--primary);
+    color: #0c5460;
+}
+
+.warning {
+    background: #f8d7da;
+    border-right: 4px solid var(--danger);
+    color: #721c24;
+}
+
+.warning-message {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* الشبكات والعناصر الشبكية */
+.permissions-grid, .report-types, .export-options, .activity-monitoring {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.permission-card, .report-type, .export-option, .activity-item {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-right: 3px solid;
+}
+
+.permission-card.role-admin { border-right-color: var(--primary); }
+.permission-card.role-doctor { border-right-color: var(--secondary); }
+.permission-card.role-nurse { border-right-color: var(--warning); }
+.permission-card.role-view { border-right-color: var(--danger); }
+
+.permission-card h5 {
+    color: var(--dark);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* التقويم */
+.calendar-view {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.day-header, .day {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #eee;
+}
+
+.day-header {
+    background: #f8f9fa;
+    font-weight: bold;
+}
+
+.day.has-visit {
+    background: #e8f0fe;
+    position: relative;
+}
+
+.visit-count {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    background: var(--primary);
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* الأسئلة الشائعة */
+.faq-container {
+    margin-top: 20px;
+}
+
+.faq-item {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.faq-question {
+    padding: 15px 20px;
+    background: #f8f9fa;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question h5 {
+    margin: 0;
+    color: var(--dark);
+}
+
+.faq-question i {
+    transition: transform 0.3s ease;
+}
+
+.faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-answer.active {
+    padding: 20px;
+    max-height: 1000px;
+}
+
+/* مشاكل وحلول */
+.problem-solution {
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #eee;
+}
+
+.problem, .solution {
+    margin-bottom: 15px;
+}
+
+.problem h5 {
+    color: var(--danger);
+}
+
+.solution h5 {
+    color: var(--secondary);
+}
+
+/* أدلة الرسم البياني */
+.charts-guide {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.chart-type {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.chart-demo {
+    width: 150px;
+    height: 100px;
+    margin: 10px auto;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    border-radius: 5px;
+}
+
+.bar-chart { background: linear-gradient(45deg, var(--primary), #1a73e8); }
+.pie-chart { background: linear-gradient(45deg, var(--secondary), #34a853); }
+.line-chart { background: linear-gradient(45deg, var(--warning), #fbbc05); }
+
+/* حالات الزيارات */
+.status-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.status-option {
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.status-scheduled { background: #fff3cd; border: 1px solid #ffeaa7; }
+.status-completed { background: #d1ecf1; border: 1px solid #bee5eb; }
+.status-cancelled { background: #f8d7da; border: 1px solid #f5c6cb; }
+.status-rescheduled { background: #e8f0fe; border: 1px solid #d0e0fd; }
+
+/* الدليل المرئي */
+.video-guide {
+    text-align: center;
+}
+
+.video-placeholder {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.video-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+/* التخصيص */
+.report-customization {
+    margin: 20px 0;
+}
+
+.custom-step {
+    margin-bottom: 20px;
+}
+
+.date-range {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.columns-select {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.columns-select label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* سياسة كلمات المرور */
+.password-policy {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.policy-rule {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+.policy-rule i {
+    color: var(--secondary);
+}
+
+/* إعدادات النسخ الاحتياطي */
+.backup-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.backup-option {
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* التواصل مع الدعم */
+.support-contact {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.contact-method {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* المدخلات التوضيحية */
+.demo-input {
+    background: #f8f9fa;
+    border: 1px dashed #ccc;
+    cursor: not-allowed;
+}
+
+/* التجاوب */
+@media (max-width: 768px) {
+    .help-container {
+        flex-direction: column;
+    }
+    
+    .help-sidebar {
+        width: 100%;
+    }
+    
+    .permissions-grid,
+    .report-types,
+    .export-options,
+    .charts-guide,
+    .status-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .steps .step {
+        flex-direction: column;
+    }
+    
+    .step-number {
+        margin-bottom: 10px;
+    }
+}
+</style>
+
+<script>
+// وظائف JavaScript للمساعدة
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function searchHelp() {
+    const searchTerm = document.getElementById('helpSearch').value.toLowerCase();
+    const sections = document.querySelectorAll('.help-section');
+    let found = false;
+    
+    sections.forEach(section => {
+        const content = section.textContent.toLowerCase();
+        if (content.includes(searchTerm)) {
+            section.scrollIntoView({ behavior: 'smooth' });
+            section.style.backgroundColor = '#fff3cd';
+            setTimeout(() => {
+                section.style.backgroundColor = '';
+            }, 2000);
+            found = true;
+        }
+    });
+    
+    if (!found && searchTerm) {
+        alert('لم يتم العثور على نتائج لبحثك: ' + searchTerm);
+    }
+}
+
+function toggleFaq(element) {
+    const answer = element.nextElementSibling;
+    const icon = element.querySelector('i');
+    
+    answer.classList.toggle('active');
+    icon.style.transform = answer.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+}
+
+function downloadUserGuide() {
+    // محاكاة تحميل الدليل
+    alert('جاري تحميل دليل المستخدم...');
+    // في التطبيق الحقيقي، هنا سيتم تحميل ملف PDF
+}
+
+function generateReport(type) {
+    const reports = {
+        patients: 'تقرير المرضى',
+        visits: 'تقرير الزيارات', 
+        medical: 'تقرير السجلات الطبية',
+        stats: 'تقرير إحصائي'
+    };
+    
+    alert(`جاري إنشاء ${reports[type]}... سيتم تنزيل الملف تلقائياً.`);
+}
+
+function loadTemplate(template) {
+    const templates = {
+        checkup: 'نموذج الفحص الدوري: يشمل الفحص العام، العلامات الحيوية، والتوصيات.',
+        prescription: 'نموذج روشتة الدواء: يشمل اسم الدواء، الجرعة، والمدة.',
+        lab: 'نموذج مختبر: يشمل التحاليل المطلوبة والنتائج.',
+        xray: 'نموذج أشعة: يشمل نوع الأشعة والنتائج.'
+    };
+    
+    document.getElementById('templateContent').textContent = 
+        templates[template] || 'اختر نموذجاً لعرض محتواه هنا.';
+}
+
+// البحث أثناء الكتابة
+document.getElementById('helpSearch').addEventListener('keyup', function(e) {
+    if (e.key === 'Enter') {
+        searchHelp();
+    }
+});
+
+// تفعيل جميع الأسئلة الشائعة
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', function() {
+        toggleFaq(this);
+    });
+});
+
+// إضافة تأثيرات للروابط السريعة
+document.querySelectorAll('.quick-link-item').forEach(link => {
+    link.addEventListener('click', function() {
+        this.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            this.style.transform = '';
+        }, 200);
+    });
+});
+</script>
+{% endblock %}

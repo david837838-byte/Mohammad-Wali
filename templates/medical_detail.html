@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">تفاصيل السجل الطبي</h5>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h6 class="text-muted">المريض</h6>
+                    <p class="h5">{{ medical.patient_name }}</p>
+                    <p class="text-muted">الملف: {{ medical.patient_file_number }}</p>
+                    <p class="text-muted">العمر: {{ medical.age }} سنة</p>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-muted">الطبيب</h6>
+                    <p class="h5">{{ medical.doctor_name }}</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <h6 class="text-muted">التشخيص</h6>
+                    <p>{{ medical.diagnosis }}</p>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <h6 class="text-muted">العلاج</h6>
+                    <p>{{ medical.treatment }}</p>
+                </div>
+            </div>
+
+            {% if medical.notes %}
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <h6 class="text-muted">الملاحظات</h6>
+                    <p>{{ medical.notes }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-muted small">
+                        <strong>تاريخ الإنشاء:</strong> {{ medical.created_at }}<br>
+                        <strong>آخر تعديل:</strong> {{ medical.updated_at }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <a href="{{ url_for('medical.edit', id=medical.id) }}" class="btn btn-warning">
+                    <i class="fas fa-edit"></i> تعديل
+                </a>
+                <form method="POST" action="{{ url_for('medical.delete', id=medical.id) }}" style="display:inline;">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('هل أنت متأكد من حذف هذا السجل؟')">
+                        <i class="fas fa-trash"></i> حذف
+                    </button>
+                </form>
+                <a href="{{ url_for('medical.index') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> رجوع
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="error-container">
+    <div class="error-code">404</div>
+    <div class="error-message">الصفحة غير موجودة</div>
+    <a href="{{ url_for('dashboard.index') }}" class="btn btn-primary">
+        <i class="fas fa-home"></i> العودة إلى لوحة التحكم
+    </a>
+</div>
+{% endblock %}

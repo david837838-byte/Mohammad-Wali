@@ -1,0 +1,134 @@
+
+## 8. **ملفات أدوات Google Sheets** (اختياري)
+
+### **utils/google_sheets.py**
+```python
+import gspread
+from google.oauth2.service_account import Credentials
+from datetime import datetime
+import pandas as pd
+
+class GoogleSheetsManager:
+    def __init__(self, credentials_file='credentials.json', sheet_id=None):
+        self.credentials_file = credentials_file
+        self.sheet_id = sheet_id
+        self.client = None
+        
+    def connect(self):
+        """الاتصال بـ Google Sheets API"""
+        try:
+            scope = [
+                'https://www.googleapis.com/auth/spreadsheets',
+                'https://www.googleapis.com/auth/drive'
+            ]
+            
+            creds = Credentials.from_service_account_file(
+                self.credentials_file,
+                scopes=scope
+            )
+            
+            self.client = gspread.authorize(creds)
+            return True
+        except Exception as e:
+            print(f"خطأ في الاتصال بـ Google Sheets: {e}")
+            return False
+    
+    def get_sheet(self, sheet_name='المرضى'):
+        """الحصول على ورقة العمل"""
+        if not self.client or not self.sheet_id:
+            return None
+        
+        try:
+            spreadsheet = self.client.open_by_key(self.sheet_id)
+            worksheet = spreadsheet.worksheet(sheet_name)
+            return worksheet
+        except Exception as e:
+            print(f"خطأ في الحصول على ورقة العمل: {e}")
+            return None
+    
+    def export_patients(self, patients_data):
+        """تصدير بيانات المرضى إلى Google Sheets"""
+        worksheet = self.get_sheet('المرضى')
+        if not worksheet:
+            return False
+        
+        try:
+            # تحضير البيانات
+            data = []
+            headers = ['رقم الملف', 'الاسم', 'العمر', 'الجنس', 'رقم الهاتف', 
+                      'العنوان', 'التشخيص', 'الحالة', 'تاريخ التسجيل']
+            data.append(headers)
+            
+            for patient in patients_data:
+                row = [
+                    patient.get('file_number', ''),
+                    patient.get('name', ''),
+                    patient.get('age', ''),
+                    patient.get('gender', ''),
+                    patient.get('phone', ''),
+                    patient.get('address', ''),
+                    patient.get('diagnosis', ''),
+                    patient.get('status', ''),
+                    patient.get('created_at', '')
+                ]
+                data.append(row)
+            
+            # مسح الورقة القديمة وكتابة البيانات الجديدة
+            worksheet.clear()
+            worksheet.update('A1', data)
+            
+            return True
+        except Exception as e:
+            print(f"خطأ في تصدير بيانات المرضى: {e}")
+            return False
+    
+    def import_patients(self):
+        """استيراد بيانات المرضى من Google Sheets"""
+        worksheet = self.get_sheet('المرضى')
+        if not worksheet:
+            return []
+        
+        try:
+            data = worksheet.get_all_records()
+            return data
+        except Exception as e:
+            print(f"خطأ في استيراد بيانات المرضى: {e}")
+            return []
+    
+    def sync_data(self, local_data, data_type='patients'):
+        """مزامنة البيانات بين النظام و Google Sheets"""
+        if data_type == 'patients':
+            return self.export_patients(local_data)
+        return False
+
+# مثال على الاستخدام
+if __name__ == '__main__':
+    gs_manager = GoogleSheetsManager(
+        credentials_file='credentials.json',
+        sheet_id='your-google-sheet-id'
+    )
+    
+    if gs_manager.connect():
+        print("تم الاتصال بـ Google Sheets بنجاح")
+        
+        # تصدير بيانات تجريبية
+        sample_patients = [
+            {
+                'file_number': 'PT-2024-001',
+                'name': 'أحمد محمود',
+                'age': 42,
+                'gender': 'ذكر',
+                'phone': '0512345678',
+                'address': 'الرياض',
+                'diagnosis': 'ارتفاع ضغط الدم',
+                'status': 'نشط',
+                'created_at': '2024-01-01'
+            }
+        ]
+        
+        if gs_manager.export_patients(sample_patients):
+            print("تم تصدير البيانات بنجاح")
+        else:
+            print("فشل تصدير البيانات")
+    else:
+        print("فشل الاتصال بـ Google Sheets")

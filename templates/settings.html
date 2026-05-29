@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}الإعدادات - بيت المسيح{% endblock %}
+
+{% block content %}
+<div id="settingsPage" class="page-content">
+    <div class="page-title">
+        <h2>الإعدادات</h2>
+        <button class="btn btn-primary" id="refreshDataBtn">
+            <i class="fas fa-sync-alt"></i> تحديث البيانات
+        </button>
+    </div>
+    
+    <div class="form-container">
+        <h3 style="margin-bottom: 20px;">إعدادات النظام</h3>
+        
+        <form method="POST" action="{{ url_for('settings.update') }}">
+            <div class="form-group">
+                <label>رابط Google Apps Script (اختياري)</label>
+                <input type="text" name="script_url" class="form-control" 
+                       value="{{ settings.script_url or '' }}" 
+                       placeholder="https://script.google.com/macros/s/.../exec">
+            </div>
+            
+            <div class="form-group">
+                <label>ID جدول Google Sheets (اختياري)</label>
+                <input type="text" name="sheet_id" class="form-control" 
+                       value="{{ settings.sheet_id or '' }}" 
+                       placeholder="أدخل ID جدول Google Sheets">
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> حفظ الإعدادات
+                </button>
+                <button type="button" class="btn btn-primary" id="testConnectionBtn">
+                    <i class="fas fa-plug"></i> اختبار الاتصال
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    {% if current_user.user_role == 'admin' %}
+    <div class="form-container" style="margin-top: 20px;">
+        <h3 style="margin-bottom: 20px;">إدارة البيانات</h3>
+        
+        <div class="form-group">
+            <label>حذف جميع البيانات المحلية</label>
+            <form method="POST" action="{{ url_for('settings.clear_data') }}" style="display: inline;">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('هل أنت متأكد من حذف جميع البيانات المحلية؟ هذا الإجراء لا يمكن التراجع عنه.')">
+                    <i class="fas fa-trash-alt"></i> حذف جميع البيانات
+                </button>
+            </form>
+        </div>
+        
+        <div class="form-group">
+            <label>تصدير البيانات إلى ملف</label>
+            <a href="{{ url_for('settings.export_data') }}" class="btn btn-warning">
+                <i class="fas fa-download"></i> تصدير البيانات
+            </a>
+        </div>
+        
+        <div class="form-group">
+            <label>استيراد البيانات من ملف</label>
+            <form method="POST" action="{{ url_for('settings.import_data') }}" enctype="multipart/form-data">
+                <input type="file" name="data_file" class="form-control" accept=".json" required>
+                <button type="submit" class="btn btn-warning" style="margin-top: 10px;">
+                    <i class="fas fa-upload"></i> استيراد البيانات
+                </button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% block extra_js %}
+<script>
+document.getElementById('refreshDataBtn').addEventListener('click', function() {
+    fetch('/api/refresh-google-sheets')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('تم تحديث البيانات بنجاح من Google Sheets');
+                location.reload();
+            } else {
+                alert('خطأ: ' + data.message);
+            }
+        })
+        .catch(error => {
+            alert('خطأ في الاتصال: ' + error.message);
+        });
+});
+
+document.getElementById('testConnectionBtn').addEventListener('click', function() {
+    alert('جاري اختبار الاتصال... تحقق من المتصفح للنتيجة.');
+    window.open('/api/test-google-sheets', '_blank');
+});
+</script>
+{% endblock %}
+{% endblock %}

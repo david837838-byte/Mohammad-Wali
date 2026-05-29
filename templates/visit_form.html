@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}{% if mode == 'add' %}إضافة زيارة{% else %}تعديل الزيارة{% endif %} - بيت المسيح{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="page-title">
+        <h2>{% if mode == 'add' %}إضافة زيارة جديدة{% else %}تعديل الزيارة{% endif %}</h2>
+    </div>
+
+    <div class="form-container">
+        <form method="POST" class="form">
+            <div class="form-group">
+                <label for="patient_id">المريض *</label>
+                <select id="patient_id" name="patient_id" required>
+                    <option value="">اختر المريض</option>
+                    {% for patient in patients %}
+                    <option value="{{ patient.id }}" {% if visit and visit.patient_id == patient.id %}selected{% endif %}>
+                        {{ patient.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="date">التاريخ *</label>
+                    <input type="date" id="date" name="date" value="{% if visit %}{{ visit.date }}{% else %}{{ today }}{% endif %}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time">الوقت *</label>
+                    <input type="time" id="time" name="time" value="{% if visit %}{{ visit.time }}{% endif %}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="purpose">غرض الزيارة *</label>
+                <textarea id="purpose" name="purpose" rows="3" required>{% if visit %}{{ visit.purpose }}{% endif %}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="diagnosis">التشخيص</label>
+                <textarea id="diagnosis" name="diagnosis" rows="3">{% if visit %}{{ visit.diagnosis }}{% endif %}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="prescription">الوصفة الطبية</label>
+                <textarea id="prescription" name="prescription" rows="3">{% if visit %}{{ visit.prescription }}{% endif %}</textarea>
+            </div>
+
+            {% if mode == 'edit' %}
+            <div class="form-group">
+                <label for="status">حالة الزيارة</label>
+                <select id="status" name="status">
+                    <option value="مجدول" {% if visit.status == 'مجدول' %}selected{% endif %}>مجدول</option>
+                    <option value="مكتمل" {% if visit.status == 'مكتمل' %}selected{% endif %}>مكتمل</option>
+                    <option value="ملغى" {% if visit.status == 'ملغى' %}selected{% endif %}>ملغى</option>
+                </select>
+            </div>
+            {% endif %}
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> {% if mode == 'add' %}إضافة{% else %}تحديث{% endif %}
+                </button>
+                <a href="{{ url_for('visit.index') }}" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> إلغاء
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+.form-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+</style>
+{% endblock %}

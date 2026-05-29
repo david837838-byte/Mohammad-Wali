@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}إدارة المستخدمين - بيت المسيح{% endblock %}
+
+{% block content %}
+<div id="usersPage" class="page-content">
+    <div class="page-title">
+        <h2>إدارة المستخدمين</h2>
+        {% if current_user.user_role == 'admin' %}
+        <a href="{{ url_for('user.add') }}" class="btn btn-primary">
+            <i class="fas fa-user-plus"></i> إضافة مستخدم جديد
+        </a>
+        {% endif %}
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>الاسم الكامل</th>
+                    <th>اسم المستخدم</th>
+                    <th>الدور</th>
+                    <th>البريد الإلكتروني</th>
+                    <th>الحالة</th>
+                    <th>تاريخ الإنشاء</th>
+                    <th>الإجراءات</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.full_name }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>
+                        <span class="role-badge {{ user.role|role_class }}">
+                            {{ user.role|role_display }}
+                        </span>
+                    </td>
+                    <td>{{ user.email or 'غير محدد' }}</td>
+                    <td>
+                        <span class="status-badge {{ 'status-active' if user.status == 'نشط' else 'status-inactive' }}">
+                            {{ user.status }}
+                        </span>
+                    </td>
+                    <td>{{ user.created_at|date_format('%Y-%m-%d') }}</td>
+                    <td>
+                        <div class="action-btns">
+                            {% if current_user.user_role == 'admin' %}
+                            <a href="{{ url_for('user.edit', id=user.id) }}" class="action-btn btn-edit" title="تعديل">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="{{ url_for('user.manage_permissions', id=user.id) }}" class="action-btn btn-permissions" title="إدارة الصلاحيات">
+                                <i class="fas fa-lock"></i>
+                            </a>
+                            {% if user.id != current_user.user_id %}
+                            <button class="action-btn btn-delete" onclick="confirmDelete('user', {{ user.id }}, '{{ user.full_name }}')" title="حذف">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

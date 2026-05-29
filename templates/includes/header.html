@@ -1,0 +1,23 @@
+<header>
+    <div class="container header-content">
+        <div class="logo">
+            <i class="fas fa-hospital"></i>
+            <h1>بيت المسيح</h1>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div>
+                <div id="currentUserName">{{ current_user.user_full_name }}</div>
+                <div id="currentUserRole" class="role-badge {{ current_user.user_role|role_class }}">
+                    {{ current_user.user_role|role_display }}
+                </div>
+            </div>
+            <a href="{{ url_for('auth.logout') }}" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+            </a>
+        </div>
+    </div>
+</header>

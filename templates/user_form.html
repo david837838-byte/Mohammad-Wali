@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'تعديل' if user else 'إضافة' }} مستخدم - بيت المسيح{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="page-title">
+        <h2>{{ 'تعديل' if user else 'إضافة' }} مستخدم جديد</h2>
+        <a href="{{ url_for('user.index') }}" class="btn">
+            <i class="fas fa-arrow-right"></i> رجوع
+        </a>
+    </div>
+    
+    <div class="form-container">
+        <form method="POST" action="{{ url_for('user.save') }}">
+            {% if user %}
+            <input type="hidden" name="user_id" value="{{ user.id }}">
+            {% endif %}
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="userFullName">الاسم الكامل *</label>
+                    <input type="text" id="userFullName" name="full_name" class="form-control" 
+                           value="{{ user.full_name if user else '' }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="userUsername">اسم المستخدم *</label>
+                    <input type="text" id="userUsername" name="username" class="form-control" 
+                           value="{{ user.username if user else '' }}" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="userPassword">{{ 'كلمة المرور' if not user else 'كلمة المرور (اتركه فارغاً إذا لم تريد التغيير)' }}</label>
+                    <input type="password" id="userPassword" name="password" class="form-control" 
+                           {{ 'required' if not user else '' }}>
+                </div>
+                <div class="form-group">
+                    <label for="userConfirmPassword">تأكيد كلمة المرور</label>
+                    <input type="password" id="userConfirmPassword" name="confirm_password" class="form-control">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="userEmail">البريد الإلكتروني</label>
+                    <input type="email" id="userEmail" name="email" class="form-control" 
+                           value="{{ user.email if user else '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="userPhone">رقم الهاتف</label>
+                    <input type="tel" id="userPhone" name="phone" class="form-control" 
+                           value="{{ user.phone if user else '' }}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="userRole">دور المستخدم *</label>
+                <select id="userRole" name="role" class="form-control" required>
+                    <option value="">اختر الدور</option>
+                    <option value="admin" {% if user and user.role == 'admin' %}selected{% endif %}>مدير النظام</option>
+                    <option value="doctor" {% if user and user.role == 'doctor' %}selected{% endif %}>طبيب</option>
+                    <option value="nurse" {% if user and user.role == 'nurse' %}selected{% endif %}>ممرض/ممرضة</option>
+                    <option value="view" {% if user and user.role == 'view' %}selected{% endif %}>مشاهد فقط</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="userStatus">حالة الحساب</label>
+                <select id="userStatus" name="status" class="form-control">
+                    <option value="نشط" {% if user and user.status == 'نشط' %}selected{% endif %}>نشط</option>
+                    <option value="غير نشط" {% if user and user.status == 'غير نشط' %}selected{% endif %}>غير نشط</option>
+                </select>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> {{ 'تحديث' if user else 'حفظ' }} المستخدم
+                </button>
+                <a href="{{ url_for('user.index') }}" class="btn" style="background-color: #f1f3f4;">
+                    إلغاء
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

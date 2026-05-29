@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+{% block title %}البروفايل الشخصي - بيت المسيح{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="page-title">
+        <h2>البروفايل الشخصي</h2>
+    </div>
+    
+    <div class="form-container">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="profile-info">
+                <h3>{{ user.full_name }}</h3>
+                <div class="user-role">
+                    <span class="role-badge {{ user.role|role_class }}">
+                        {{ user.role|role_display }}
+                    </span>
+                </div>
+                <p class="profile-username">
+                    <i class="fas fa-user"></i> {{ user.username }}
+                </p>
+            </div>
+        </div>
+        
+        <form method="POST" action="{{ url_for('update_profile') }}" class="profile-form">
+            <h4><i class="fas fa-user-edit"></i> تعديل المعلومات الشخصية</h4>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="full_name">الاسم الكامل</label>
+                    <input type="text" id="full_name" name="full_name" class="form-control" 
+                           value="{{ user.full_name }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">اسم المستخدم</label>
+                    <input type="text" id="username" class="form-control" 
+                           value="{{ user.username }}" disabled>
+                    <small class="form-text text-muted">لا يمكن تغيير اسم المستخدم</small>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email" class="form-control" 
+                           value="{{ user.email or '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" 
+                           value="{{ user.phone or '' }}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="role">الدور</label>
+                <input type="text" id="role" class="form-control" 
+                       value="{{ user.role|role_display }}" disabled>
+            </div>
+            
+            <div class="form-group">
+                <label for="status">الحالة</label>
+                <input type="text" id="status" class="form-control" 
+                       value="{{ user.status }}" disabled>
+            </div>
+            
+            <hr>
+            
+            <h4><i class="fas fa-lock"></i> تغيير كلمة المرور</h4>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="current_password">كلمة المرور الحالية</label>
+                    <input type="password" id="current_password" name="current_password" 
+                           class="form-control">
+                    <small class="form-text text-muted">اتركه فارغاً إذا لم ترد تغيير كلمة المرور</small>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="new_password">كلمة المرور الجديدة</label>
+                    <input type="password" id="new_password" name="new_password" 
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">تأكيد كلمة المرور الجديدة</label>
+                    <input type="password" id="confirm_password" name="confirm_password" 
+                           class="form-control">
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> حفظ التغييرات
+                </button>
+                <a href="{{ url_for('dashboard.index') }}" class="btn">
+                    رجوع
+                </a>
+            </div>
+        </form>
+        
+        <div class="profile-stats">
+            <h4><i class="fas fa-chart-bar"></i> إحصائيات</h4>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-label">تاريخ التسجيل</div>
+                    <div class="stat-value">{{ user.created_at|date_format('%Y-%m-%d') }}</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">آخر تحديث</div>
+                    <div class="stat-value">{{ user.updated_at|date_format('%Y-%m-%d') if user.updated_at else 'غير متوفر' }}</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">مدة العضوية</div>
+                    <div class="stat-value">{{ membership_duration }} يوم</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+}
+
+.profile-avatar i {
+    font-size: 60px;
+    color: white;
+}
+
+.profile-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+.profile-username {
+    color: var(--gray);
+    margin-top: 5px;
+}
+
+.profile-form {
+    margin-bottom: 30px;
+}
+
+.profile-form h4 {
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+}
+
+.profile-form h4 i {
+    margin-left: 10px;
+}
+
+.profile-stats {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.profile-stats h4 {
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.stat-item {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--dark);
+}
+</style>
+
+<script>
+// حساب مدة العضوية
+document.addEventListener('DOMContentLoaded', function() {
+    const createdDate = new Date('{{ user.created_at }}');
+    const today = new Date();
+    const diffTime = Math.abs(today - createdDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    const membershipElement = document.querySelector('.stat-item:nth-child(3) .stat-value');
+    if (membershipElement) {
+        membershipElement.textContent = diffDays + ' يوم';
+    }
+});
+</script>
+{% endblock %}
