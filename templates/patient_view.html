@@ -5,14 +5,14 @@
 {% block content %}
 <div class="page-content">
     <div class="page-title">
-        <h2>عرض بيانات المريض</h2>
+        <h2>{{ t('عرض بيانات المريض') }}</h2>
         <div>
             <a href="{{ url_for('patient.index') }}" class="btn">
-                <i class="fas fa-arrow-right"></i> رجوع
+                <i class="fas fa-arrow-right"></i> {{ t('رجوع') }}
             </a>
             {% if current_user.user_role != 'view' %}
             <a href="{{ url_for('patient.edit', id=patient.id) }}" class="btn btn-edit">
-                <i class="fas fa-edit"></i> تعديل
+                <i class="fas fa-edit"></i> {{ t('تعديل') }}
             </a>
             {% endif %}
         </div>
@@ -21,35 +21,35 @@
     <div class="form-container">
         <div class="patient-info">
             <div class="info-row">
-                <div class="info-label">رقم الملف:</div>
+                <div class="info-label">{{ t('رقم الملف:') }}</div>
                 <div class="info-value">{{ patient.file_number }}</div>
             </div>
             <div class="info-row">
-                <div class="info-label">اسم المريض:</div>
+                <div class="info-label">{{ t('اسم المريض:') }}</div>
                 <div class="info-value">{{ patient.name }}</div>
             </div>
             <div class="info-row">
-                <div class="info-label">العمر:</div>
+                <div class="info-label">{{ t('العمر:') }}</div>
                 <div class="info-value">{{ patient.age }}</div>
             </div>
             <div class="info-row">
-                <div class="info-label">الجنس:</div>
+                <div class="info-label">{{ t('الجنس:') }}</div>
                 <div class="info-value">{{ patient.gender }}</div>
             </div>
             <div class="info-row">
-                <div class="info-label">رقم الهاتف:</div>
+                <div class="info-label">{{ t('رقم الهاتف:') }}</div>
                 <div class="info-value">{{ patient.phone }}</div>
             </div>
             <div class="info-row">
-                <div class="info-label">العنوان:</div>
+                <div class="info-label">{{ t('العنوان:') }}</div>
                 <div class="info-value">{{ patient.address }}</div>
             </div>
             <div class="info-row">
-                <div class="info-label">التشخيص الأولي:</div>
+                <div class="info-label">{{ t('التشخيص الأولي:') }}</div>
                 <div class="info-value">{{ patient.diagnosis or 'غير محدد' }}</div>
             </div>
             <div class="info-row">
-                <div class="info-label">الحالة:</div>
+                <div class="info-label">{{ t('الحالة:') }}</div>
                 <div class="info-value">
                     <span class="status-badge {{ patient.status|status_class }}">
                         {{ patient.status }}
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="info-row">
-                <div class="info-label">تاريخ التسجيل:</div>
+                <div class="info-label">{{ t('تاريخ التسجيل:') }}</div>
                 <div class="info-value">{{ patient.created_at|date_format('%Y-%m-%d') }}</div>
             </div>
         </div>

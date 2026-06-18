@@ -5,36 +5,36 @@
 {% block content %}
 <div id="settingsPage" class="page-content">
     <div class="page-title">
-        <h2>الإعدادات</h2>
+        <h2>{{ t('الإعدادات') }}</h2>
         <button class="btn btn-primary" id="refreshDataBtn">
-            <i class="fas fa-sync-alt"></i> تحديث البيانات
+            <i class="fas fa-sync-alt"></i> {{ t('تحديث البيانات') }}
         </button>
     </div>
     
     <div class="form-container">
-        <h3 style="margin-bottom: 20px;">إعدادات النظام</h3>
+        <h3 style="margin-bottom: 20px;">{{ t('إعدادات النظام') }}</h3>
         
         <form method="POST" action="{{ url_for('settings.update') }}">
             <div class="form-group">
-                <label>رابط Google Apps Script (اختياري)</label>
+                <label>{{ t('رابط Google Apps Script (اختياري)') }}</label>
                 <input type="text" name="script_url" class="form-control" 
                        value="{{ settings.script_url or '' }}" 
                        placeholder="https://script.google.com/macros/s/.../exec">
             </div>
             
             <div class="form-group">
-                <label>ID جدول Google Sheets (اختياري)</label>
+                <label>{{ t('ID جدول Google Sheets (اختياري)') }}</label>
                 <input type="text" name="sheet_id" class="form-control" 
                        value="{{ settings.sheet_id or '' }}" 
-                       placeholder="أدخل ID جدول Google Sheets">
+                       placeholder="{{ t('أدخل ID جدول Google Sheets') }}">
             </div>
             
             <div class="form-actions">
                 <button type="submit" class="btn btn-success">
-                    <i class="fas fa-save"></i> حفظ الإعدادات
+                    <i class="fas fa-save"></i> {{ t('حفظ الإعدادات') }}
                 </button>
                 <button type="button" class="btn btn-primary" id="testConnectionBtn">
-                    <i class="fas fa-plug"></i> اختبار الاتصال
+                    <i class="fas fa-plug"></i> {{ t('اختبار الاتصال') }}
                 </button>
             </div>
         </form>
@@ -42,30 +42,91 @@
     
     {% if current_user.user_role == 'admin' %}
     <div class="form-container" style="margin-top: 20px;">
-        <h3 style="margin-bottom: 20px;">إدارة البيانات</h3>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3>
+                <i class="fas fa-users-cog"></i> {{ t('إدارة الصلاحيات للمستخدمين (Access Control)') }}
+            </h3>
+            <a href="{{ url_for('user.add') }}" class="btn btn-primary" style="padding: 8px 12px; font-size: 0.9rem;">
+                <i class="fas fa-user-plus"></i> {{ t('إضافة مستخدم') }}
+            </a>
+        </div>
+        <p style="margin-bottom: 15px; color: var(--muted); line-height: 1.6;">
+            {{ t('أنت الوحيد (كمدير للنظام) الذي يمتلك صلاحية إعطاء الصلاحيات. يمكنك تحديد مستوى الوصول (Access) لكل مستخدم في النظام من القائمة التالية:') }}
+        </p>
+        
+        <div class="table-container" style="box-shadow: none; border: 1px solid var(--stroke);">
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{ t('اسم المستخدم') }}</th>
+                        <th>{{ t('الاسم الكامل') }}</th>
+                        <th>{{ t('الدور الحالي') }}</th>
+                        <th>{{ t('الحالة') }}</th>
+                        <th>{{ t('صلاحيات الوصول (Access)') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in users %}
+                    <tr>
+                        <td style="font-weight: 600;">{{ u.username }}</td>
+                        <td>{{ u.full_name }}</td>
+                        <td>
+                            <span class="role-badge {{ u.role|role_class }}">
+                                {{ u.role|role_display }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="status-badge {{ 'status-active' if u.status == 'نشط' else 'status-inactive' }}">
+                                {{ t(u.status) }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="action-btns">
+                                <a href="{{ url_for('user.manage_permissions', id=u.id) }}" class="btn btn-warning" style="padding: 6px 12px; font-size: 0.85rem;" title="تعديل الصلاحيات المخصصة">
+                                    <i class="fas fa-key"></i> {{ t('إعطاء أكسس') }}
+                                </a>
+                                <a href="{{ url_for('user.edit', id=u.id) }}" class="btn btn-edit" style="padding: 6px 12px; font-size: 0.85rem;" title="تعديل الدور والحساب">
+                                    <i class="fas fa-user-edit"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% if not users %}
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 20px;">{{ t('لا يوجد مستخدمين لعرضهم.') }}</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="form-container" style="margin-top: 20px;">
+        <h3 style="margin-bottom: 20px;">{{ t('إدارة البيانات') }}</h3>
         
         <div class="form-group">
-            <label>حذف جميع البيانات المحلية</label>
+            <label>{{ t('حذف جميع البيانات المحلية') }}</label>
             <form method="POST" action="{{ url_for('settings.clear_data') }}" style="display: inline;">
                 <button type="submit" class="btn btn-danger" onclick="return confirm('هل أنت متأكد من حذف جميع البيانات المحلية؟ هذا الإجراء لا يمكن التراجع عنه.')">
-                    <i class="fas fa-trash-alt"></i> حذف جميع البيانات
+                    <i class="fas fa-trash-alt"></i> {{ t('حذف جميع البيانات') }}
                 </button>
             </form>
         </div>
         
         <div class="form-group">
-            <label>تصدير البيانات إلى ملف</label>
+            <label>{{ t('تصدير البيانات إلى ملف') }}</label>
             <a href="{{ url_for('settings.export_data') }}" class="btn btn-warning">
-                <i class="fas fa-download"></i> تصدير البيانات
+                <i class="fas fa-download"></i> {{ t('تصدير البيانات') }}
             </a>
         </div>
         
         <div class="form-group">
-            <label>استيراد البيانات من ملف</label>
+            <label>{{ t('استيراد البيانات من ملف') }}</label>
             <form method="POST" action="{{ url_for('settings.import_data') }}" enctype="multipart/form-data">
                 <input type="file" name="data_file" class="form-control" accept=".json" required>
                 <button type="submit" class="btn btn-warning" style="margin-top: 10px;">
-                    <i class="fas fa-upload"></i> استيراد البيانات
+                    <i class="fas fa-upload"></i> {{ t('استيراد البيانات') }}
                 </button>
             </form>
         </div>

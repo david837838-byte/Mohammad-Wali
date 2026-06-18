@@ -5,46 +5,46 @@
 {% block content %}
 <div class="page-content">
     <div class="page-title">
-        <h2>تفاصيل الزيارة</h2>
+        <h2>{{ t('تفاصيل الزيارة') }}</h2>
     </div>
 
     <div class="detail-container">
         <div class="detail-card">
             <div class="detail-header">
-                <h3>معلومات الزيارة</h3>
+                <h3>{{ t('معلومات الزيارة') }}</h3>
                 <a href="{{ url_for('visit.index') }}" class="btn btn-secondary">
-                    <i class="fas fa-arrow-left"></i> عودة
+                    <i class="fas fa-arrow-left"></i> {{ t('عودة') }}
                 </a>
             </div>
 
             <div class="detail-body">
                 <div class="detail-row">
-                    <div class="detail-label">رقم الزيارة:</div>
+                    <div class="detail-label">{{ t('رقم الزيارة:') }}</div>
                     <div class="detail-value">V-{{ visit.id }}</div>
                 </div>
 
                 <div class="detail-row">
-                    <div class="detail-label">اسم المريض:</div>
+                    <div class="detail-label">{{ t('اسم المريض:') }}</div>
                     <div class="detail-value">{{ visit.patient_name }}</div>
                 </div>
 
                 <div class="detail-row">
-                    <div class="detail-label">التاريخ:</div>
+                    <div class="detail-label">{{ t('التاريخ:') }}</div>
                     <div class="detail-value">{{ visit.date }}</div>
                 </div>
 
                 <div class="detail-row">
-                    <div class="detail-label">الوقت:</div>
+                    <div class="detail-label">{{ t('الوقت:') }}</div>
                     <div class="detail-value">{{ visit.time }}</div>
                 </div>
 
                 <div class="detail-row">
-                    <div class="detail-label">الطبيب المسؤول:</div>
+                    <div class="detail-label">{{ t('الطبيب المسؤول:') }}</div>
                     <div class="detail-value">{{ visit.doctor_name or 'غير محدد' }}</div>
                 </div>
 
                 <div class="detail-row">
-                    <div class="detail-label">حالة الزيارة:</div>
+                    <div class="detail-label">{{ t('حالة الزيارة:') }}</div>
                     <div class="detail-value">
                         <span class="status-badge {% if visit.status == 'مكتمل' %}status-active{% elif visit.status == 'مجدول' %}status-pending{% else %}status-inactive{% endif %}">
                             {{ visit.status }}
@@ -53,26 +53,26 @@
                 </div>
 
                 <div class="detail-row full-width">
-                    <div class="detail-label">غرض الزيارة:</div>
+                    <div class="detail-label">{{ t('غرض الزيارة:') }}</div>
                     <div class="detail-value">{{ visit.purpose }}</div>
                 </div>
 
                 {% if visit.diagnosis %}
                 <div class="detail-row full-width">
-                    <div class="detail-label">التشخيص:</div>
+                    <div class="detail-label">{{ t('التشخيص:') }}</div>
                     <div class="detail-value">{{ visit.diagnosis }}</div>
                 </div>
                 {% endif %}
 
                 {% if visit.prescription %}
                 <div class="detail-row full-width">
-                    <div class="detail-label">الوصفة الطبية:</div>
+                    <div class="detail-label">{{ t('الوصفة الطبية:') }}</div>
                     <div class="detail-value">{{ visit.prescription }}</div>
                 </div>
                 {% endif %}
 
                 <div class="detail-row">
-                    <div class="detail-label">تاريخ الإنشاء:</div>
+                    <div class="detail-label">{{ t('تاريخ الإنشاء:') }}</div>
                     <div class="detail-value">{{ visit.created_at }}</div>
                 </div>
             </div>
@@ -80,12 +80,12 @@
             <div class="detail-actions">
                 {% if current_user.user_role in ['admin', 'doctor'] %}
                 <a href="{{ url_for('visit.edit', id=visit.id) }}" class="btn btn-primary">
-                    <i class="fas fa-edit"></i> تعديل
+                    <i class="fas fa-edit"></i> {{ t('تعديل') }}
                 </a>
                 {% endif %}
                 {% if current_user.user_role == 'admin' %}
                 <button class="btn btn-danger" onclick="confirmDelete('visit', {{ visit.id }}, 'الزيارة V-{{ visit.id }}')">
-                    <i class="fas fa-trash"></i> حذف
+                    <i class="fas fa-trash"></i> {{ t('حذف') }}
                 </button>
                 {% endif %}
             </div>

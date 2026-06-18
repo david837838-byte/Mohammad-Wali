@@ -1,18 +1,18 @@
 <div id="deleteModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h3>تأكيد الحذف</h3>
+            <h3>{{ t('تأكيد الحذف') }}</h3>
             <button class="modal-close">&times;</button>
         </div>
         <div class="modal-body">
-            <p id="deleteMessage">هل أنت متأكد من رغبتك في حذف هذا العنصر؟</p>
+            <p id="deleteMessage">{{ t('هل أنت متأكد من رغبتك في حذف هذا العنصر؟') }}</p>
             <div class="form-actions">
                 <form id="deleteForm" method="POST" style="display: inline;">
                     <input type="hidden" id="deleteItemType" name="item_type">
                     <input type="hidden" id="deleteItemId" name="item_id">
-                    <button type="submit" class="btn btn-danger" id="confirmDeleteBtn">نعم، احذف</button>
+                    <button type="submit" class="btn btn-danger" id="confirmDeleteBtn">{{ t('نعم، احذف') }}</button>
                 </form>
-                <button id="cancelDeleteBtn" class="btn">إلغاء</button>
+                <button id="cancelDeleteBtn" class="btn">{{ t('إلغاء') }}</button>
             </div>
         </div>
     </div>

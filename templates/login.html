@@ -10,8 +10,8 @@
                 <i class="fas fa-clinic-medical"></i>
             </div>
 
-            <h1>Digital Clinic</h1>
-            <p>Smart Healthcare Management System</p>
+            <h1>{{ t('العيادة الرقمية') }}</h1>
+            <p>{{ t('نظام ذكي لإدارة الرعاية الصحية') }}</p>
         </div>
 
         <!-- Login Form -->
@@ -21,7 +21,7 @@
             <div class="form-group">
                 <label for="username">
                     <i class="fas fa-user"></i>
-                    اسم المستخدم
+                    {{ t('اسم المستخدم') }}
                 </label>
 
                 <input 
@@ -29,7 +29,7 @@
                     id="username"
                     name="username"
                     class="form-control"
-                    placeholder="أدخل اسم المستخدم"
+                    placeholder="{{ t('أدخل اسم المستخدم') }}"
                     required
                 >
             </div>
@@ -38,7 +38,7 @@
             <div class="form-group">
                 <label for="password">
                     <i class="fas fa-lock"></i>
-                    كلمة المرور
+                    {{ t('كلمة المرور') }}
                 </label>
 
                 <input 
@@ -46,92 +46,18 @@
                     id="password"
                     name="password"
                     class="form-control"
-                    placeholder="أدخل كلمة المرور"
+                    placeholder="{{ t('أدخل كلمة المرور') }}"
                     required
                 >
             </div>
 
-            <!-- Role Selection -->
-            <div class="form-group">
-                <label class="role-title">
-                    <i class="fas fa-users"></i>
-                    اختر دور المستخدم
-                </label>
-
-                <div class="role-selector">
-
-                    <!-- Admin -->
-                    <label class="role-option {% if request.form.get('role') == 'admin' or not request.form.get('role') %}selected{% endif %}">
-                        <input 
-                            type="radio"
-                            name="role"
-                            value="admin"
-                            {% if request.form.get('role') == 'admin' or not request.form.get('role') %}checked{% endif %}
-                        >
-
-                        <i class="fas fa-user-shield"></i>
-                        <span>مدير النظام</span>
-                    </label>
-
-                    <!-- Doctor -->
-                    <label class="role-option {% if request.form.get('role') == 'doctor' %}selected{% endif %}">
-                        <input 
-                            type="radio"
-                            name="role"
-                            value="doctor"
-                            {% if request.form.get('role') == 'doctor' %}checked{% endif %}
-                        >
-
-                        <i class="fas fa-user-md"></i>
-                        <span>طبيب</span>
-                    </label>
-
-                    <!-- Nurse -->
-                    <label class="role-option {% if request.form.get('role') == 'nurse' %}selected{% endif %}">
-                        <input 
-                            type="radio"
-                            name="role"
-                            value="nurse"
-                            {% if request.form.get('role') == 'nurse' %}checked{% endif %}
-                        >
-
-                        <i class="fas fa-user-nurse"></i>
-                        <span>ممرض / ممرضة</span>
-                    </label>
-
-                    <!-- Viewer -->
-                    <label class="role-option {% if request.form.get('role') == 'view' %}selected{% endif %}">
-                        <input 
-                            type="radio"
-                            name="role"
-                            value="view"
-                            {% if request.form.get('role') == 'view' %}checked{% endif %}
-                        >
-
-                        <i class="fas fa-eye"></i>
-                        <span>مشاهد فقط</span>
-                    </label>
-
-                </div>
-            </div>
+            <!-- Role is determined automatically by the system based on Admin assignment -->
 
             <!-- Login Button -->
             <button type="submit" class="btn-login">
                 <i class="fas fa-sign-in-alt"></i>
-                تسجيل الدخول
+                {{ t('تسجيل الدخول') }}
             </button>
-
-            <!-- Demo Accounts -->
-            <div class="demo-box">
-                <h4>
-                    <i class="fas fa-info-circle"></i>
-                    بيانات تجريبية
-                </h4>
-
-                <p><strong>مدير النظام:</strong> admin / admin123</p>
-                <p><strong>طبيب:</strong> doctor1 / doctor123</p>
-                <p><strong>ممرض:</strong> nurse1 / nurse123</p>
-            </div>
 
         </form>
     </div>
@@ -145,17 +71,21 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+    background: radial-gradient(circle at top left, rgba(15, 138, 112, 0.08), transparent 28%),
+                radial-gradient(circle at top right, rgba(217, 108, 72, 0.08), transparent 24%),
+                var(--bg, #f4f6f8);
     padding:20px;
 }
 
 .login-box{
     width:100%;
-    max-width:500px;
-    background:#ffffff;
-    border-radius:25px;
-    padding:40px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+    max-width:440px;
+    background:rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(191, 208, 203, 0.75);
+    border-radius: 28px;
+    padding:44px 38px;
+    box-shadow: 0 22px 48px rgba(22, 33, 31, 0.1);
     animation:fadeIn 0.5s ease;
 }
 
@@ -165,28 +95,29 @@
 }
 
 .main-logo{
-    width:100px;
-    height:100px;
+    width:90px;
+    height:90px;
     margin:0 auto 20px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    border-radius:24px;
+    background:linear-gradient(135deg, var(--primary, #0f8a70), var(--secondary, #2d5b8a));
     display:flex;
     align-items:center;
     justify-content:center;
     color:white;
-    font-size:42px;
-    box-shadow:0 10px 25px rgba(37,99,235,0.4);
+    font-size:38px;
+    box-shadow: 0 10px 24px rgba(15, 138, 112, 0.25);
 }
 
 .login-header h1{
-    font-size:34px;
-    font-weight:700;
-    color:#0f172a;
-    margin-bottom:10px;
+    font-size:32px;
+    font-weight:800;
+    color:var(--text, #16211f);
+    margin-bottom:8px;
+    line-height: 1.2;
 }
 
 .login-header p{
-    color:#64748b;
+    color:var(--muted, #5e6e69);
     font-size:15px;
 }
 
@@ -195,25 +126,32 @@
 }
 
 .form-group label{
-    display:block;
+    display:flex;
+    align-items:center;
+    gap: 8px;
     margin-bottom:10px;
-    font-weight:600;
-    color:#1e293b;
+    font-weight:700;
+    color:var(--text, #16211f);
+}
+
+.form-group label i {
+    color: var(--primary, #0f8a70);
 }
 
 .form-control{
     width:100%;
-    padding:14px 16px;
-    border:2px solid #e2e8f0;
-    border-radius:14px;
+    padding:16px 18px;
+    border:2px solid var(--stroke, #d7e0de);
+    background: var(--surface, #ffffff);
+    border-radius:18px;
     font-size:15px;
     transition:0.3s;
 }
 
 .form-control:focus{
-    border-color:#2563eb;
+    border-color:var(--primary, #0f8a70);
     outline:none;
-    box-shadow:0 0 0 4px rgba(37,99,235,0.15);
+    box-shadow:0 0 0 4px rgba(15, 138, 112, 0.15);
 }
 
 .role-title{
@@ -265,40 +203,25 @@
 
 .btn-login{
     width:100%;
-    padding:15px;
+    padding:16px;
     border:none;
-    border-radius:14px;
-    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    border-radius:18px;
+    background:linear-gradient(135deg, var(--primary, #0f8a70), #13b18f);
     color:white;
     font-size:17px;
     font-weight:700;
     cursor:pointer;
     transition:0.3s;
-    margin-top:10px;
+    margin-top:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
 }
 
 .btn-login:hover{
     transform:translateY(-2px);
-    box-shadow:0 10px 20px rgba(37,99,235,0.3);
-}
-
-.demo-box{
-    margin-top:30px;
-    background:#f8fafc;
-    border-radius:16px;
-    padding:18px;
-    border:1px solid #e2e8f0;
-}
-
-.demo-box h4{
-    margin-bottom:12px;
-    color:#0f172a;
-}
-
-.demo-box p{
-    margin:6px 0;
-    color:#475569;
-    font-size:14px;
+    box-shadow: 0 14px 28px rgba(15, 138, 112, 0.25);
 }
 
 @keyframes fadeIn{
@@ -331,21 +254,6 @@
 
 <!-- Script -->
 <script>
+<!-- Removed role selector script --></script>
 
-document.querySelectorAll('.role-option').forEach(option => {
-
-    option.addEventListener('click', function () {
-
-        document.querySelectorAll('.role-option')
-            .forEach(el => el.classList.remove('selected'));
-
-        this.classList.add('selected');
-
-        this.querySelector('input').checked = true;
-    });
-
-});
-
-</script>
-
-{% endblock %}
+{% endblock %}  

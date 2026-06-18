@@ -14,6 +14,10 @@ from controllers.settings_controller import settings_bp
 from controllers.medical_controller import medical_bp
 from controllers.visit_controller import visit_bp
 from controllers.report_controller import report_bp
+from controllers.pharmacy_controller import pharmacy_bp
+from controllers.billing_controller import billing_bp
+from controllers.lab_controller import lab_bp
+from controllers.portal_controller import portal_bp
 from database.db_handler import init_db, get_db_connection, seed_sample_data
 
 from models.patient import Patient
@@ -24,6 +28,7 @@ from utils.validators import validate_patient_data, validate_user_data
 from utils.helpers import get_arabic_date, get_current_user, has_permission
 from utils.google_sheets import get_google_sheets_manager, sync_with_google_sheets
 from utils.excel_exporter import ExcelExporter
+from utils.i18n import t, get_current_language, is_rtl, role_label, status_label, gender_label, format_localized_date
 
 app = Flask(__name__)
 
@@ -49,6 +54,10 @@ app.register_blueprint(settings_bp)
 app.register_blueprint(medical_bp)
 app.register_blueprint(visit_bp)
 app.register_blueprint(report_bp)
+app.register_blueprint(pharmacy_bp)
+app.register_blueprint(billing_bp)
+app.register_blueprint(lab_bp)
+app.register_blueprint(portal_bp)
 
 # فلاتر قالب Jinja2
 @app.template_filter('date_format')
@@ -90,6 +99,10 @@ def status_class(status):
         'ملغى': 'status-inactive'
     }
     return classes.get(status, '')
+
+@app.template_filter('status_display')
+def status_display(status):
+    return status_label(status)
 
 @app.template_filter('role_class')
 def role_class(role):
@@ -155,7 +168,16 @@ def inject_user():
         
         conn.close()
     
-    return dict(current_user=user_info)
+    return dict(
+        current_user=user_info,
+        t=t,
+        current_lang=get_current_language(),
+        is_rtl=is_rtl(),
+        role_label=role_label,
+        status_label=status_label,
+        gender_label=gender_label,
+        format_localized_date=format_localized_date
+    )
 
 # صفحة رئيسية
 @app.route('/')
@@ -163,6 +185,13 @@ def index():
     if 'user_id' in session:
         return redirect(url_for('dashboard.index'))
     return redirect(url_for('auth.login'))
+
+@app.route('/language/<lang>')
+def set_language(lang):
+    if lang in ['ar', 'en']:
+        session['lang'] = lang
+    next_url = request.args.get('next') or request.referrer or '/'
+    return redirect(next_url)
 
 # API لجلب الإحصائيات
 @app.route('/api/stats')

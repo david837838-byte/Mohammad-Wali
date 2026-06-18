@@ -17,9 +17,9 @@
                 
                 <!-- اختيار المريض -->
                 <div class="form-group mb-3">
-                    <label for="patient_id" class="form-label">المريض *</label>
+                    <label for="patient_id" class="form-label">{{ t('المريض *') }}</label>
                     <select class="form-control" id="patient_id" name="patient_id" required>
-                        <option value="">-- اختر مريضاً --</option>
+                        <option value="">{{ t('-- اختر مريضاً --') }}</option>
                         {% for patient in patients %}
                             <option value="{{ patient.id }}" 
                                 {% if form_type == 'edit' and medical.patient_id == patient.id %}selected{% endif %}>
@@ -31,24 +31,24 @@
 
                 <!-- التشخيص -->
                 <div class="form-group mb-3">
-                    <label for="diagnosis" class="form-label">التشخيص *</label>
-                    <textarea class="form-control" id="diagnosis" name="diagnosis" rows="3" placeholder="أدخل التشخيص الطبي" required>
+                    <label for="diagnosis" class="form-label">{{ t('التشخيص *') }}</label>
+                    <textarea class="form-control" id="diagnosis" name="diagnosis" rows="3" placeholder="{{ t('أدخل التشخيص الطبي') }}" required>
                         {% if form_type == 'edit' %}{{ medical.diagnosis }}{% endif %}
                     </textarea>
                 </div>
 
                 <!-- العلاج -->
                 <div class="form-group mb-3">
-                    <label for="treatment" class="form-label">العلاج *</label>
-                    <textarea class="form-control" id="treatment" name="treatment" rows="3" placeholder="أدخل العلاج الموصوف" required>
+                    <label for="treatment" class="form-label">{{ t('العلاج *') }}</label>
+                    <textarea class="form-control" id="treatment" name="treatment" rows="3" placeholder="{{ t('أدخل العلاج الموصوف') }}" required>
                         {% if form_type == 'edit' %}{{ medical.treatment }}{% endif %}
                     </textarea>
                 </div>
 
                 <!-- الملاحظات -->
                 <div class="form-group mb-3">
-                    <label for="notes" class="form-label">الملاحظات</label>
-                    <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="ملاحظات إضافية (اختياري)">
+                    <label for="notes" class="form-label">{{ t('الملاحظات') }}</label>
+                    <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="{{ t('ملاحظات إضافية (اختياري)') }}">
                         {% if form_type == 'edit' %}{{ medical.notes }}{% endif %}
                     </textarea>
                 </div>
@@ -56,9 +56,9 @@
                 <!-- التاريخ -->
                 {% if form_type == 'edit' %}
                 <div class="form-group mb-3">
-                    <label for="record_date" class="form-label">تاريخ السجل</label>
+                    <label for="record_date" class="form-label">{{ t('تاريخ السجل') }}</label>
                     <input type="date" class="form-control" id="record_date" value="{% if medical.created_at %}{{ medical.created_at|date_format('%Y-%m-%d') }}{% endif %}" disabled>
-                    <small class="text-muted">تاريخ الإنشاء الأصلي</small>
+                    <small class="text-muted">{{ t('تاريخ الإنشاء الأصلي') }}</small>
                 </div>
                 {% endif %}
 
@@ -70,7 +70,7 @@
                     </button>
                     <a href="/medical" class="btn btn-secondary">
                         <i class="fas fa-times"></i>
-                        إلغاء
+                        {{ t('إلغاء') }}
                     </a>
                 </div>
             </form>

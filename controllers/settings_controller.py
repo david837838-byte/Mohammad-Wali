@@ -30,9 +30,18 @@ def index():
             'sheet_id': '1_JvtLlgrN5GoNIIO7tP0eGsdd3sH9RXRLH7VlN8d9HM'
         }
     
+    users = []
+    if session.get('user_role') == 'admin':
+        cursor.execute('''
+            SELECT id, full_name, username, role, status
+            FROM users
+            ORDER BY created_at DESC
+        ''')
+        users = cursor.fetchall()
+    
     conn.close()
     
-    return render_template('settings.html', settings=settings)
+    return render_template('settings.html', settings=settings, users=users)
 
 @settings_bp.route('/update', methods=['POST'])
 def update():

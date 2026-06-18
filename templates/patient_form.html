@@ -7,7 +7,7 @@
     <div class="page-title">
         <h2>{{ 'تعديل' if patient else 'إضافة' }} مريض جديد</h2>
         <a href="{{ url_for('patient.index') }}" class="btn">
-            <i class="fas fa-arrow-right"></i> رجوع
+            <i class="fas fa-arrow-right"></i> {{ t('رجوع') }}
         </a>
     </div>
     
@@ -19,46 +19,46 @@
             
             <div class="form-row">
                 <div class="form-group">
-                    <label for="patientName">اسم المريض الكامل *</label>
+                    <label for="patientName">{{ t('اسم المريض الكامل *') }}</label>
                     <input type="text" id="patientName" name="name" class="form-control" value="{{ patient.name if patient else '' }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="patientAge">العمر *</label>
+                    <label for="patientAge">{{ t('العمر *') }}</label>
                     <input type="number" id="patientAge" name="age" class="form-control" value="{{ patient.age if patient else '' }}" required min="0" max="150">
                 </div>
             </div>
             
             <div class="form-row">
                 <div class="form-group">
-                    <label for="patientPhone">رقم الهاتف *</label>
+                    <label for="patientPhone">{{ t('رقم الهاتف *') }}</label>
                     <input type="tel" id="patientPhone" name="phone" class="form-control" value="{{ patient.phone if patient else '' }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="patientGender">الجنس *</label>
+                    <label for="patientGender">{{ t('الجنس *') }}</label>
                     <select id="patientGender" name="gender" class="form-control" required>
-                        <option value="">اختر الجنس</option>
-                        <option value="ذكر" {% if patient and patient.gender == 'ذكر' %}selected{% endif %}>ذكر</option>
-                        <option value="أنثى" {% if patient and patient.gender == 'أنثى' %}selected{% endif %}>أنثى</option>
+                        <option value="">{{ t('اختر الجنس') }}</option>
+                        <option value="ذكر" {% if patient and patient.gender == 'ذكر' %}selected{% endif %}>{{ t('ذكر') }}</option>
+                        <option value="أنثى" {% if patient and patient.gender == 'أنثى' %}selected{% endif %}>{{ t('أنثى') }}</option>
                     </select>
                 </div>
             </div>
             
             <div class="form-group">
-                <label for="patientAddress">العنوان *</label>
+                <label for="patientAddress">{{ t('العنوان *') }}</label>
                 <input type="text" id="patientAddress" name="address" class="form-control" value="{{ patient.address if patient else '' }}" required>
             </div>
             
             <div class="form-group">
-                <label for="initialDiagnosis">التشخيص الأولي</label>
+                <label for="initialDiagnosis">{{ t('التشخيص الأولي') }}</label>
                 <textarea id="initialDiagnosis" name="diagnosis" class="form-control" rows="3">{{ patient.diagnosis if patient else '' }}</textarea>
             </div>
             
             <div class="form-group">
-                <label for="patientStatus">الحالة</label>
+                <label for="patientStatus">{{ t('الحالة') }}</label>
                 <select id="patientStatus" name="status" class="form-control">
-                    <option value="نشط" {% if patient and patient.status == 'نشط' %}selected{% endif %}>نشط</option>
-                    <option value="بانتظار الفحص" {% if patient and patient.status == 'بانتظار الفحص' %}selected{% endif %}>بانتظار الفحص</option>
-                    <option value="غير نشط" {% if patient and patient.status == 'غير نشط' %}selected{% endif %}>غير نشط</option>
+                    <option value="نشط" {% if patient and patient.status == 'نشط' %}selected{% endif %}>{{ t('نشط') }}</option>
+                    <option value="بانتظار الفحص" {% if patient and patient.status == 'بانتظار الفحص' %}selected{% endif %}>{{ t('بانتظار الفحص') }}</option>
+                    <option value="غير نشط" {% if patient and patient.status == 'غير نشط' %}selected{% endif %}>{{ t('غير نشط') }}</option>
                 </select>
             </div>
             
@@ -67,7 +67,7 @@
                     <i class="fas fa-save"></i> {{ 'تحديث' if patient else 'حفظ' }} المريض
                 </button>
                 <a href="{{ url_for('patient.index') }}" class="btn" style="background-color: #f1f3f4;">
-                    إلغاء
+                    {{ t('إلغاء') }}
                 </a>
             </div>
         </form>

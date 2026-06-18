@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}المالية{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <h2><i class="fas fa-file-invoice-dollar"></i> {{ t('قسم المالية') }}</h2>
+    <div class="header-actions">
+        <a href="{{ url_for('billing.add') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> {{ t('إنشاء فاتورة جديدة') }}
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>{{ t('رقم الفاتورة') }}</th>
+                    <th>{{ t('اسم المريض') }}</th>
+                    <th>{{ t('التاريخ') }}</th>
+                    <th>{{ t('الإجمالي') }}</th>
+                    <th>{{ t('المدفوع') }}</th>
+                    <th>{{ t('الحالة') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for invoice in invoices %}
+                <tr>
+                    <td>{{ invoice.invoice_number }}</td>
+                    <td>{{ invoice.patient_name }}</td>
+                    <td>{{ invoice.date|date_format }}</td>
+                    <td>{{ invoice.total_amount }} $</td>
+                    <td>{{ invoice.paid_amount }} $</td>
+                    <td><span class="status-badge">{{ invoice.status }}</span></td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">{{ t('لا توجد فواتير مسجلة') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,23 +1,73 @@
-<header>
-    <div class="container header-content">
-        <div class="logo">
-            <i class="fas fa-hospital"></i>
-            <h1>بيت المسيح</h1>
-        </div>
-        
-        <div class="user-info">
-            <div class="user-avatar">
-                <i class="fas fa-user"></i>
-            </div>
-            <div>
-                <div id="currentUserName">{{ current_user.user_full_name }}</div>
-                <div id="currentUserRole" class="role-badge {{ current_user.user_role|role_class }}">
-                    {{ current_user.user_role|role_display }}
-                </div>
-            </div>
-            <a href="{{ url_for('auth.logout') }}" class="logout-btn">
-                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+<header class="topbar">
+    <div class="topbar-inner">
+        <div class="topbar-start">
+            <button class="icon-btn mobile-only" type="button" id="sidebarToggle" aria-label="{{ t('Main Navigation') }}">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <a href="{{ url_for('dashboard.index') }}" class="brand-block">
+                <span class="brand-mark">
+                    <i class="fas fa-hospital-user"></i>
+                </span>
+                <span class="brand-copy">
+                    <strong>{{ t('Beit Al-Masih') }}</strong>
+                    <small>{{ t('Hospital Operations Center') }}</small>
+                </span>
             </a>
+        </div>
+
+        <div class="topbar-center">
+            <div class="date-chip">
+                <i class="fas fa-calendar-day"></i>
+                <span class="current-date">{{ current_local_date }}</span>
+            </div>
+        </div>
+
+        <div class="topbar-end">
+            <div class="language-switch" aria-label="{{ t('Language') }}">
+                <a href="{{ url_for('set_language', lang='ar', next=request.path) }}" class="lang-pill {% if current_lang == 'ar' %}active{% endif %}">{{ t('Arabic') }}</a>
+                <a href="{{ url_for('set_language', lang='en', next=request.path) }}" class="lang-pill {% if current_lang == 'en' %}active{% endif %}">{{ t('English') }}</a>
+            </div>
+
+            <button class="icon-btn" type="button" id="notificationsToggle" aria-label="{{ t('Notifications') }}">
+                <i class="fas fa-bell"></i>
+                <span class="notification-count is-hidden" id="notificationCount">0</span>
+            </button>
+
+            <div class="user-chip">
+                <span class="user-chip-avatar">
+                    {{ (current_user.user_full_name or 'U')[0] }}
+                </span>
+                <span class="user-chip-copy">
+                    <strong>{{ current_user.user_full_name }}</strong>
+                    <small>{{ current_user.user_role|role_display }}</small>
+                </span>
+            </div>
+
+            <a href="{{ url_for('profile') }}" class="icon-link" aria-label="{{ t('Profile') }}">
+                <i class="fas fa-user-cog"></i>
+            </a>
+            <a href="{{ url_for('auth.logout') }}" class="icon-link danger" aria-label="{{ t('Close') }}">
+                <i class="fas fa-right-from-bracket"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="notification-panel" id="notificationPanel">
+        <div class="panel-header">
+            <div>
+                <h3>{{ t('Notifications') }}</h3>
+                <p>{{ t('Operational alerts linked to patients, visits, and accounts.') }}</p>
+            </div>
+            <button class="icon-btn subtle" type="button" id="closeNotifications" aria-label="{{ t('Close') }}">
+                <i class="fas fa-xmark"></i>
+            </button>
+        </div>
+        <div class="panel-body" id="notificationList">
+            <div class="empty-state compact">
+                <i class="fas fa-bell-slash"></i>
+                <p>{{ t('No notifications at the moment.') }}</p>
+            </div>
         </div>
     </div>
 </header>

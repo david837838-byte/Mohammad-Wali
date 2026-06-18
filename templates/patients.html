@@ -5,18 +5,18 @@
 {% block content %}
 <div id="patientsPage" class="page-content">
     <div class="page-title">
-        <h2>إدارة المرضى</h2>
+        <h2>{{ t('إدارة المرضى') }}</h2>
         <div>
             {% if current_user.user_role == 'admin' %}
             <form action="{{ url_for('patient.clear_temp') }}" method="POST" style="display: inline;">
                 <button type="submit" class="btn btn-danger" onclick="return confirm('هل أنت متأكد من مسح جميع البيانات المؤقتة؟')">
-                    <i class="fas fa-trash-alt"></i> مسح المؤقت
+                    <i class="fas fa-trash-alt"></i> {{ t('مسح المؤقت') }}
                 </button>
             </form>
             {% endif %}
             {% if current_user.user_role != 'view' %}
             <a href="{{ url_for('patient.add') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> إضافة مريض جديد
+                <i class="fas fa-plus"></i> {{ t('إضافة مريض جديد') }}
             </a>
             {% endif %}
         </div>
@@ -26,14 +26,14 @@
         <table>
             <thead>
                 <tr>
-                    <th>رقم الملف</th>
-                    <th>اسم المريض</th>
-                    <th>العمر</th>
-                    <th>رقم الهاتف</th>
-                    <th>التشخيص الأولي</th>
-                    <th>الحالة</th>
-                    <th>تاريخ التسجيل</th>
-                    <th>الإجراءات</th>
+                    <th>{{ t('رقم الملف') }}</th>
+                    <th>{{ t('اسم المريض') }}</th>
+                    <th>{{ t('العمر') }}</th>
+                    <th>{{ t('رقم الهاتف') }}</th>
+                    <th>{{ t('التشخيص الأولي') }}</th>
+                    <th>{{ t('الحالة') }}</th>
+                    <th>{{ t('تاريخ التسجيل') }}</th>
+                    <th>{{ t('الإجراءات') }}</th>
                 </tr>
             </thead>
             <tbody>

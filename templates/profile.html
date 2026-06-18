@@ -5,7 +5,7 @@
 {% block content %}
 <div class="page-content">
     <div class="page-title">
-        <h2>البروفايل الشخصي</h2>
+        <h2>{{ t('البروفايل الشخصي') }}</h2>
     </div>
     
     <div class="form-container">
@@ -27,68 +27,68 @@
         </div>
         
         <form method="POST" action="{{ url_for('update_profile') }}" class="profile-form">
-            <h4><i class="fas fa-user-edit"></i> تعديل المعلومات الشخصية</h4>
+            <h4><i class="fas fa-user-edit"></i> {{ t('تعديل المعلومات الشخصية') }}</h4>
             
             <div class="form-row">
                 <div class="form-group">
-                    <label for="full_name">الاسم الكامل</label>
+                    <label for="full_name">{{ t('الاسم الكامل') }}</label>
                     <input type="text" id="full_name" name="full_name" class="form-control" 
                            value="{{ user.full_name }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="username">اسم المستخدم</label>
+                    <label for="username">{{ t('اسم المستخدم') }}</label>
                     <input type="text" id="username" class="form-control" 
                            value="{{ user.username }}" disabled>
-                    <small class="form-text text-muted">لا يمكن تغيير اسم المستخدم</small>
+                    <small class="form-text text-muted">{{ t('لا يمكن تغيير اسم المستخدم') }}</small>
                 </div>
             </div>
             
             <div class="form-row">
                 <div class="form-group">
-                    <label for="email">البريد الإلكتروني</label>
+                    <label for="email">{{ t('البريد الإلكتروني') }}</label>
                     <input type="email" id="email" name="email" class="form-control" 
                            value="{{ user.email or '' }}">
                 </div>
                 <div class="form-group">
-                    <label for="phone">رقم الهاتف</label>
+                    <label for="phone">{{ t('رقم الهاتف') }}</label>
                     <input type="tel" id="phone" name="phone" class="form-control" 
                            value="{{ user.phone or '' }}">
                 </div>
             </div>
             
             <div class="form-group">
-                <label for="role">الدور</label>
+                <label for="role">{{ t('الدور') }}</label>
                 <input type="text" id="role" class="form-control" 
                        value="{{ user.role|role_display }}" disabled>
             </div>
             
             <div class="form-group">
-                <label for="status">الحالة</label>
+                <label for="status">{{ t('الحالة') }}</label>
                 <input type="text" id="status" class="form-control" 
                        value="{{ user.status }}" disabled>
             </div>
             
             <hr>
             
-            <h4><i class="fas fa-lock"></i> تغيير كلمة المرور</h4>
+            <h4><i class="fas fa-lock"></i> {{ t('تغيير كلمة المرور') }}</h4>
             
             <div class="form-row">
                 <div class="form-group">
-                    <label for="current_password">كلمة المرور الحالية</label>
+                    <label for="current_password">{{ t('كلمة المرور الحالية') }}</label>
                     <input type="password" id="current_password" name="current_password" 
                            class="form-control">
-                    <small class="form-text text-muted">اتركه فارغاً إذا لم ترد تغيير كلمة المرور</small>
+                    <small class="form-text text-muted">{{ t('اتركه فارغاً إذا لم ترد تغيير كلمة المرور') }}</small>
                 </div>
             </div>
             
             <div class="form-row">
                 <div class="form-group">
-                    <label for="new_password">كلمة المرور الجديدة</label>
+                    <label for="new_password">{{ t('كلمة المرور الجديدة') }}</label>
                     <input type="password" id="new_password" name="new_password" 
                            class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="confirm_password">تأكيد كلمة المرور الجديدة</label>
+                    <label for="confirm_password">{{ t('تأكيد كلمة المرور الجديدة') }}</label>
                     <input type="password" id="confirm_password" name="confirm_password" 
                            class="form-control">
                 </div>
@@ -96,27 +96,27 @@
             
             <div class="form-actions">
                 <button type="submit" class="btn btn-success">
-                    <i class="fas fa-save"></i> حفظ التغييرات
+                    <i class="fas fa-save"></i> {{ t('حفظ التغييرات') }}
                 </button>
                 <a href="{{ url_for('dashboard.index') }}" class="btn">
-                    رجوع
+                    {{ t('رجوع') }}
                 </a>
             </div>
         </form>
         
         <div class="profile-stats">
-            <h4><i class="fas fa-chart-bar"></i> إحصائيات</h4>
+            <h4><i class="fas fa-chart-bar"></i> {{ t('إحصائيات') }}</h4>
             <div class="stats-grid">
                 <div class="stat-item">
-                    <div class="stat-label">تاريخ التسجيل</div>
+                    <div class="stat-label">{{ t('تاريخ التسجيل') }}</div>
                     <div class="stat-value">{{ user.created_at|date_format('%Y-%m-%d') }}</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-label">آخر تحديث</div>
+                    <div class="stat-label">{{ t('آخر تحديث') }}</div>
                     <div class="stat-value">{{ user.updated_at|date_format('%Y-%m-%d') if user.updated_at else 'غير متوفر' }}</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-label">مدة العضوية</div>
+                    <div class="stat-label">{{ t('مدة العضوية') }}</div>
                     <div class="stat-value">{{ membership_duration }} يوم</div>
                 </div>
             </div>

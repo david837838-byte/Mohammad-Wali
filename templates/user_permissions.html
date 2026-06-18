@@ -7,7 +7,7 @@
     <div class="page-title">
         <h2>إدارة صلاحيات المستخدم: {{ user.full_name }}</h2>
         <a href="{{ url_for('user.index') }}" class="btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> عودة
+            <i class="fas fa-arrow-left"></i> {{ t('عودة') }}
         </a>
     </div>
 
@@ -15,15 +15,15 @@
         <form method="POST" action="{{ url_for('user.update_permissions', id=user.id) }}">
             <div class="user-info">
                 <div class="info-item">
-                    <label>اسم المستخدم:</label>
+                    <label>{{ t('اسم المستخدم:') }}</label>
                     <span>{{ user.username }}</span>
                 </div>
                 <div class="info-item">
-                    <label>الاسم الكامل:</label>
+                    <label>{{ t('الاسم الكامل:') }}</label>
                     <span>{{ user.full_name }}</span>
                 </div>
                 <div class="info-item">
-                    <label>الدور:</label>
+                    <label>{{ t('الدور:') }}</label>
                     <span>{{ user.role }}</span>
                 </div>
             </div>
@@ -31,110 +31,110 @@
             <hr>
 
             <div class="permissions-section">
-                <h3>صلاحيات المرضى</h3>
+                <h3>{{ t('صلاحيات المرضى') }}</h3>
                 <div class="permission-group">
                     <label>
                         <input type="checkbox" name="can_view_patients" 
                                {% if permissions.can_view_patients %}checked{% endif %}>
-                        عرض المرضى
+                        {{ t('عرض المرضى') }}
                     </label>
                     <label>
                         <input type="checkbox" name="can_add_patients" 
                                {% if permissions.can_add_patients %}checked{% endif %}>
-                        إضافة مريض جديد
+                        {{ t('إضافة مريض جديد') }}
                     </label>
                     <label>
                         <input type="checkbox" name="can_edit_patients" 
                                {% if permissions.can_edit_patients %}checked{% endif %}>
-                        تعديل بيانات المريض
+                        {{ t('تعديل بيانات المريض') }}
                     </label>
                     <label>
                         <input type="checkbox" name="can_delete_patients" 
                                {% if permissions.can_delete_patients %}checked{% endif %}>
-                        حذف المريض
+                        {{ t('حذف المريض') }}
                     </label>
                 </div>
             </div>
 
             <div class="permissions-section">
-                <h3>صلاحيات السجلات الطبية</h3>
+                <h3>{{ t('صلاحيات السجلات الطبية') }}</h3>
                 <div class="permission-group">
                     <label>
                         <input type="checkbox" name="can_view_medical" 
                                {% if permissions.can_view_medical %}checked{% endif %}>
-                        عرض السجلات الطبية
+                        {{ t('عرض السجلات الطبية') }}
                     </label>
                     <label>
                         <input type="checkbox" name="can_add_medical" 
                                {% if permissions.can_add_medical %}checked{% endif %}>
-                        إضافة سجل طبي جديد
+                        {{ t('إضافة سجل طبي جديد') }}
                     </label>
                     <label>
                         <input type="checkbox" name="can_edit_medical" 
                                {% if permissions.can_edit_medical %}checked{% endif %}>
-                        تعديل السجل الطبي
+                        {{ t('تعديل السجل الطبي') }}
                     </label>
                     <label>
                         <input type="checkbox" name="can_delete_medical" 
                                {% if permissions.can_delete_medical %}checked{% endif %}>
-                        حذف السجل الطبي
+                        {{ t('حذف السجل الطبي') }}
                     </label>
                 </div>
             </div>
 
             <div class="permissions-section">
-                <h3>صلاحيات الزيارات</h3>
+                <h3>{{ t('صلاحيات الزيارات') }}</h3>
                 <div class="permission-group">
                     <label>
                         <input type="checkbox" name="can_view_visits" 
                                {% if permissions.can_view_visits %}checked{% endif %}>
-                        عرض الزيارات
+                        {{ t('عرض الزيارات') }}
                     </label>
                     <label>
                         <input type="checkbox" name="can_add_visits" 
                                {% if permissions.can_add_visits %}checked{% endif %}>
-                        جدولة زيارة جديدة
+                        {{ t('جدولة زيارة جديدة') }}
                     </label>
                     <label>
                         <input type="checkbox" name="can_edit_visits" 
                                {% if permissions.can_edit_visits %}checked{% endif %}>
-                        تعديل الزيارة
+                        {{ t('تعديل الزيارة') }}
                     </label>
                     <label>
                         <input type="checkbox" name="can_delete_visits" 
                                {% if permissions.can_delete_visits %}checked{% endif %}>
-                        حذف الزيارة
+                        {{ t('حذف الزيارة') }}
                     </label>
                 </div>
             </div>
 
             <div class="permissions-section">
-                <h3>صلاحيات إضافية</h3>
+                <h3>{{ t('صلاحيات إضافية') }}</h3>
                 <div class="permission-group">
                     <label>
                         <input type="checkbox" name="can_view_reports" 
                                {% if permissions.can_view_reports %}checked{% endif %}>
-                        عرض التقارير والإحصائيات
+                        {{ t('عرض التقارير والإحصائيات') }}
                     </label>
                     <label>
                         <input type="checkbox" name="can_manage_users" 
                                {% if permissions.can_manage_users %}checked{% endif %}>
-                        إدارة المستخدمين والصلاحيات
+                        {{ t('إدارة المستخدمين والصلاحيات') }}
                     </label>
                     <label>
                         <input type="checkbox" name="can_manage_settings" 
                                {% if permissions.can_manage_settings %}checked{% endif %}>
-                        إدارة الإعدادات
+                        {{ t('إدارة الإعدادات') }}
                     </label>
                 </div>
             </div>
 
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-save"></i> حفظ الصلاحيات
+                    <i class="fas fa-save"></i> {{ t('حفظ الصلاحيات') }}
                 </button>
                 <a href="{{ url_for('user.index') }}" class="btn btn-secondary">
-                    <i class="fas fa-times"></i> إلغاء
+                    <i class="fas fa-times"></i> {{ t('إلغاء') }}
                 </a>
             </div>
         </form>

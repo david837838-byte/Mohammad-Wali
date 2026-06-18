@@ -5,10 +5,10 @@
 {% block content %}
 <div id="medicalRecordsPage" class="page-content">
     <div class="page-title">
-        <h2>السجلات الطبية</h2>
+        <h2>{{ t('السجلات الطبية') }}</h2>
         {% if current_user.user_role in ['admin', 'doctor', 'nurse'] %}
         <a href="{{ url_for('medical.add') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> إضافة سجل طبي
+            <i class="fas fa-plus"></i> {{ t('إضافة سجل طبي') }}
         </a>
         {% endif %}
     </div>
@@ -17,14 +17,14 @@
         <table>
             <thead>
                 <tr>
-                    <th>رقم السجل</th>
-                    <th>اسم المريض</th>
-                    <th>رقم الملف</th>
-                    <th>التشخيص</th>
-                    <th>العلاج</th>
-                    <th>التاريخ</th>
-                    <th>الطبيب المعالج</th>
-                    <th>الإجراءات</th>
+                    <th>{{ t('رقم السجل') }}</th>
+                    <th>{{ t('اسم المريض') }}</th>
+                    <th>{{ t('رقم الملف') }}</th>
+                    <th>{{ t('التشخيص') }}</th>
+                    <th>{{ t('العلاج') }}</th>
+                    <th>{{ t('التاريخ') }}</th>
+                    <th>{{ t('الطبيب المعالج') }}</th>
+                    <th>{{ t('الإجراءات') }}</th>
                 </tr>
             </thead>
             <tbody>

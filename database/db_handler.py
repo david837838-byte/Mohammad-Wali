@@ -147,6 +147,113 @@ def init_db():
         )
     ''')
     
+    # -- بداية الجداول الجديدة --
+    
+    # جداول الصيدلية
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS medicines (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            category TEXT,
+            stock INTEGER DEFAULT 0,
+            expiry_date TEXT,
+            price REAL DEFAULT 0.0,
+            status TEXT DEFAULT 'متوفر',
+            created_at TEXT NOT NULL,
+            updated_at TEXT
+        )
+    ''')
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS prescriptions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            patient_id INTEGER NOT NULL,
+            visit_id INTEGER,
+            doctor_id INTEGER NOT NULL,
+            notes TEXT,
+            status TEXT DEFAULT 'غير مصروف',
+            date TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            FOREIGN KEY (patient_id) REFERENCES patients (id),
+            FOREIGN KEY (visit_id) REFERENCES visits (id),
+            FOREIGN KEY (doctor_id) REFERENCES users (id)
+        )
+    ''')
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS prescription_items (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            prescription_id INTEGER NOT NULL,
+            medicine_id INTEGER NOT NULL,
+            dosage TEXT NOT NULL,
+            duration TEXT,
+            quantity INTEGER DEFAULT 1,
+            FOREIGN KEY (prescription_id) REFERENCES prescriptions (id),
+            FOREIGN KEY (medicine_id) REFERENCES medicines (id)
+        )
+    ''')
+    
+    # جداول المالية
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS invoices (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            invoice_number TEXT UNIQUE NOT NULL,
+            patient_id INTEGER NOT NULL,
+            visit_id INTEGER,
+            total_amount REAL DEFAULT 0.0,
+            paid_amount REAL DEFAULT 0.0,
+            status TEXT DEFAULT 'غير مدفوع',
+            date TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            FOREIGN KEY (patient_id) REFERENCES patients (id),
+            FOREIGN KEY (visit_id) REFERENCES visits (id)
+        )
+    ''')
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS invoice_items (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            invoice_id INTEGER NOT NULL,
+            description TEXT NOT NULL,
+            amount REAL DEFAULT 0.0,
+            FOREIGN KEY (invoice_id) REFERENCES invoices (id)
+        )
+    ''')
+    
+    # جداول المختبر
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS lab_tests (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            category TEXT,
+            cost REAL DEFAULT 0.0,
+            normal_range TEXT,
+            status TEXT DEFAULT 'متاح',
+            created_at TEXT NOT NULL
+        )
+    ''')
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS lab_requests (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            patient_id INTEGER NOT NULL,
+            visit_id INTEGER,
+            doctor_id INTEGER NOT NULL,
+            test_id INTEGER NOT NULL,
+            status TEXT DEFAULT 'بانتظار العينة',
+            result TEXT,
+            notes TEXT,
+            request_date TEXT NOT NULL,
+            result_date TEXT,
+            FOREIGN KEY (patient_id) REFERENCES patients (id),
+            FOREIGN KEY (visit_id) REFERENCES visits (id),
+            FOREIGN KEY (doctor_id) REFERENCES users (id),
+            FOREIGN KEY (test_id) REFERENCES lab_tests (id)
+        )
+    ''')
+    
+    # -- نهاية الجداول الجديدة --
+
     conn.commit()
     conn.close()
 

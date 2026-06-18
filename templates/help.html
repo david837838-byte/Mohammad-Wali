@@ -5,13 +5,13 @@
 {% block content %}
 <div class="page-content">
     <div class="page-title">
-        <h2><i class="fas fa-question-circle"></i> مركز المساعدة والدعم الفني</h2>
+        <h2><i class="fas fa-question-circle"></i> {{ t('مركز المساعدة والدعم الفني') }}</h2>
         <div>
             <button class="btn btn-primary" onclick="window.print()">
-                <i class="fas fa-print"></i> طباعة الدليل
+                <i class="fas fa-print"></i> {{ t('طباعة الدليل') }}
             </button>
             <button class="btn btn-success" onclick="downloadUserGuide()">
-                <i class="fas fa-download"></i> تحميل الدليل
+                <i class="fas fa-download"></i> {{ t('تحميل الدليل') }}
             </button>
         </div>
     </div>
@@ -20,48 +20,48 @@
         <!-- الشريط الجانبي -->
         <div class="help-sidebar">
             <div class="help-search">
-                <input type="text" id="helpSearch" placeholder="ابحث في الدليل..." class="form-control">
+                <input type="text" id="helpSearch" placeholder="{{ t('ابحث في الدليل...') }}" class="form-control">
                 <button class="btn-search" onclick="searchHelp()">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
 
             <div class="help-nav">
-                <h4><i class="fas fa-list"></i> فهرس المحتويات</h4>
+                <h4><i class="fas fa-list"></i> {{ t('فهرس المحتويات') }}</h4>
                 <ul id="helpToc">
-                    <li><a href="#getting-started" onclick="scrollToSection('getting-started')"><i class="fas fa-play"></i> بدء الاستخدام</a></li>
-                    <li><a href="#dashboard" onclick="scrollToSection('dashboard')"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a></li>
-                    <li><a href="#patients" onclick="scrollToSection('patients')"><i class="fas fa-procedures"></i> إدارة المرضى</a></li>
-                    <li><a href="#medical" onclick="scrollToSection('medical')"><i class="fas fa-file-medical"></i> السجلات الطبية</a></li>
-                    <li><a href="#visits" onclick="scrollToSection('visits')"><i class="fas fa-calendar-check"></i> إدارة الزيارات</a></li>
-                    <li><a href="#reports" onclick="scrollToSection('reports')"><i class="fas fa-chart-bar"></i> التقارير والإحصائيات</a></li>
-                    <li><a href="#users" onclick="scrollToSection('users')"><i class="fas fa-users-cog"></i> إدارة المستخدمين</a></li>
-                    <li><a href="#settings" onclick="scrollToSection('settings')"><i class="fas fa-cogs"></i> الإعدادات</a></li>
-                    <li><a href="#troubleshooting" onclick="scrollToSection('troubleshooting')"><i class="fas fa-wrench"></i> استكشاف الأخطاء</a></li>
-                    <li><a href="#faq" onclick="scrollToSection('faq')"><i class="fas fa-question"></i> الأسئلة الشائعة</a></li>
+                    <li><a href="#getting-started" onclick="scrollToSection('getting-started')"><i class="fas fa-play"></i> {{ t('بدء الاستخدام') }}</a></li>
+                    <li><a href="#dashboard" onclick="scrollToSection('dashboard')"><i class="fas fa-tachometer-alt"></i> {{ t('لوحة التحكم') }}</a></li>
+                    <li><a href="#patients" onclick="scrollToSection('patients')"><i class="fas fa-procedures"></i> {{ t('إدارة المرضى') }}</a></li>
+                    <li><a href="#medical" onclick="scrollToSection('medical')"><i class="fas fa-file-medical"></i> {{ t('السجلات الطبية') }}</a></li>
+                    <li><a href="#visits" onclick="scrollToSection('visits')"><i class="fas fa-calendar-check"></i> {{ t('إدارة الزيارات') }}</a></li>
+                    <li><a href="#reports" onclick="scrollToSection('reports')"><i class="fas fa-chart-bar"></i> {{ t('التقارير والإحصائيات') }}</a></li>
+                    <li><a href="#users" onclick="scrollToSection('users')"><i class="fas fa-users-cog"></i> {{ t('إدارة المستخدمين') }}</a></li>
+                    <li><a href="#settings" onclick="scrollToSection('settings')"><i class="fas fa-cogs"></i> {{ t('الإعدادات') }}</a></li>
+                    <li><a href="#troubleshooting" onclick="scrollToSection('troubleshooting')"><i class="fas fa-wrench"></i> {{ t('استكشاف الأخطاء') }}</a></li>
+                    <li><a href="#faq" onclick="scrollToSection('faq')"><i class="fas fa-question"></i> {{ t('الأسئلة الشائعة') }}</a></li>
                 </ul>
             </div>
 
             <div class="quick-links">
-                <h4><i class="fas fa-bolt"></i> روابط سريعة</h4>
+                <h4><i class="fas fa-bolt"></i> {{ t('روابط سريعة') }}</h4>
                 <div class="quick-link-item" onclick="window.location.href='/patients'">
-                    <i class="fas fa-procedures"></i> الذهاب إلى المرضى
+                    <i class="fas fa-procedures"></i> {{ t('الذهاب إلى المرضى') }}
                 </div>
                 <div class="quick-link-item" onclick="window.location.href='/medical'">
-                    <i class="fas fa-file-medical"></i> الذهاب إلى السجلات الطبية
+                    <i class="fas fa-file-medical"></i> {{ t('الذهاب إلى السجلات الطبية') }}
                 </div>
                 <div class="quick-link-item" onclick="window.location.href='/reports'">
-                    <i class="fas fa-chart-line"></i> الذهاب إلى التقارير
+                    <i class="fas fa-chart-line"></i> {{ t('الذهاب إلى التقارير') }}
                 </div>
             </div>
 
             <div class="help-contact">
-                <h4><i class="fas fa-headset"></i> اتصل بنا</h4>
-                <p>لديك سؤال أو مشكلة؟</p>
+                <h4><i class="fas fa-headset"></i> {{ t('اتصل بنا') }}</h4>
+                <p>{{ t('لديك سؤال أو مشكلة؟') }}</p>
                 <div class="contact-methods">
-                    <p><i class="fas fa-envelope"></i> <strong>البريد الإلكتروني:</strong><br>support@hospital-system.com</p>
-                    <p><i class="fas fa-phone"></i> <strong>الهاتف:</strong><br>800 123 4567</p>
-                    <p><i class="fas fa-clock"></i> <strong>ساعات العمل:</strong><br>الأحد - الخميس: 8 صباحاً - 5 مساءً</p>
+                    <p><i class="fas fa-envelope"></i> <strong>{{ t('البريد الإلكتروني:') }}</strong><br>support@hospital-system.com</p>
+                    <p><i class="fas fa-phone"></i> <strong>{{ t('الهاتف:') }}</strong><br>800 123 4567</p>
+                    <p><i class="fas fa-clock"></i> <strong>{{ t('ساعات العمل:') }}</strong><br>{{ t('الأحد - الخميس: 8 صباحاً - 5 مساءً') }}</p>
                 </div>
             </div>
         </div>
@@ -70,96 +70,96 @@
         <div class="help-content">
             <!-- بدء الاستخدام -->
             <section id="getting-started" class="help-section">
-                <h3><i class="fas fa-play-circle"></i> بدء الاستخدام</h3>
+                <h3><i class="fas fa-play-circle"></i> {{ t('بدء الاستخدام') }}</h3>
                 
                 <div class="help-card">
-                    <h4>👋 الترحيب بالنظام</h4>
-                    <p>مرحباً بك في بيت المسيح، نظام متكامل لإدارة كافة العمليات الطبية والإدارية في المؤسسات الصحية.</p>
-                    <p>تم تصميم النظام ليكون سهل الاستخدام ويوفر جميع الأدوات التي تحتاجها لإدارة عملك بكفاءة.</p>
+                    <h4>{{ t('👋 الترحيب بالنظام') }}</h4>
+                    <p>{{ t('مرحباً بك في بيت المسيح، نظام متكامل لإدارة كافة العمليات الطبية والإدارية في المؤسسات الصحية.') }}</p>
+                    <p>{{ t('تم تصميم النظام ليكون سهل الاستخدام ويوفر جميع الأدوات التي تحتاجها لإدارة عملك بكفاءة.') }}</p>
                 </div>
 
                 <div class="help-card">
-                    <h4>🔐 تسجيل الدخول الأول</h4>
+                    <h4>{{ t('🔐 تسجيل الدخول الأول') }}</h4>
                     <div class="steps">
                         <div class="step">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                <h5>فتح صفحة تسجيل الدخول</h5>
-                                <p>افتح المتصفح واذهب إلى العنوان: <code>http://localhost:5000</code></p>
+                                <h5>{{ t('فتح صفحة تسجيل الدخول') }}</h5>
+                                <p>{{ t('افتح المتصفح واذهب إلى العنوان:') }} <code>http://localhost:5000</code></p>
                             </div>
                         </div>
                         <div class="step">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <h5>إدخال بيانات الدخول</h5>
-                                <p>استخدم بيانات الدخول الافتراضية:</p>
+                                <h5>{{ t('إدخال بيانات الدخول') }}</h5>
+                                <p>{{ t('استخدم بيانات الدخول الافتراضية:') }}</p>
                                 <ul>
-                                    <li><strong>مدير النظام:</strong> admin / admin123</li>
-                                    <li><strong>طبيب:</strong> doctor1 / doctor123</li>
-                                    <li><strong>ممرض/ة:</strong> nurse1 / nurse123</li>
-                                    <li><strong>مشاهد:</strong> viewer / view123</li>
+                                    <li><strong>{{ t('مدير النظام:') }}</strong> admin / admin123</li>
+                                    <li><strong>{{ t('طبيب:') }}</strong> doctor1 / doctor123</li>
+                                    <li><strong>{{ t('ممرض/ة:') }}</strong> nurse1 / nurse123</li>
+                                    <li><strong>{{ t('مشاهد:') }}</strong> viewer / view123</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="step">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <h5>اختيار الدور</h5>
-                                <p>اختر الدور المناسب من قائمة الأدوار</p>
+                                <h5>{{ t('اختيار الدور') }}</h5>
+                                <p>{{ t('اختر الدور المناسب من قائمة الأدوار') }}</p>
                                 <img src="/static/images/login-role-select.png" alt="اختيار الدور" class="help-image">
                             </div>
                         </div>
                         <div class="step">
                             <div class="step-number">4</div>
                             <div class="step-content">
-                                <h5>الدخول للنظام</h5>
-                                <p>اضغط على زر "تسجيل الدخول" للدخول إلى لوحة التحكم</p>
+                                <h5>{{ t('الدخول للنظام') }}</h5>
+                                <p>{{ t('اضغط على زر "تسجيل الدخول" للدخول إلى لوحة التحكم') }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="note">
-                        <strong>ملاحظة هامة:</strong> يجب تغيير كلمات المرور الافتراضية بعد أول دخول لأسباب أمنية.
+                        <strong>{{ t('ملاحظة هامة:') }}</strong> {{ t('يجب تغيير كلمات المرور الافتراضية بعد أول دخول لأسباب أمنية.') }}
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>🎯 فهم الصلاحيات</h4>
-                    <p>يحتوي النظام على 4 مستويات من الصلاحيات:</p>
+                    <h4>{{ t('🎯 فهم الصلاحيات') }}</h4>
+                    <p>{{ t('يحتوي النظام على 4 مستويات من الصلاحيات:') }}</p>
                     <div class="permissions-grid">
                         <div class="permission-card role-admin">
-                            <h5><i class="fas fa-user-shield"></i> مدير النظام</h5>
+                            <h5><i class="fas fa-user-shield"></i> {{ t('مدير النظام') }}</h5>
                             <ul>
-                                <li>إدارة جميع المستخدمين</li>
-                                <li>التحكم الكامل في النظام</li>
-                                <li>تصدير واستيراد البيانات</li>
-                                <li>تعديل الإعدادات</li>
+                                <li>{{ t('إدارة جميع المستخدمين') }}</li>
+                                <li>{{ t('التحكم الكامل في النظام') }}</li>
+                                <li>{{ t('تصدير واستيراد البيانات') }}</li>
+                                <li>{{ t('تعديل الإعدادات') }}</li>
                             </ul>
                         </div>
                         <div class="permission-card role-doctor">
-                            <h5><i class="fas fa-user-md"></i> طبيب</h5>
+                            <h5><i class="fas fa-user-md"></i> {{ t('طبيب') }}</h5>
                             <ul>
-                                <li>إدارة المرضى</li>
-                                <li>إضافة السجلات الطبية</li>
-                                <li>جدولة الزيارات</li>
-                                <li>عرض التقارير</li>
+                                <li>{{ t('إدارة المرضى') }}</li>
+                                <li>{{ t('إضافة السجلات الطبية') }}</li>
+                                <li>{{ t('جدولة الزيارات') }}</li>
+                                <li>{{ t('عرض التقارير') }}</li>
                             </ul>
                         </div>
                         <div class="permission-card role-nurse">
-                            <h5><i class="fas fa-user-nurse"></i> ممرض/ممرضة</h5>
+                            <h5><i class="fas fa-user-nurse"></i> {{ t('ممرض/ممرضة') }}</h5>
                             <ul>
-                                <li>إضافة المرضى</li>
-                                <li>تحديث المعلومات الأساسية</li>
-                                <li>عرض السجلات</li>
-                                <li>إدارة الزيارات البسيطة</li>
+                                <li>{{ t('إضافة المرضى') }}</li>
+                                <li>{{ t('تحديث المعلومات الأساسية') }}</li>
+                                <li>{{ t('عرض السجلات') }}</li>
+                                <li>{{ t('إدارة الزيارات البسيطة') }}</li>
                             </ul>
                         </div>
                         <div class="permission-card role-view">
-                            <h5><i class="fas fa-eye"></i> مشاهد</h5>
+                            <h5><i class="fas fa-eye"></i> {{ t('مشاهد') }}</h5>
                             <ul>
-                                <li>عرض البيانات فقط</li>
-                                <li>لا يمكن التعديل أو الحذف</li>
-                                <li>عرض التقارير</li>
-                                <li>بحث في البيانات</li>
+                                <li>{{ t('عرض البيانات فقط') }}</li>
+                                <li>{{ t('لا يمكن التعديل أو الحذف') }}</li>
+                                <li>{{ t('عرض التقارير') }}</li>
+                                <li>{{ t('بحث في البيانات') }}</li>
                             </ul>
                         </div>
                     </div>
@@ -168,62 +168,62 @@
 
             <!-- لوحة التحكم -->
             <section id="dashboard" class="help-section">
-                <h3><i class="fas fa-tachometer-alt"></i> لوحة التحكم</h3>
+                <h3><i class="fas fa-tachometer-alt"></i> {{ t('لوحة التحكم') }}</h3>
                 
                 <div class="help-card">
-                    <h4>📊 نظرة عامة على لوحة التحكم</h4>
-                    <p>لوحة التحكم هي الصفحة الرئيسية التي تظهر بعد تسجيل الدخول، وتحتوي على:</p>
+                    <h4>{{ t('📊 نظرة عامة على لوحة التحكم') }}</h4>
+                    <p>{{ t('لوحة التحكم هي الصفحة الرئيسية التي تظهر بعد تسجيل الدخول، وتحتوي على:') }}</p>
                     
                     <div class="dashboard-components">
                         <div class="component">
-                            <h5><i class="fas fa-chart-pie"></i> بطاقات الإحصائيات</h5>
-                            <p>تعرض إحصائيات سريعة عن النظام:</p>
+                            <h5><i class="fas fa-chart-pie"></i> {{ t('بطاقات الإحصائيات') }}</h5>
+                            <p>{{ t('تعرض إحصائيات سريعة عن النظام:') }}</p>
                             <ul>
-                                <li>عدد المرضى المسجلين</li>
-                                <li>عدد الأطباء النشطين</li>
-                                <li>عدد المستخدمين</li>
-                                <li>عدد الزيارات اليوم</li>
+                                <li>{{ t('عدد المرضى المسجلين') }}</li>
+                                <li>{{ t('عدد الأطباء النشطين') }}</li>
+                                <li>{{ t('عدد المستخدمين') }}</li>
+                                <li>{{ t('عدد الزيارات اليوم') }}</li>
                             </ul>
                         </div>
                         <div class="component">
-                            <h5><i class="fas fa-users"></i> أحدث المرضى</h5>
-                            <p>جدول يعرض آخر 5 مرضى تم تسجيلهم</p>
+                            <h5><i class="fas fa-users"></i> {{ t('أحدث المرضى') }}</h5>
+                            <p>{{ t('جدول يعرض آخر 5 مرضى تم تسجيلهم') }}</p>
                         </div>
                         <div class="component">
-                            <h5><i class="fas fa-bell"></i> الإشعارات</h5>
-                            <p>إشعارات هامة تتطلب انتباهك</p>
+                            <h5><i class="fas fa-bell"></i> {{ t('الإشعارات') }}</h5>
+                            <p>{{ t('إشعارات هامة تتطلب انتباهك') }}</p>
                         </div>
                         <div class="component">
-                            <h5><i class="fas fa-calendar-day"></i> الزيارات القادمة</h5>
-                            <p>زيارات اليوم والزيارات المجدولة</p>
+                            <h5><i class="fas fa-calendar-day"></i> {{ t('الزيارات القادمة') }}</h5>
+                            <p>{{ t('زيارات اليوم والزيارات المجدولة') }}</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>🔄 تحديث البيانات</h4>
-                    <p>للتأكد من رؤية أحدث البيانات:</p>
+                    <h4>{{ t('🔄 تحديث البيانات') }}</h4>
+                    <p>{{ t('للتأكد من رؤية أحدث البيانات:') }}</p>
                     <ol>
-                        <li>اضغط على زر <strong>تحديث</strong> في الأعلى</li>
-                        <li>أو اضغط <kbd>F5</kbd> على الكيبورد</li>
-                        <li>أو انتظر تحديث تلقائي كل دقيقة</li>
+                        <li>{{ t('اضغط على زر') }} <strong>{{ t('تحديث') }}</strong> {{ t('في الأعلى') }}</li>
+                        <li>{{ t('أو اضغط') }} <kbd>F5</kbd> {{ t('على الكيبورد') }}</li>
+                        <li>{{ t('أو انتظر تحديث تلقائي كل دقيقة') }}</li>
                     </ol>
                 </div>
 
                 <div class="help-card">
-                    <h4>🚀 النصائح السريعة</h4>
+                    <h4>{{ t('🚀 النصائح السريعة') }}</h4>
                     <div class="tips">
                         <div class="tip">
                             <i class="fas fa-mouse-pointer"></i>
-                            <p>مرر مؤشر الفأرة على البطاقات الإحصائية لعرض تفاصيل إضافية</p>
+                            <p>{{ t('مرر مؤشر الفأرة على البطاقات الإحصائية لعرض تفاصيل إضافية') }}</p>
                         </div>
                         <div class="tip">
                             <i class="fas fa-search"></i>
-                            <p>استخدم البحث السريع في الأعلى للعثور على أي شيء بسرعة</p>
+                            <p>{{ t('استخدم البحث السريع في الأعلى للعثور على أي شيء بسرعة') }}</p>
                         </div>
                         <div class="tip">
                             <i class="fas fa-star"></i>
-                            <p>اضغط على زر النجمة بجانب الأسماء لإضافتها للمفضلة</p>
+                            <p>{{ t('اضغط على زر النجمة بجانب الأسماء لإضافتها للمفضلة') }}</p>
                         </div>
                     </div>
                 </div>
@@ -231,72 +231,72 @@
 
             <!-- إدارة المرضى -->
             <section id="patients" class="help-section">
-                <h3><i class="fas fa-procedures"></i> إدارة المرضى</h3>
+                <h3><i class="fas fa-procedures"></i> {{ t('إدارة المرضى') }}</h3>
                 
                 <div class="help-card video-guide">
-                    <h4>🎥 دليل مرئي لإضافة مريض</h4>
+                    <h4>{{ t('🎥 دليل مرئي لإضافة مريض') }}</h4>
                     <div class="video-placeholder">
                         <i class="fas fa-video"></i>
-                        <p>اضغط للتشغيل: "كيفية إضافة مريض جديد"</p>
+                        <p>{{ t('اضغط للتشغيل: "كيفية إضافة مريض جديد"') }}</p>
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>➕ إضافة مريض جديد</h4>
+                    <h4>{{ t('➕ إضافة مريض جديد') }}</h4>
                     <div class="steps">
                         <div class="step">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                <h5>الذهاب إلى قسم المرضى</h5>
-                                <p>من القائمة الجانبية، اضغط على <strong>"المرضى"</strong></p>
+                                <h5>{{ t('الذهاب إلى قسم المرضى') }}</h5>
+                                <p>{{ t('من القائمة الجانبية، اضغط على') }} <strong>{{ t('"المرضى"') }}</strong></p>
                             </div>
                         </div>
                         <div class="step">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <h5>فتح نموذج الإضافة</h5>
-                                <p>اضغط على زر <button class="btn-small btn-primary"><i class="fas fa-plus"></i> إضافة مريض جديد</button></p>
+                                <h5>{{ t('فتح نموذج الإضافة') }}</h5>
+                                <p>{{ t('اضغط على زر') }} <button class="btn-small btn-primary"><i class="fas fa-plus"></i> {{ t('إضافة مريض جديد') }}</button></p>
                             </div>
                         </div>
                         <div class="step">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <h5>ملء بيانات المريض</h5>
-                                <p>املأ جميع الحقول المطلوبة (*):</p>
+                                <h5>{{ t('ملء بيانات المريض') }}</h5>
+                                <p>{{ t('املأ جميع الحقول المطلوبة (*):') }}</p>
                                 <table class="field-table">
                                     <tr>
-                                        <th>الحقل</th>
-                                        <th>الوصف</th>
-                                        <th>مطلوب</th>
+                                        <th>{{ t('الحقل') }}</th>
+                                        <th>{{ t('الوصف') }}</th>
+                                        <th>{{ t('مطلوب') }}</th>
                                     </tr>
                                     <tr>
-                                        <td>اسم المريض</td>
-                                        <td>الاسم الكامل للمريض</td>
+                                        <td>{{ t('اسم المريض') }}</td>
+                                        <td>{{ t('الاسم الكامل للمريض') }}</td>
                                         <td>✓</td>
                                     </tr>
                                     <tr>
-                                        <td>العمر</td>
-                                        <td>عمر المريض بالأرقام</td>
+                                        <td>{{ t('العمر') }}</td>
+                                        <td>{{ t('عمر المريض بالأرقام') }}</td>
                                         <td>✓</td>
                                     </tr>
                                     <tr>
-                                        <td>الجنس</td>
-                                        <td>ذكر أو أنثى</td>
+                                        <td>{{ t('الجنس') }}</td>
+                                        <td>{{ t('ذكر أو أنثى') }}</td>
                                         <td>✓</td>
                                     </tr>
                                     <tr>
-                                        <td>رقم الهاتف</td>
-                                        <td>رقم الهاتف النشط</td>
+                                        <td>{{ t('رقم الهاتف') }}</td>
+                                        <td>{{ t('رقم الهاتف النشط') }}</td>
                                         <td>✓</td>
                                     </tr>
                                     <tr>
-                                        <td>العنوان</td>
-                                        <td>عنوان السكن</td>
+                                        <td>{{ t('العنوان') }}</td>
+                                        <td>{{ t('عنوان السكن') }}</td>
                                         <td>✓</td>
                                     </tr>
                                     <tr>
-                                        <td>التشخيص الأولي</td>
-                                        <td>التشخيص المبدئي</td>
+                                        <td>{{ t('التشخيص الأولي') }}</td>
+                                        <td>{{ t('التشخيص المبدئي') }}</td>
                                         <td>✗</td>
                                     </tr>
                                 </table>
@@ -305,197 +305,197 @@
                         <div class="step">
                             <div class="step-number">4</div>
                             <div class="step-content">
-                                <h5>حفظ البيانات</h5>
-                                <p>اضغط على <button class="btn-small btn-success"><i class="fas fa-save"></i> حفظ المريض</button></p>
-                                <p>سيتم توليد <strong>رقم ملف تلقائياً</strong> للمريض</p>
+                                <h5>{{ t('حفظ البيانات') }}</h5>
+                                <p>{{ t('اضغط على') }} <button class="btn-small btn-success"><i class="fas fa-save"></i> {{ t('حفظ المريض') }}</button></p>
+                                <p>{{ t('سيتم توليد') }} <strong>{{ t('رقم ملف تلقائياً') }}</strong> {{ t('للمريض') }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>🔍 البحث عن المرضى</h4>
-                    <p>للبحث عن مريض معين:</p>
+                    <h4>{{ t('🔍 البحث عن المرضى') }}</h4>
+                    <p>{{ t('للبحث عن مريض معين:') }}</p>
                     <div class="search-methods">
                         <div class="method">
-                            <h5><i class="fas fa-search"></i> البحث السريع</h5>
-                            <p>اكتب في مربع البحث أعلى الجدول:</p>
-                            <input type="text" placeholder="ابحث بالاسم أو رقم الملف..." class="form-control demo-input" readonly>
-                            <p>يمكن البحث بـ: الاسم، رقم الملف، رقم الهاتف</p>
+                            <h5><i class="fas fa-search"></i> {{ t('البحث السريع') }}</h5>
+                            <p>{{ t('اكتب في مربع البحث أعلى الجدول:') }}</p>
+                            <input type="text" placeholder="{{ t('ابحث بالاسم أو رقم الملف...') }}" class="form-control demo-input" readonly>
+                            <p>{{ t('يمكن البحث بـ: الاسم، رقم الملف، رقم الهاتف') }}</p>
                         </div>
                         <div class="method">
-                            <h5><i class="fas fa-filter"></i> التصفية المتقدمة</h5>
-                            <p>استخدم عوامل التصفية:</p>
+                            <h5><i class="fas fa-filter"></i> {{ t('التصفية المتقدمة') }}</h5>
+                            <p>{{ t('استخدم عوامل التصفية:') }}</p>
                             <ul>
-                                <li>حسب الجنس</li>
-                                <li>حسب العمر</li>
-                                <li>حسب الحالة</li>
-                                <li>حسب تاريخ التسجيل</li>
+                                <li>{{ t('حسب الجنس') }}</li>
+                                <li>{{ t('حسب العمر') }}</li>
+                                <li>{{ t('حسب الحالة') }}</li>
+                                <li>{{ t('حسب تاريخ التسجيل') }}</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>✏️ تعديل بيانات المريض</h4>
+                    <h4>{{ t('✏️ تعديل بيانات المريض') }}</h4>
                     <ol>
-                        <li>ابحث عن المريض المطلوب</li>
-                        <li>اضغط على زر <button class="btn-small btn-edit"><i class="fas fa-edit"></i></button></li>
-                        <li>قم بالتعديلات المطلوبة</li>
-                        <li>اضغط على <button class="btn-small btn-success">تحديث</button></li>
+                        <li>{{ t('ابحث عن المريض المطلوب') }}</li>
+                        <li>{{ t('اضغط على زر') }} <button class="btn-small btn-edit"><i class="fas fa-edit"></i></button></li>
+                        <li>{{ t('قم بالتعديلات المطلوبة') }}</li>
+                        <li>{{ t('اضغط على') }} <button class="btn-small btn-success">{{ t('تحديث') }}</button></li>
                     </ol>
                     <div class="note">
-                        <strong>ملاحظة:</strong> يمكن للممرضين والأطباء والمديرين التعديل، بينما يمكن للمشاهدين العرض فقط.
+                        <strong>{{ t('ملاحظة:') }}</strong> {{ t('يمكن للممرضين والأطباء والمديرين التعديل، بينما يمكن للمشاهدين العرض فقط.') }}
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>👁️ عرض تفاصيل المريض</h4>
-                    <p>لعرض كافة معلومات المريض:</p>
+                    <h4>{{ t('👁️ عرض تفاصيل المريض') }}</h4>
+                    <p>{{ t('لعرض كافة معلومات المريض:') }}</p>
                     <ol>
-                        <li>اضغط على زر <button class="btn-small btn-view"><i class="fas fa-eye"></i></button></li>
-                        <li>أو اضغط على اسم المريض في الجدول</li>
+                        <li>{{ t('اضغط على زر') }} <button class="btn-small btn-view"><i class="fas fa-eye"></i></button></li>
+                        <li>{{ t('أو اضغط على اسم المريض في الجدول') }}</li>
                     </ol>
-                    <p>ستظهر صفحة تحتوي على:</p>
+                    <p>{{ t('ستظهر صفحة تحتوي على:') }}</p>
                     <ul>
-                        <li>المعلومات الشخصية</li>
-                        <li>السجلات الطبية</li>
-                        <li>تاريخ الزيارات</li>
-                        <li>التقارير المرتبطة</li>
+                        <li>{{ t('المعلومات الشخصية') }}</li>
+                        <li>{{ t('السجلات الطبية') }}</li>
+                        <li>{{ t('تاريخ الزيارات') }}</li>
+                        <li>{{ t('التقارير المرتبطة') }}</li>
                     </ul>
                 </div>
 
                 <div class="help-card warning">
-                    <h4>⚠️ حذف المريض</h4>
-                    <p><strong>هذا الإجراء للمديرين فقط!</strong></p>
-                    <p>لحذف مريض:</p>
+                    <h4>{{ t('⚠️ حذف المريض') }}</h4>
+                    <p><strong>{{ t('هذا الإجراء للمديرين فقط!') }}</strong></p>
+                    <p>{{ t('لحذف مريض:') }}</p>
                     <ol>
-                        <li>اضغط على زر <button class="btn-small btn-danger"><i class="fas fa-trash"></i></button></li>
-                        <li>ستظهر نافذة تأكيد</li>
-                        <li>اكتب "تأكيد" في المربع</li>
-                        <li>اضغط على زر الحذف</li>
+                        <li>{{ t('اضغط على زر') }} <button class="btn-small btn-danger"><i class="fas fa-trash"></i></button></li>
+                        <li>{{ t('ستظهر نافذة تأكيد') }}</li>
+                        <li>{{ t('اكتب "تأكيد" في المربع') }}</li>
+                        <li>{{ t('اضغط على زر الحذف') }}</li>
                     </ol>
                     <div class="warning-message">
                         <i class="fas fa-exclamation-triangle"></i>
-                        <strong>تحذير:</strong> هذا الإجراء لا يمكن التراجع عنه ويمحو جميع السجلات المرتبطة بالمريض!
+                        <strong>{{ t('تحذير:') }}</strong> {{ t('هذا الإجراء لا يمكن التراجع عنه ويمحو جميع السجلات المرتبطة بالمريض!') }}
                     </div>
                 </div>
             </section>
 
             <!-- السجلات الطبية -->
             <section id="medical" class="help-section">
-                <h3><i class="fas fa-file-medical"></i> السجلات الطبية</h3>
+                <h3><i class="fas fa-file-medical"></i> {{ t('السجلات الطبية') }}</h3>
                 
                 <div class="help-card">
-                    <h4>📝 فهم السجلات الطبية</h4>
-                    <p>السجلات الطبية هي سجل كامل لتاريخ المريض الطبي، وتشمل:</p>
+                    <h4>{{ t('📝 فهم السجلات الطبية') }}</h4>
+                    <p>{{ t('السجلات الطبية هي سجل كامل لتاريخ المريض الطبي، وتشمل:') }}</p>
                     <div class="record-types">
                         <div class="record-type">
-                            <h5><i class="fas fa-stethoscope"></i> التشخيص</h5>
-                            <p>تشخيص الحالة المرضية</p>
+                            <h5><i class="fas fa-stethoscope"></i> {{ t('التشخيص') }}</h5>
+                            <p>{{ t('تشخيص الحالة المرضية') }}</p>
                         </div>
                         <div class="record-type">
-                            <h5><i class="fas fa-pills"></i> العلاج</h5>
-                            <p>العلاج الموصوف والأدوية</p>
+                            <h5><i class="fas fa-pills"></i> {{ t('العلاج') }}</h5>
+                            <p>{{ t('العلاج الموصوف والأدوية') }}</p>
                         </div>
                         <div class="record-type">
-                            <h5><i class="fas fa-notes-medical"></i> الملاحظات</h5>
-                            <p>ملاحظات إضافية من الطبيب</p>
+                            <h5><i class="fas fa-notes-medical"></i> {{ t('الملاحظات') }}</h5>
+                            <p>{{ t('ملاحظات إضافية من الطبيب') }}</p>
                         </div>
                         <div class="record-type">
-                            <h5><i class="fas fa-calendar-alt"></i> المتابعة</h5>
-                            <p>مواعيد المتابعة والتقارير</p>
+                            <h5><i class="fas fa-calendar-alt"></i> {{ t('المتابعة') }}</h5>
+                            <p>{{ t('مواعيد المتابعة والتقارير') }}</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>➕ إضافة سجل طبي جديد</h4>
+                    <h4>{{ t('➕ إضافة سجل طبي جديد') }}</h4>
                     <ol>
-                        <li>اذهب إلى قسم <strong>"السجلات الطبية"</strong></li>
-                        <li>اضغط على <button class="btn-small btn-primary"><i class="fas fa-plus"></i> إضافة سجل طبي</button></li>
-                        <li>اختر المريض من القائمة المنسدلة</li>
-                        <li>املأ الحقول:
+                        <li>{{ t('اذهب إلى قسم') }} <strong>{{ t('"السجلات الطبية"') }}</strong></li>
+                        <li>{{ t('اضغط على') }} <button class="btn-small btn-primary"><i class="fas fa-plus"></i> {{ t('إضافة سجل طبي') }}</button></li>
+                        <li>{{ t('اختر المريض من القائمة المنسدلة') }}</li>
+                        <li>{{ t('املأ الحقول:') }}
                             <ul>
-                                <li><strong>التشخيص:</strong> الحالة المرضية</li>
-                                <li><strong>العلاج:</strong> الخطة العلاجية</li>
-                                <li><strong>الملاحظات:</strong> معلومات إضافية</li>
-                                <li><strong>التاريخ:</strong> تاريخ الفحص (افتراضي: اليوم)</li>
+                                <li><strong>{{ t('التشخيص:') }}</strong> {{ t('الحالة المرضية') }}</li>
+                                <li><strong>{{ t('العلاج:') }}</strong> {{ t('الخطة العلاجية') }}</li>
+                                <li><strong>{{ t('الملاحظات:') }}</strong> {{ t('معلومات إضافية') }}</li>
+                                <li><strong>{{ t('التاريخ:') }}</strong> {{ t('تاريخ الفحص (افتراضي: اليوم)') }}</li>
                             </ul>
                         </li>
-                        <li>اضغط على <button class="btn-small btn-success">حفظ السجل</button></li>
+                        <li>{{ t('اضغط على') }} <button class="btn-small btn-success">{{ t('حفظ السجل') }}</button></li>
                     </ol>
                 </div>
 
                 <div class="help-card">
-                    <h4>📋 نماذج السجلات الجاهزة</h4>
-                    <p>للتسريع، يمكنك استخدام النماذج الجاهزة:</p>
+                    <h4>{{ t('📋 نماذج السجلات الجاهزة') }}</h4>
+                    <p>{{ t('للتسريع، يمكنك استخدام النماذج الجاهزة:') }}</p>
                     <div class="templates">
                         <select class="form-control" onchange="loadTemplate(this.value)">
-                            <option value="">اختر نموذجاً جاهزاً</option>
-                            <option value="checkup">فحص دوري</option>
-                            <option value="prescription">روشتة دواء</option>
-                            <option value="lab">تقرير مختبر</option>
-                            <option value="xray">تقرير أشعة</option>
+                            <option value="">{{ t('اختر نموذجاً جاهزاً') }}</option>
+                            <option value="checkup">{{ t('فحص دوري') }}</option>
+                            <option value="prescription">{{ t('روشتة دواء') }}</option>
+                            <option value="lab">{{ t('تقرير مختبر') }}</option>
+                            <option value="xray">{{ t('تقرير أشعة') }}</option>
                         </select>
                         <div class="template-preview">
-                            <h5>معاينة النموذج:</h5>
+                            <h5>{{ t('معاينة النموذج:') }}</h5>
                             <div id="templateContent"></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>📄 إرفاق المستندات</h4>
-                    <p>يمكنك إرفاق مستندات مع السجلات:</p>
+                    <h4>{{ t('📄 إرفاق المستندات') }}</h4>
+                    <p>{{ t('يمكنك إرفاق مستندات مع السجلات:') }}</p>
                     <ol>
-                        <li>في نموذج السجل، اضغط على <button class="btn-small"><i class="fas fa-paperclip"></i> إرفاق ملف</button></li>
-                        <li>اختر الملف من جهازك</li>
-                        <li>الأنواع المسموحة: PDF, JPG, PNG, DOC</li>
-                        <li>الحجم الأقصى: 10MB</li>
+                        <li>{{ t('في نموذج السجل، اضغط على') }} <button class="btn-small"><i class="fas fa-paperclip"></i> {{ t('إرفاق ملف') }}</button></li>
+                        <li>{{ t('اختر الملف من جهازك') }}</li>
+                        <li>{{ t('الأنواع المسموحة: PDF, JPG, PNG, DOC') }}</li>
+                        <li>{{ t('الحجم الأقصى: 10MB') }}</li>
                     </ol>
                     <div class="note">
-                        <strong>ملاحظة:</strong> المستندات المحملة تكون مرئية فقط للمستخدمين المصرح لهم.
+                        <strong>{{ t('ملاحظة:') }}</strong> {{ t('المستندات المحملة تكون مرئية فقط للمستخدمين المصرح لهم.') }}
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>🖨️ طباعة السجلات</h4>
-                    <p>لطباعة سجل طبي:</p>
+                    <h4>{{ t('🖨️ طباعة السجلات') }}</h4>
+                    <p>{{ t('لطباعة سجل طبي:') }}</p>
                     <ol>
-                        <li>افتح السجل المطلوب</li>
-                        <li>اضغط على <button class="btn-small"><i class="fas fa-print"></i> طباعة</button></li>
-                        <li>اختر إعدادات الطباعة:
+                        <li>{{ t('افتح السجل المطلوب') }}</li>
+                        <li>{{ t('اضغط على') }} <button class="btn-small"><i class="fas fa-print"></i> {{ t('طباعة') }}</button></li>
+                        <li>{{ t('اختر إعدادات الطباعة:') }}
                             <ul>
-                                <li><input type="checkbox" checked> تضمين الترويسة</li>
-                                <li><input type="checkbox" checked> تضمين التوقيع</li>
-                                <li><input type="checkbox"> طباعة خلفية</li>
+                                <li><input type="checkbox" checked> {{ t('تضمين الترويسة') }}</li>
+                                <li><input type="checkbox" checked> {{ t('تضمين التوقيع') }}</li>
+                                <li><input type="checkbox"> {{ t('طباعة خلفية') }}</li>
                             </ul>
                         </li>
-                        <li>اضغط على زر الطباعة</li>
+                        <li>{{ t('اضغط على زر الطباعة') }}</li>
                     </ol>
                 </div>
             </section>
 
             <!-- إدارة الزيارات -->
             <section id="visits" class="help-section">
-                <h3><i class="fas fa-calendar-check"></i> إدارة الزيارات</h3>
+                <h3><i class="fas fa-calendar-check"></i> {{ t('إدارة الزيارات') }}</h3>
                 
                 <div class="help-card">
-                    <h4>📅 جدولة زيارة جديدة</h4>
+                    <h4>{{ t('📅 جدولة زيارة جديدة') }}</h4>
                     <div class="steps">
                         <div class="step">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                <h5>اختيار المريض</h5>
-                                <p>ابحث عن المريض أو اختره من القائمة</p>
+                                <h5>{{ t('اختيار المريض') }}</h5>
+                                <p>{{ t('ابحث عن المريض أو اختره من القائمة') }}</p>
                             </div>
                         </div>
                         <div class="step">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <h5>تحديد التاريخ والوقت</h5>
-                                <p>استخدم التقويم لاختيار التاريخ المناسب</p>
+                                <h5>{{ t('تحديد التاريخ والوقت') }}</h5>
+                                <p>{{ t('استخدم التقويم لاختيار التاريخ المناسب') }}</p>
                                 <input type="date" class="form-control demo-input" value="{{ current_date }}" readonly>
                                 <input type="time" class="form-control demo-input" value="10:00" readonly>
                             </div>
@@ -503,49 +503,49 @@
                         <div class="step">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <h5>تحديد نوع الزيارة</h5>
+                                <h5>{{ t('تحديد نوع الزيارة') }}</h5>
                                 <select class="form-control demo-input" readonly>
-                                    <option>فحص دوري</option>
-                                    <option>متابعة علاج</option>
-                                    <option>تحليل مخبري</option>
-                                    <option>أشعة</option>
-                                    <option>استشارة</option>
+                                    <option>{{ t('فحص دوري') }}</option>
+                                    <option>{{ t('متابعة علاج') }}</option>
+                                    <option>{{ t('تحليل مخبري') }}</option>
+                                    <option>{{ t('أشعة') }}</option>
+                                    <option>{{ t('استشارة') }}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="step">
                             <div class="step-number">4</div>
                             <div class="step-content">
-                                <h5>حجز الموعد</h5>
-                                <p>اضغط على <button class="btn-small btn-success">حجز الموعد</button></p>
+                                <h5>{{ t('حجز الموعد') }}</h5>
+                                <p>{{ t('اضغط على') }} <button class="btn-small btn-success">{{ t('حجز الموعد') }}</button></p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>👁️ عرض التقويم</h4>
-                    <p>لعرض جميع المواعيد بشكل تقويمي:</p>
+                    <h4>{{ t('👁️ عرض التقويم') }}</h4>
+                    <p>{{ t('لعرض جميع المواعيد بشكل تقويمي:') }}</p>
                     <ol>
-                        <li>اضغط على زر <button class="btn-small"><i class="fas fa-calendar-alt"></i> عرض التقويم</button></li>
-                        <li>استخدم الأسهم للتنقل بين الأشهر</li>
-                        <li>اضغط على اليوم لرؤية المواعيد</li>
-                        <li>اضغط على الموعد لعرض تفاصيله</li>
+                        <li>{{ t('اضغط على زر') }} <button class="btn-small"><i class="fas fa-calendar-alt"></i> {{ t('عرض التقويم') }}</button></li>
+                        <li>{{ t('استخدم الأسهم للتنقل بين الأشهر') }}</li>
+                        <li>{{ t('اضغط على اليوم لرؤية المواعيد') }}</li>
+                        <li>{{ t('اضغط على الموعد لعرض تفاصيله') }}</li>
                     </ol>
                     <div class="calendar-view">
                         <div class="calendar-header">
                             <button><i class="fas fa-chevron-right"></i></button>
-                            <h5>يناير 2024</h5>
+                            <h5>{{ t('يناير 2024') }}</h5>
                             <button><i class="fas fa-chevron-left"></i></button>
                         </div>
                         <div class="calendar-grid">
-                            <div class="day-header">أحد</div>
-                            <div class="day-header">إثنين</div>
-                            <div class="day-header">ثلاثاء</div>
-                            <div class="day-header">أربعاء</div>
-                            <div class="day-header">خميس</div>
-                            <div class="day-header">جمعة</div>
-                            <div class="day-header">سبت</div>
+                            <div class="day-header">{{ t('أحد') }}</div>
+                            <div class="day-header">{{ t('إثنين') }}</div>
+                            <div class="day-header">{{ t('ثلاثاء') }}</div>
+                            <div class="day-header">{{ t('أربعاء') }}</div>
+                            <div class="day-header">{{ t('خميس') }}</div>
+                            <div class="day-header">{{ t('جمعة') }}</div>
+                            <div class="day-header">{{ t('سبت') }}</div>
                             <!-- أيام الشهر -->
                             <div class="day">1</div>
                             <div class="day">2</div>
@@ -556,44 +556,44 @@
                 </div>
 
                 <div class="help-card">
-                    <h4>🔔 تذكيرات المواعيد</h4>
-                    <p>لتفعيل التذكيرات:</p>
+                    <h4>{{ t('🔔 تذكيرات المواعيد') }}</h4>
+                    <p>{{ t('لتفعيل التذكيرات:') }}</p>
                     <ol>
-                        <li>اذهب إلى إعدادات الملف الشخصي</li>
-                        <li>اختر "التنبيهات والإشعارات"</li>
-                        <li>حدد أنواع التنبيهات:
+                        <li>{{ t('اذهب إلى إعدادات الملف الشخصي') }}</li>
+                        <li>{{ t('اختر "التنبيهات والإشعارات"') }}</li>
+                        <li>{{ t('حدد أنواع التنبيهات:') }}
                             <ul>
-                                <li><input type="checkbox" checked> قبل الموعد بساعة</li>
-                                <li><input type="checkbox"> قبل الموعد بيوم</li>
-                                <li><input type="checkbox"> عبر البريد الإلكتروني</li>
-                                <li><input type="checkbox"> عبر الرسائل النصية</li>
+                                <li><input type="checkbox" checked> {{ t('قبل الموعد بساعة') }}</li>
+                                <li><input type="checkbox"> {{ t('قبل الموعد بيوم') }}</li>
+                                <li><input type="checkbox"> {{ t('عبر البريد الإلكتروني') }}</li>
+                                <li><input type="checkbox"> {{ t('عبر الرسائل النصية') }}</li>
                             </ul>
                         </li>
-                        <li>حفظ الإعدادات</li>
+                        <li>{{ t('حفظ الإعدادات') }}</li>
                     </ol>
                 </div>
 
                 <div class="help-card">
-                    <h4>🔄 إدارة حالات الزيارات</h4>
-                    <p>تحديث حالة الزيارة:</p>
+                    <h4>{{ t('🔄 إدارة حالات الزيارات') }}</h4>
+                    <p>{{ t('تحديث حالة الزيارة:') }}</p>
                     <div class="status-options">
                         <div class="status-option status-scheduled">
-                            <h5><i class="fas fa-clock"></i> مجدول</h5>
-                            <p>الزيارة مسجلة ولم تتم بعد</p>
+                            <h5><i class="fas fa-clock"></i> {{ t('مجدول') }}</h5>
+                            <p>{{ t('الزيارة مسجلة ولم تتم بعد') }}</p>
                         </div>
                         <div class="status-option status-completed">
-                            <h5><i class="fas fa-check-circle"></i> مكتمل</h5>
-                            <p>تمت الزيارة بنجاح</p>
-                            <button class="btn-small">تحديث للحالة</button>
+                            <h5><i class="fas fa-check-circle"></i> {{ t('مكتمل') }}</h5>
+                            <p>{{ t('تمت الزيارة بنجاح') }}</p>
+                            <button class="btn-small">{{ t('تحديث للحالة') }}</button>
                         </div>
                         <div class="status-option status-cancelled">
-                            <h5><i class="fas fa-times-circle"></i> ملغى</h5>
-                            <p>ألغيت الزيارة</p>
-                            <input type="text" placeholder="سبب الإلغاء..." class="form-control">
+                            <h5><i class="fas fa-times-circle"></i> {{ t('ملغى') }}</h5>
+                            <p>{{ t('ألغيت الزيارة') }}</p>
+                            <input type="text" placeholder="{{ t('سبب الإلغاء...') }}" class="form-control">
                         </div>
                         <div class="status-option status-rescheduled">
-                            <h5><i class="fas fa-calendar-times"></i> مؤجل</h5>
-                            <p>تم تأجيل الزيارة</p>
+                            <h5><i class="fas fa-calendar-times"></i> {{ t('مؤجل') }}</h5>
+                            <p>{{ t('تم تأجيل الزيارة') }}</p>
                             <input type="date" class="form-control">
                         </div>
                     </div>
@@ -602,68 +602,68 @@
 
             <!-- التقارير والإحصائيات -->
             <section id="reports" class="help-section">
-                <h3><i class="fas fa-chart-bar"></i> التقارير والإحصائيات</h3>
+                <h3><i class="fas fa-chart-bar"></i> {{ t('التقارير والإحصائيات') }}</h3>
                 
                 <div class="help-card">
-                    <h4>📈 أنواع التقارير المتاحة</h4>
+                    <h4>{{ t('📈 أنواع التقارير المتاحة') }}</h4>
                     <div class="report-types">
                         <div class="report-type">
-                            <h5><i class="fas fa-users"></i> تقرير المرضى</h5>
-                            <p>جميع بيانات المرضى مع إمكانية التصفية</p>
-                            <button class="btn-small" onclick="generateReport('patients')">إنشاء التقرير</button>
+                            <h5><i class="fas fa-users"></i> {{ t('تقرير المرضى') }}</h5>
+                            <p>{{ t('جميع بيانات المرضى مع إمكانية التصفية') }}</p>
+                            <button class="btn-small" onclick="generateReport('patients')">{{ t('إنشاء التقرير') }}</button>
                         </div>
                         <div class="report-type">
-                            <h5><i class="fas fa-calendar-alt"></i> تقرير الزيارات</h5>
-                            <p>الزيارات في فترة محددة مع تحليل</p>
-                            <button class="btn-small" onclick="generateReport('visits')">إنشاء التقرير</button>
+                            <h5><i class="fas fa-calendar-alt"></i> {{ t('تقرير الزيارات') }}</h5>
+                            <p>{{ t('الزيارات في فترة محددة مع تحليل') }}</p>
+                            <button class="btn-small" onclick="generateReport('visits')">{{ t('إنشاء التقرير') }}</button>
                         </div>
                         <div class="report-type">
-                            <h5><i class="fas fa-file-medical"></i> تقرير السجلات</h5>
-                            <p>السجلات الطبية مع إحصائيات التشخيصات</p>
-                            <button class="btn-small" onclick="generateReport('medical')">إنشاء التقرير</button>
+                            <h5><i class="fas fa-file-medical"></i> {{ t('تقرير السجلات') }}</h5>
+                            <p>{{ t('السجلات الطبية مع إحصائيات التشخيصات') }}</p>
+                            <button class="btn-small" onclick="generateReport('medical')">{{ t('إنشاء التقرير') }}</button>
                         </div>
                         <div class="report-type">
-                            <h5><i class="fas fa-chart-pie"></i> تقرير إحصائي</h5>
-                            <p>إحصائيات عامة وأرقام رئيسية</p>
-                            <button class="btn-small" onclick="generateReport('stats')">إنشاء التقرير</button>
+                            <h5><i class="fas fa-chart-pie"></i> {{ t('تقرير إحصائي') }}</h5>
+                            <p>{{ t('إحصائيات عامة وأرقام رئيسية') }}</p>
+                            <button class="btn-small" onclick="generateReport('stats')">{{ t('إنشاء التقرير') }}</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>⚙️ تخصيص التقارير</h4>
-                    <p>لإنشاء تقرير مخصص:</p>
+                    <h4>{{ t('⚙️ تخصيص التقارير') }}</h4>
+                    <p>{{ t('لإنشاء تقرير مخصص:') }}</p>
                     <div class="report-customization">
                         <div class="custom-step">
-                            <h5>1. اختيار نوع التقرير</h5>
+                            <h5>{{ t('1. اختيار نوع التقرير') }}</h5>
                             <select class="form-control">
-                                <option>تقرير المرضى</option>
-                                <option>تقرير الزيارات</option>
-                                <option>تقرير السجلات الطبية</option>
-                                <option>تقرير مالي</option>
+                                <option>{{ t('تقرير المرضى') }}</option>
+                                <option>{{ t('تقرير الزيارات') }}</option>
+                                <option>{{ t('تقرير السجلات الطبية') }}</option>
+                                <option>{{ t('تقرير مالي') }}</option>
                             </select>
                         </div>
                         <div class="custom-step">
-                            <h5>2. تحديد الفترة الزمنية</h5>
+                            <h5>{{ t('2. تحديد الفترة الزمنية') }}</h5>
                             <div class="date-range">
-                                <input type="date" class="form-control" placeholder="من تاريخ">
-                                <span>إلى</span>
-                                <input type="date" class="form-control" placeholder="إلى تاريخ">
+                                <input type="date" class="form-control" placeholder="{{ t('من تاريخ') }}">
+                                <span>{{ t('إلى') }}</span>
+                                <input type="date" class="form-control" placeholder="{{ t('إلى تاريخ') }}">
                             </div>
                         </div>
                         <div class="custom-step">
-                            <h5>3. اختيار الأعمدة</h5>
+                            <h5>{{ t('3. اختيار الأعمدة') }}</h5>
                             <div class="columns-select">
-                                <label><input type="checkbox" checked> الاسم</label>
-                                <label><input type="checkbox" checked> العمر</label>
-                                <label><input type="checkbox"> الجنس</label>
-                                <label><input type="checkbox" checked> الهاتف</label>
-                                <label><input type="checkbox"> العنوان</label>
-                                <label><input type="checkbox"> التشخيص</label>
+                                <label><input type="checkbox" checked> {{ t('الاسم') }}</label>
+                                <label><input type="checkbox" checked> {{ t('العمر') }}</label>
+                                <label><input type="checkbox"> {{ t('الجنس') }}</label>
+                                <label><input type="checkbox" checked> {{ t('الهاتف') }}</label>
+                                <label><input type="checkbox"> {{ t('العنوان') }}</label>
+                                <label><input type="checkbox"> {{ t('التشخيص') }}</label>
                             </div>
                         </div>
                         <div class="custom-step">
-                            <h5>4. تنسيق التقرير</h5>
+                            <h5>{{ t('4. تنسيق التقرير') }}</h5>
                             <select class="form-control">
                                 <option>Excel (.xlsx)</option>
                                 <option>PDF (.pdf)</option>
@@ -671,49 +671,49 @@
                                 <option>CSV (.csv)</option>
                             </select>
                         </div>
-                        <button class="btn btn-primary">إنشاء التقرير</button>
+                        <button class="btn btn-primary">{{ t('إنشاء التقرير') }}</button>
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>📊 قراءة الرسوم البيانية</h4>
+                    <h4>{{ t('📊 قراءة الرسوم البيانية') }}</h4>
                     <div class="charts-guide">
                         <div class="chart-type">
-                            <h5><i class="fas fa-chart-bar"></i> الأعمدة</h5>
-                            <p>لمقارنة القيم بين الفئات</p>
+                            <h5><i class="fas fa-chart-bar"></i> {{ t('الأعمدة') }}</h5>
+                            <p>{{ t('لمقارنة القيم بين الفئات') }}</p>
                             <div class="chart-demo bar-chart"></div>
                         </div>
                         <div class="chart-type">
-                            <h5><i class="fas fa-chart-pie"></i> الدائرية</h5>
-                            <p>لعرض النسب المئوية</p>
+                            <h5><i class="fas fa-chart-pie"></i> {{ t('الدائرية') }}</h5>
+                            <p>{{ t('لعرض النسب المئوية') }}</p>
                             <div class="chart-demo pie-chart"></div>
                         </div>
                         <div class="chart-type">
-                            <h5><i class="fas fa-chart-line"></i> الخطية</h5>
-                            <p>لمتابعة التغير عبر الزمن</p>
+                            <h5><i class="fas fa-chart-line"></i> {{ t('الخطية') }}</h5>
+                            <p>{{ t('لمتابعة التغير عبر الزمن') }}</p>
                             <div class="chart-demo line-chart"></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>📤 تصدير التقارير</h4>
-                    <p>لتصدير أي تقرير:</p>
+                    <h4>{{ t('📤 تصدير التقارير') }}</h4>
+                    <p>{{ t('لتصدير أي تقرير:') }}</p>
                     <div class="export-options">
                         <div class="export-option">
-                            <h5><i class="fas fa-file-excel"></i> إلى Excel</h5>
-                            <p>مثالي للتحليل والطباعة</p>
-                            <button class="btn-small btn-success">تصدير Excel</button>
+                            <h5><i class="fas fa-file-excel"></i> {{ t('إلى Excel') }}</h5>
+                            <p>{{ t('مثالي للتحليل والطباعة') }}</p>
+                            <button class="btn-small btn-success">{{ t('تصدير Excel') }}</button>
                         </div>
                         <div class="export-option">
-                            <h5><i class="fas fa-file-pdf"></i> إلى PDF</h5>
-                            <p>للحفظ والمشاركة</p>
-                            <button class="btn-small btn-danger">تصدير PDF</button>
+                            <h5><i class="fas fa-file-pdf"></i> {{ t('إلى PDF') }}</h5>
+                            <p>{{ t('للحفظ والمشاركة') }}</p>
+                            <button class="btn-small btn-danger">{{ t('تصدير PDF') }}</button>
                         </div>
                         <div class="export-option">
-                            <h5><i class="fas fa-print"></i> طباعة مباشرة</h5>
-                            <p>للاستخدام الفوري</p>
-                            <button class="btn-small btn-warning">طباعة</button>
+                            <h5><i class="fas fa-print"></i> {{ t('طباعة مباشرة') }}</h5>
+                            <p>{{ t('للاستخدام الفوري') }}</p>
+                            <button class="btn-small btn-warning">{{ t('طباعة') }}</button>
                         </div>
                     </div>
                 </div>
@@ -721,87 +721,87 @@
 
             <!-- إدارة المستخدمين -->
             <section id="users" class="help-section">
-                <h3><i class="fas fa-users-cog"></i> إدارة المستخدمين</h3>
+                <h3><i class="fas fa-users-cog"></i> {{ t('إدارة المستخدمين') }}</h3>
                 
                 <div class="help-card warning">
-                    <h4>⚠️ صلاحيات المديرين فقط</h4>
-                    <p>هذا القسم متاح فقط لمستخدمي دور <strong>"مدير النظام"</strong>.</p>
-                    <p>إذا كنت لا ترى هذا القسم، فأنت لا تملك الصلاحيات الكافية.</p>
+                    <h4>{{ t('⚠️ صلاحيات المديرين فقط') }}</h4>
+                    <p>{{ t('هذا القسم متاح فقط لمستخدمي دور') }} <strong>{{ t('"مدير النظام"') }}</strong>.</p>
+                    <p>{{ t('إذا كنت لا ترى هذا القسم، فأنت لا تملك الصلاحيات الكافية.') }}</p>
                 </div>
 
                 <div class="help-card">
-                    <h4>👤 إضافة مستخدم جديد</h4>
+                    <h4>{{ t('👤 إضافة مستخدم جديد') }}</h4>
                     <ol>
-                        <li>اذهب إلى قسم <strong>"إدارة المستخدمين"</strong></li>
-                        <li>اضغط على <button class="btn-small btn-primary"><i class="fas fa-user-plus"></i> إضافة مستخدم جديد</button></li>
-                        <li>املأ البيانات الأساسية:
+                        <li>{{ t('اذهب إلى قسم') }} <strong>{{ t('"إدارة المستخدمين"') }}</strong></li>
+                        <li>{{ t('اضغط على') }} <button class="btn-small btn-primary"><i class="fas fa-user-plus"></i> {{ t('إضافة مستخدم جديد') }}</button></li>
+                        <li>{{ t('املأ البيانات الأساسية:') }}
                             <ul>
-                                <li><strong>الاسم الكامل</strong> (مطلوب)</li>
-                                <li><strong>اسم المستخدم</strong> (مطلوب، فريد)</li>
-                                <li><strong>كلمة المرور</strong> (6 أحرف على الأقل)</li>
+                                <li><strong>{{ t('الاسم الكامل') }}</strong> {{ t('(مطلوب)') }}</li>
+                                <li><strong>{{ t('اسم المستخدم') }}</strong> {{ t('(مطلوب، فريد)') }}</li>
+                                <li><strong>{{ t('كلمة المرور') }}</strong> {{ t('(6 أحرف على الأقل)') }}</li>
                             </ul>
                         </li>
-                        <li>اختر الدور المناسب</li>
-                        <li>اضغط على <button class="btn-small btn-success">حفظ المستخدم</button></li>
+                        <li>{{ t('اختر الدور المناسب') }}</li>
+                        <li>{{ t('اضغط على') }} <button class="btn-small btn-success">{{ t('حفظ المستخدم') }}</button></li>
                     </ol>
                 </div>
 
                 <div class="help-card">
-                    <h4>🔐 سياسة كلمات المرور</h4>
+                    <h4>{{ t('🔐 سياسة كلمات المرور') }}</h4>
                     <div class="password-policy">
                         <div class="policy-rule">
                             <i class="fas fa-check-circle"></i>
-                            <span>6 أحرف على الأقل</span>
+                            <span>{{ t('6 أحرف على الأقل') }}</span>
                         </div>
                         <div class="policy-rule">
                             <i class="fas fa-check-circle"></i>
-                            <span>تحتوي على أرقام</span>
+                            <span>{{ t('تحتوي على أرقام') }}</span>
                         </div>
                         <div class="policy-rule">
                             <i class="fas fa-check-circle"></i>
-                            <span>لا تحتوي على اسم المستخدم</span>
+                            <span>{{ t('لا تحتوي على اسم المستخدم') }}</span>
                         </div>
                         <div class="policy-rule">
                             <i class="fas fa-check-circle"></i>
-                            <span>تتغير كل 90 يوماً</span>
+                            <span>{{ t('تتغير كل 90 يوماً') }}</span>
                         </div>
                     </div>
                     <div class="note">
-                        <strong>نصيحة أمنية:</strong> استخدم كلمات مرور قوية ولا تشاركها مع أحد.
+                        <strong>{{ t('نصيحة أمنية:') }}</strong> {{ t('استخدم كلمات مرور قوية ولا تشاركها مع أحد.') }}
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>🔄 إعادة تعيين كلمة المرور</h4>
-                    <p>إذا نسي المستخدم كلمة المرور:</p>
+                    <h4>{{ t('🔄 إعادة تعيين كلمة المرور') }}</h4>
+                    <p>{{ t('إذا نسي المستخدم كلمة المرور:') }}</p>
                     <ol>
-                        <li>ابحث عن المستخدم في الجدول</li>
-                        <li>اضغط على <button class="btn-small"><i class="fas fa-key"></i> إعادة تعيين</button></li>
-                        <li>ستظهر كلمة مرور مؤقتة</li>
-                        <li>أعطِ الكلمة للمستخدم لتسجيل الدخول</li>
-                        <li>يجب على المستخدم تغييرها بعد أول دخول</li>
+                        <li>{{ t('ابحث عن المستخدم في الجدول') }}</li>
+                        <li>{{ t('اضغط على') }} <button class="btn-small"><i class="fas fa-key"></i> {{ t('إعادة تعيين') }}</button></li>
+                        <li>{{ t('ستظهر كلمة مرور مؤقتة') }}</li>
+                        <li>{{ t('أعطِ الكلمة للمستخدم لتسجيل الدخول') }}</li>
+                        <li>{{ t('يجب على المستخدم تغييرها بعد أول دخول') }}</li>
                     </ol>
                 </div>
 
                 <div class="help-card">
-                    <h4>📊 مراقبة نشاط المستخدمين</h4>
-                    <p>لعرض نشاط المستخدمين:</p>
+                    <h4>{{ t('📊 مراقبة نشاط المستخدمين') }}</h4>
+                    <p>{{ t('لعرض نشاط المستخدمين:') }}</p>
                     <div class="activity-monitoring">
                         <div class="activity-item">
-                            <h5><i class="fas fa-sign-in-alt"></i> آخر تسجيل دخول</h5>
-                            <p>عرض آخر مرة سجل فيها المستخدم دخول</p>
+                            <h5><i class="fas fa-sign-in-alt"></i> {{ t('آخر تسجيل دخول') }}</h5>
+                            <p>{{ t('عرض آخر مرة سجل فيها المستخدم دخول') }}</p>
                         </div>
                         <div class="activity-item">
-                            <h5><i class="fas fa-history"></i> سجل النشاط</h5>
-                            <p>جميع الإجراءات التي قام بها المستخدم</p>
+                            <h5><i class="fas fa-history"></i> {{ t('سجل النشاط') }}</h5>
+                            <p>{{ t('جميع الإجراءات التي قام بها المستخدم') }}</p>
                         </div>
                         <div class="activity-item">
-                            <h5><i class="fas fa-exclamation-triangle"></i> محاولات فاشلة</h5>
-                            <p>محاولات تسجيل دخول فاشلة</p>
+                            <h5><i class="fas fa-exclamation-triangle"></i> {{ t('محاولات فاشلة') }}</h5>
+                            <p>{{ t('محاولات تسجيل دخول فاشلة') }}</p>
                         </div>
                         <div class="activity-item">
-                            <h5><i class="fas fa-user-clock"></i> وقت الجلسة</h5>
-                            <p>مدة بقاء المستخدم مسجلاً دخول</p>
+                            <h5><i class="fas fa-user-clock"></i> {{ t('وقت الجلسة') }}</h5>
+                            <p>{{ t('مدة بقاء المستخدم مسجلاً دخول') }}</p>
                         </div>
                     </div>
                 </div>
@@ -809,110 +809,110 @@
 
             <!-- الإعدادات -->
             <section id="settings" class="help-section">
-                <h3><i class="fas fa-cogs"></i> الإعدادات</h3>
+                <h3><i class="fas fa-cogs"></i> {{ t('الإعدادات') }}</h3>
                 
                 <div class="help-card">
-                    <h4>⚙️ إعدادات النظام العامة</h4>
+                    <h4>{{ t('⚙️ إعدادات النظام العامة') }}</h4>
                     <div class="settings-categories">
                         <div class="setting-category">
-                            <h5><i class="fas fa-hospital"></i> إعدادات المؤسسة</h5>
+                            <h5><i class="fas fa-hospital"></i> {{ t('إعدادات المؤسسة') }}</h5>
                             <ul>
-                                <li>اسم المستشفى/العيادة</li>
-                                <li>الشعار</li>
-                                <li>معلومات الاتصال</li>
-                                <li>العنوان</li>
+                                <li>{{ t('اسم المستشفى/العيادة') }}</li>
+                                <li>{{ t('الشعار') }}</li>
+                                <li>{{ t('معلومات الاتصال') }}</li>
+                                <li>{{ t('العنوان') }}</li>
                             </ul>
                         </div>
                         <div class="setting-category">
-                            <h5><i class="fas fa-bell"></i> الإشعارات والتنبيهات</h5>
+                            <h5><i class="fas fa-bell"></i> {{ t('الإشعارات والتنبيهات') }}</h5>
                             <ul>
-                                <li>إشعارات البريد الإلكتروني</li>
-                                <li>التنبيهات داخل النظام</li>
-                                <li>تذكيرات المواعيد</li>
-                                <li>الإشعارات العاجلة</li>
+                                <li>{{ t('إشعارات البريد الإلكتروني') }}</li>
+                                <li>{{ t('التنبيهات داخل النظام') }}</li>
+                                <li>{{ t('تذكيرات المواعيد') }}</li>
+                                <li>{{ t('الإشعارات العاجلة') }}</li>
                             </ul>
                         </div>
                         <div class="setting-category">
-                            <h5><i class="fas fa-print"></i> إعدادات الطباعة</h5>
+                            <h5><i class="fas fa-print"></i> {{ t('إعدادات الطباعة') }}</h5>
                             <ul>
-                                <li>تنسيق التقارير</li>
-                                <li>رأس وتذييل الصفحة</li>
-                                <li>إعدادات الطابعة</li>
-                                <li>نماذج الطباعة</li>
+                                <li>{{ t('تنسيق التقارير') }}</li>
+                                <li>{{ t('رأس وتذييل الصفحة') }}</li>
+                                <li>{{ t('إعدادات الطابعة') }}</li>
+                                <li>{{ t('نماذج الطباعة') }}</li>
                             </ul>
                         </div>
                         <div class="setting-category">
-                            <h5><i class="fas fa-database"></i> إدارة البيانات</h5>
+                            <h5><i class="fas fa-database"></i> {{ t('إدارة البيانات') }}</h5>
                             <ul>
-                                <li>نسخ احتياطي</li>
-                                <li>استعادة البيانات</li>
-                                <li>تصدير البيانات</li>
-                                <li>حذف البيانات</li>
+                                <li>{{ t('نسخ احتياطي') }}</li>
+                                <li>{{ t('استعادة البيانات') }}</li>
+                                <li>{{ t('تصدير البيانات') }}</li>
+                                <li>{{ t('حذف البيانات') }}</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>📊 تكامل Google Sheets</h4>
-                    <p>لربط النظام مع Google Sheets:</p>
+                    <h4>{{ t('📊 تكامل Google Sheets') }}</h4>
+                    <p>{{ t('لربط النظام مع Google Sheets:') }}</p>
                     <div class="integration-steps">
                         <div class="step">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                <h5>إنشاء جدول Google Sheets</h5>
-                                <p>اذهب إلى drive.google.com وأنشئ جدولاً جديداً</p>
+                                <h5>{{ t('إنشاء جدول Google Sheets') }}</h5>
+                                <p>{{ t('اذهب إلى drive.google.com وأنشئ جدولاً جديداً') }}</p>
                             </div>
                         </div>
                         <div class="step">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <h5>نسخ معرف الجدول</h5>
-                                <p>انسخ ID الجدول من الرابط</p>
+                                <h5>{{ t('نسخ معرف الجدول') }}</h5>
+                                <p>{{ t('انسخ ID الجدول من الرابط') }}</p>
                                 <code>https://docs.google.com/spreadsheets/d/<strong>ID_HERE</strong>/edit</code>
                             </div>
                         </div>
                         <div class="step">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <h5>إضافة المعرف في النظام</h5>
-                                <p>الصق ID في حقل "معرف جدول Google Sheets"</p>
+                                <h5>{{ t('إضافة المعرف في النظام') }}</h5>
+                                <p>{{ t('الصق ID في حقل "معرف جدول Google Sheets"') }}</p>
                             </div>
                         </div>
                         <div class="step">
                             <div class="step-number">4</div>
                             <div class="step-content">
-                                <h5>اختبار الاتصال</h5>
-                                <p>اضغط على <button class="btn-small"><i class="fas fa-plug"></i> اختبار الاتصال</button></p>
+                                <h5>{{ t('اختبار الاتصال') }}</h5>
+                                <p>{{ t('اضغط على') }} <button class="btn-small"><i class="fas fa-plug"></i> {{ t('اختبار الاتصال') }}</button></p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>💾 النسخ الاحتياطي</h4>
-                    <p>لإنشاء نسخة احتياطية من البيانات:</p>
+                    <h4>{{ t('💾 النسخ الاحتياطي') }}</h4>
+                    <p>{{ t('لإنشاء نسخة احتياطية من البيانات:') }}</p>
                     <div class="backup-options">
                         <div class="backup-option">
-                            <h5><i class="fas fa-cloud-download-alt"></i> نسخ احتياطي تلقائي</h5>
-                            <p>ضبط النسخ التلقائي:</p>
+                            <h5><i class="fas fa-cloud-download-alt"></i> {{ t('نسخ احتياطي تلقائي') }}</h5>
+                            <p>{{ t('ضبط النسخ التلقائي:') }}</p>
                             <select class="form-control">
-                                <option>يومياً</option>
-                                <option>أسبوعياً</option>
-                                <option>شهرياً</option>
-                                <option>معطلة</option>
+                                <option>{{ t('يومياً') }}</option>
+                                <option>{{ t('أسبوعياً') }}</option>
+                                <option>{{ t('شهرياً') }}</option>
+                                <option>{{ t('معطلة') }}</option>
                             </select>
                         </div>
                         <div class="backup-option">
-                            <h5><i class="fas fa-download"></i> نسخ احتياطي يدوي</h5>
-                            <p>لإنشاء نسخة فورية:</p>
-                            <button class="btn-small btn-success">إنشاء نسخة احتياطية</button>
+                            <h5><i class="fas fa-download"></i> {{ t('نسخ احتياطي يدوي') }}</h5>
+                            <p>{{ t('لإنشاء نسخة فورية:') }}</p>
+                            <button class="btn-small btn-success">{{ t('إنشاء نسخة احتياطية') }}</button>
                         </div>
                         <div class="backup-option">
-                            <h5><i class="fas fa-upload"></i> استعادة بيانات</h5>
-                            <p>لاستعادة نسخة سابقة:</p>
+                            <h5><i class="fas fa-upload"></i> {{ t('استعادة بيانات') }}</h5>
+                            <p>{{ t('لاستعادة نسخة سابقة:') }}</p>
                             <input type="file" class="form-control" accept=".json,.backup">
-                            <button class="btn-small btn-warning">استعادة</button>
+                            <button class="btn-small btn-warning">{{ t('استعادة') }}</button>
                         </div>
                     </div>
                 </div>
@@ -920,189 +920,189 @@
 
             <!-- استكشاف الأخطاء -->
             <section id="troubleshooting" class="help-section">
-                <h3><i class="fas fa-wrench"></i> استكشاف الأخطاء وإصلاحها</h3>
+                <h3><i class="fas fa-wrench"></i> {{ t('استكشاف الأخطاء وإصلاحها') }}</h3>
                 
                 <div class="help-card error">
-                    <h4>🔴 مشاكل شائعة وحلولها</h4>
+                    <h4>{{ t('🔴 مشاكل شائعة وحلولها') }}</h4>
                     
                     <div class="problem-solution">
                         <div class="problem">
-                            <h5><i class="fas fa-times-circle"></i> لا يمكن تسجيل الدخول</h5>
-                            <p><strong>الأعراض:</strong> تظهر رسالة "اسم المستخدم أو كلمة المرور غير صحيحة"</p>
+                            <h5><i class="fas fa-times-circle"></i> {{ t('لا يمكن تسجيل الدخول') }}</h5>
+                            <p><strong>{{ t('الأعراض:') }}</strong> {{ t('تظهر رسالة "اسم المستخدم أو كلمة المرور غير صحيحة"') }}</p>
                         </div>
                         <div class="solution">
-                            <h5><i class="fas fa-check-circle"></i> الحلول:</h5>
+                            <h5><i class="fas fa-check-circle"></i> {{ t('الحلول:') }}</h5>
                             <ol>
-                                <li>تأكد من صحة اسم المستخدم وكلمة المرور</li>
-                                <li>تحقق من أن زر Caps Lock غير مفعل</li>
-                                <li>جرب تصفير كلمة المرور (للمديرين فقط)</li>
-                                <li>اتصل بالدعم إذا استمرت المشكلة</li>
+                                <li>{{ t('تأكد من صحة اسم المستخدم وكلمة المرور') }}</li>
+                                <li>{{ t('تحقق من أن زر Caps Lock غير مفعل') }}</li>
+                                <li>{{ t('جرب تصفير كلمة المرور (للمديرين فقط)') }}</li>
+                                <li>{{ t('اتصل بالدعم إذا استمرت المشكلة') }}</li>
                             </ol>
                         </div>
                     </div>
 
                     <div class="problem-solution">
                         <div class="problem">
-                            <h5><i class="fas fa-times-circle"></i> النظام بطيء</h5>
-                            <p><strong>الأعراض:</strong> تأخير في تحميل الصفحات أو استجابة النظام</p>
+                            <h5><i class="fas fa-times-circle"></i> {{ t('النظام بطيء') }}</h5>
+                            <p><strong>{{ t('الأعراض:') }}</strong> {{ t('تأخير في تحميل الصفحات أو استجابة النظام') }}</p>
                         </div>
                         <div class="solution">
-                            <h5><i class="fas fa-check-circle"></i> الحلول:</h5>
+                            <h5><i class="fas fa-check-circle"></i> {{ t('الحلول:') }}</h5>
                             <ol>
-                                <li>تحديث الصفحة (F5)</li>
-                                <li>مسح ذاكرة التخزين المؤقت للمتصفح</li>
-                                <li>تأكد من سرعة الإنترنت</li>
-                                <li>أغلق التبويبات غير الضرورية</li>
-                                <li>اتصل بالدعم إذا استمرت المشكلة</li>
+                                <li>{{ t('تحديث الصفحة (F5)') }}</li>
+                                <li>{{ t('مسح ذاكرة التخزين المؤقت للمتصفح') }}</li>
+                                <li>{{ t('تأكد من سرعة الإنترنت') }}</li>
+                                <li>{{ t('أغلق التبويبات غير الضرورية') }}</li>
+                                <li>{{ t('اتصل بالدعم إذا استمرت المشكلة') }}</li>
                             </ol>
                         </div>
                     </div>
 
                     <div class="problem-solution">
                         <div class="problem">
-                            <h5><i class="fas fa-times-circle"></i> لا يمكن إضافة بيانات</h5>
-                            <p><strong>الأعراض:</strong> لا يتم حفظ البيانات أو تظهر رسائل خطأ</p>
+                            <h5><i class="fas fa-times-circle"></i> {{ t('لا يمكن إضافة بيانات') }}</h5>
+                            <p><strong>{{ t('الأعراض:') }}</strong> {{ t('لا يتم حفظ البيانات أو تظهر رسائل خطأ') }}</p>
                         </div>
                         <div class="solution">
-                            <h5><i class="fas fa-check-circle"></i> الحلول:</h5>
+                            <h5><i class="fas fa-check-circle"></i> {{ t('الحلول:') }}</h5>
                             <ol>
-                                <li>تأكد من ملء جميع الحقول المطلوبة (*)</li>
-                                <li>تحقق من صحة تنسيق البيانات (أرقام، تواريخ)</li>
-                                <li>تأكد من أنك تملك الصلاحيات الكافية</li>
-                                <li>حاول استخدام متصفح مختلف</li>
+                                <li>{{ t('تأكد من ملء جميع الحقول المطلوبة (*)') }}</li>
+                                <li>{{ t('تحقق من صحة تنسيق البيانات (أرقام، تواريخ)') }}</li>
+                                <li>{{ t('تأكد من أنك تملك الصلاحيات الكافية') }}</li>
+                                <li>{{ t('حاول استخدام متصفح مختلف') }}</li>
                             </ol>
                         </div>
                     </div>
 
                     <div class="problem-solution">
                         <div class="problem">
-                            <h5><i class="fas fa-times-circle"></i> خطأ في الطباعة</h5>
-                            <p><strong>الأعراض:</strong> لا تطبع الطابعة أو تظهر صفحات فارغة</p>
+                            <h5><i class="fas fa-times-circle"></i> {{ t('خطأ في الطباعة') }}</h5>
+                            <p><strong>{{ t('الأعراض:') }}</strong> {{ t('لا تطبع الطابعة أو تظهر صفحات فارغة') }}</p>
                         </div>
                         <div class="solution">
-                            <h5><i class="fas fa-check-circle"></i> الحلول:</h5>
+                            <h5><i class="fas fa-check-circle"></i> {{ t('الحلول:') }}</h5>
                             <ol>
-                                <li>تأكد من توصيل الطابعة وتشغيلها</li>
-                                <li>جرب طباعة صفحة اختبار من الطابعة</li>
-                                <li>استخدم خاصية "حفظ كـ PDF" ثم اطبع الملف</li>
-                                <li>تحقق من إعدادات الطابعة في النظام</li>
+                                <li>{{ t('تأكد من توصيل الطابعة وتشغيلها') }}</li>
+                                <li>{{ t('جرب طباعة صفحة اختبار من الطابعة') }}</li>
+                                <li>{{ t('استخدم خاصية "حفظ كـ PDF" ثم اطبع الملف') }}</li>
+                                <li>{{ t('تحقق من إعدادات الطابعة في النظام') }}</li>
                             </ol>
                         </div>
                     </div>
                 </div>
 
                 <div class="help-card">
-                    <h4>📞 التواصل مع الدعم الفني</h4>
-                    <p>إذا لم تجد حلاً لمشكلتك:</p>
+                    <h4>{{ t('📞 التواصل مع الدعم الفني') }}</h4>
+                    <p>{{ t('إذا لم تجد حلاً لمشكلتك:') }}</p>
                     <div class="support-contact">
                         <div class="contact-method">
-                            <h5><i class="fas fa-phone-alt"></i> الهاتف</h5>
+                            <h5><i class="fas fa-phone-alt"></i> {{ t('الهاتف') }}</h5>
                             <p>800 123 4567</p>
-                            <p>ساعات العمل: 8 ص - 5 م</p>
+                            <p>{{ t('ساعات العمل: 8 ص - 5 م') }}</p>
                         </div>
                         <div class="contact-method">
-                            <h5><i class="fas fa-envelope"></i> البريد الإلكتروني</h5>
+                            <h5><i class="fas fa-envelope"></i> {{ t('البريد الإلكتروني') }}</h5>
                             <p>support@hospital-system.com</p>
-                            <p>الرد خلال 24 ساعة عمل</p>
+                            <p>{{ t('الرد خلال 24 ساعة عمل') }}</p>
                         </div>
                         <div class="contact-method">
-                            <h5><i class="fas fa-comments"></i> الدردشة المباشرة</h5>
-                            <p>متاحة خلال ساعات العمل</p>
-                            <button class="btn-small btn-primary">ابدأ محادثة</button>
+                            <h5><i class="fas fa-comments"></i> {{ t('الدردشة المباشرة') }}</h5>
+                            <p>{{ t('متاحة خلال ساعات العمل') }}</p>
+                            <button class="btn-small btn-primary">{{ t('ابدأ محادثة') }}</button>
                         </div>
                     </div>
                     <div class="note">
-                        <strong>للمساعدة السريعة:</strong> أرفق لقطة شاشة للخطأ وصف المشكلة بالتفصيل.
+                        <strong>{{ t('للمساعدة السريعة:') }}</strong> {{ t('أرفق لقطة شاشة للخطأ وصف المشكلة بالتفصيل.') }}
                     </div>
                 </div>
             </section>
 
             <!-- الأسئلة الشائعة -->
             <section id="faq" class="help-section">
-                <h3><i class="fas fa-question"></i> الأسئلة الشائعة (FAQ)</h3>
+                <h3><i class="fas fa-question"></i> {{ t('الأسئلة الشائعة (FAQ)') }}</h3>
                 
                 <div class="faq-container">
                     <div class="faq-item">
                         <div class="faq-question" onclick="toggleFaq(this)">
-                            <h5>كيف يمكنني تغيير كلمة المرور؟</h5>
+                            <h5>{{ t('كيف يمكنني تغيير كلمة المرور؟') }}</h5>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>لتغيير كلمة المرور:</p>
+                            <p>{{ t('لتغيير كلمة المرور:') }}</p>
                             <ol>
-                                <li>اضغط على اسمك في الزاوية اليمنى العليا</li>
-                                <li>اختر "البروفايل الشخصي"</li>
-                                <li>ادخل كلمة المرور الحالية</li>
-                                <li>ادخل كلمة المرور الجديدة</li>
-                                <li>اضغط على "حفظ التغييرات"</li>
+                                <li>{{ t('اضغط على اسمك في الزاوية اليمنى العليا') }}</li>
+                                <li>{{ t('اختر "البروفايل الشخصي"') }}</li>
+                                <li>{{ t('ادخل كلمة المرور الحالية') }}</li>
+                                <li>{{ t('ادخل كلمة المرور الجديدة') }}</li>
+                                <li>{{ t('اضغط على "حفظ التغييرات"') }}</li>
                             </ol>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <div class="faq-question" onclick="toggleFaq(this)">
-                            <h5>كيف يمكنني تصدير جميع بيانات المرضى؟</h5>
+                            <h5>{{ t('كيف يمكنني تصدير جميع بيانات المرضى؟') }}</h5>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>لتصدير بيانات المرضى:</p>
+                            <p>{{ t('لتصدير بيانات المرضى:') }}</p>
                             <ol>
-                                <li>اذهب إلى قسم "التقارير"</li>
-                                <li>اختر "تقرير المرضى"</li>
-                                <li>اضغط على زر "تصدير إلى Excel"</li>
-                                <li>اختر الموقع لحفظ الملف</li>
+                                <li>{{ t('اذهب إلى قسم "التقارير"') }}</li>
+                                <li>{{ t('اختر "تقرير المرضى"') }}</li>
+                                <li>{{ t('اضغط على زر "تصدير إلى Excel"') }}</li>
+                                <li>{{ t('اختر الموقع لحفظ الملف') }}</li>
                             </ol>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <div class="faq-question" onclick="toggleFaq(this)">
-                            <h5>هل يمكنني استخدام النظام على الهاتف؟</h5>
+                            <h5>{{ t('هل يمكنني استخدام النظام على الهاتف؟') }}</h5>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>نعم، النظام متجاوب ويعمل على:</p>
+                            <p>{{ t('نعم، النظام متجاوب ويعمل على:') }}</p>
                             <ul>
-                                <li>الهواتف الذكية</li>
-                                <li>الأجهزة اللوحية</li>
-                                <li>أجهزة الكمبيوتر</li>
+                                <li>{{ t('الهواتف الذكية') }}</li>
+                                <li>{{ t('الأجهزة اللوحية') }}</li>
+                                <li>{{ t('أجهزة الكمبيوتر') }}</li>
                             </ul>
-                            <p>ببساطة افتح المتصفح على جهازك واذهب إلى عنوان النظام.</p>
+                            <p>{{ t('ببساطة افتح المتصفح على جهازك واذهب إلى عنوان النظام.') }}</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <div class="faq-question" onclick="toggleFaq(this)">
-                            <h5>كيف يمكنني استعادة بيانات محذوفة؟</h5>
+                            <h5>{{ t('كيف يمكنني استعادة بيانات محذوفة؟') }}</h5>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>لاستعادة البيانات المحذوفة:</p>
+                            <p>{{ t('لاستعادة البيانات المحذوفة:') }}</p>
                             <ol>
-                                <li>اذهب إلى "الإعدادات"</li>
-                                <li>اختر "إدارة البيانات"</li>
-                                <li>اضغط على "استعادة من نسخة احتياطية"</li>
-                                <li>اختر النسخة الاحتياطية المناسبة</li>
-                                <li>اضغط على "استعادة"</li>
+                                <li>{{ t('اذهب إلى "الإعدادات"') }}</li>
+                                <li>{{ t('اختر "إدارة البيانات"') }}</li>
+                                <li>{{ t('اضغط على "استعادة من نسخة احتياطية"') }}</li>
+                                <li>{{ t('اختر النسخة الاحتياطية المناسبة') }}</li>
+                                <li>{{ t('اضغط على "استعادة"') }}</li>
                             </ol>
                             <div class="warning">
-                                <strong>تحذير:</strong> الاستعادة تحل محل البيانات الحالية.
+                                <strong>{{ t('تحذير:') }}</strong> {{ t('الاستعادة تحل محل البيانات الحالية.') }}
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <div class="faq-question" onclick="toggleFaq(this)">
-                            <h5>ماذا أفعل إذا نسيت اسم المستخدم؟</h5>
+                            <h5>{{ t('ماذا أفعل إذا نسيت اسم المستخدم؟') }}</h5>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>إذا نسيت اسم المستخدم:</p>
+                            <p>{{ t('إذا نسيت اسم المستخدم:') }}</p>
                             <ol>
-                                <li>اتصل بمدير النظام في مؤسستك</li>
-                                <li>أو اتصل بالدعم الفني على 800 123 4567</li>
-                                <li>قدم معلومات الهوية للتحقق</li>
-                                <li>سيتم تزويدك باسم المستخدم</li>
+                                <li>{{ t('اتصل بمدير النظام في مؤسستك') }}</li>
+                                <li>{{ t('أو اتصل بالدعم الفني على 800 123 4567') }}</li>
+                                <li>{{ t('قدم معلومات الهوية للتحقق') }}</li>
+                                <li>{{ t('سيتم تزويدك باسم المستخدم') }}</li>
                             </ol>
                         </div>
                     </div>

@@ -105,6 +105,10 @@ def main():
         sys.exit(1)
 
     setup_environment()
+    
+    from database.db_handler import init_db
+    print("جاري تهيئة قاعدة البيانات...")
+    init_db()
 
     print("✓ تم الإعداد بنجاح")
     print("✓ تشغيل التطبيق...")

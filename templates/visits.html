@@ -5,10 +5,10 @@
 {% block content %}
 <div id="visitsPage" class="page-content">
     <div class="page-title">
-        <h2>الزيارات والتشخيص</h2>
+        <h2>{{ t('الزيارات والتشخيص') }}</h2>
         {% if current_user.user_role in ['admin', 'doctor'] %}
         <a href="{{ url_for('visit.add') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> إضافة زيارة
+            <i class="fas fa-plus"></i> {{ t('إضافة زيارة') }}
         </a>
         {% endif %}
     </div>
@@ -17,15 +17,15 @@
         <table>
             <thead>
                 <tr>
-                    <th>رقم الزيارة</th>
-                    <th>اسم المريض</th>
-                    <th>رقم الملف</th>
-                    <th>التاريخ</th>
-                    <th>الوقت</th>
-                    <th>الغرض</th>
-                    <th>التشخيص</th>
-                    <th>الحالة</th>
-                    <th>الإجراءات</th>
+                    <th>{{ t('رقم الزيارة') }}</th>
+                    <th>{{ t('اسم المريض') }}</th>
+                    <th>{{ t('رقم الملف') }}</th>
+                    <th>{{ t('التاريخ') }}</th>
+                    <th>{{ t('الوقت') }}</th>
+                    <th>{{ t('الغرض') }}</th>
+                    <th>{{ t('التشخيص') }}</th>
+                    <th>{{ t('الحالة') }}</th>
+                    <th>{{ t('الإجراءات') }}</th>
                 </tr>
             </thead>
             <tbody>

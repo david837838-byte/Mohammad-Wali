@@ -11,9 +11,9 @@
     <div class="form-container">
         <form method="POST" class="form">
             <div class="form-group">
-                <label for="patient_id">المريض *</label>
+                <label for="patient_id">{{ t('المريض *') }}</label>
                 <select id="patient_id" name="patient_id" required>
-                    <option value="">اختر المريض</option>
+                    <option value="">{{ t('اختر المريض') }}</option>
                     {% for patient in patients %}
                     <option value="{{ patient.id }}" {% if visit and visit.patient_id == patient.id %}selected{% endif %}>
                         {{ patient.name }}
@@ -24,38 +24,38 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="date">التاريخ *</label>
+                    <label for="date">{{ t('التاريخ *') }}</label>
                     <input type="date" id="date" name="date" value="{% if visit %}{{ visit.date }}{% else %}{{ today }}{% endif %}" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="time">الوقت *</label>
+                    <label for="time">{{ t('الوقت *') }}</label>
                     <input type="time" id="time" name="time" value="{% if visit %}{{ visit.time }}{% endif %}" required>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="purpose">غرض الزيارة *</label>
+                <label for="purpose">{{ t('غرض الزيارة *') }}</label>
                 <textarea id="purpose" name="purpose" rows="3" required>{% if visit %}{{ visit.purpose }}{% endif %}</textarea>
             </div>
 
             <div class="form-group">
-                <label for="diagnosis">التشخيص</label>
+                <label for="diagnosis">{{ t('التشخيص') }}</label>
                 <textarea id="diagnosis" name="diagnosis" rows="3">{% if visit %}{{ visit.diagnosis }}{% endif %}</textarea>
             </div>
 
             <div class="form-group">
-                <label for="prescription">الوصفة الطبية</label>
+                <label for="prescription">{{ t('الوصفة الطبية') }}</label>
                 <textarea id="prescription" name="prescription" rows="3">{% if visit %}{{ visit.prescription }}{% endif %}</textarea>
             </div>
 
             {% if mode == 'edit' %}
             <div class="form-group">
-                <label for="status">حالة الزيارة</label>
+                <label for="status">{{ t('حالة الزيارة') }}</label>
                 <select id="status" name="status">
-                    <option value="مجدول" {% if visit.status == 'مجدول' %}selected{% endif %}>مجدول</option>
-                    <option value="مكتمل" {% if visit.status == 'مكتمل' %}selected{% endif %}>مكتمل</option>
-                    <option value="ملغى" {% if visit.status == 'ملغى' %}selected{% endif %}>ملغى</option>
+                    <option value="مجدول" {% if visit.status == 'مجدول' %}selected{% endif %}>{{ t('مجدول') }}</option>
+                    <option value="مكتمل" {% if visit.status == 'مكتمل' %}selected{% endif %}>{{ t('مكتمل') }}</option>
+                    <option value="ملغى" {% if visit.status == 'ملغى' %}selected{% endif %}>{{ t('ملغى') }}</option>
                 </select>
             </div>
             {% endif %}
@@ -65,7 +65,7 @@
                     <i class="fas fa-save"></i> {% if mode == 'add' %}إضافة{% else %}تحديث{% endif %}
                 </button>
                 <a href="{{ url_for('visit.index') }}" class="btn btn-secondary">
-                    <i class="fas fa-times"></i> إلغاء
+                    <i class="fas fa-times"></i> {{ t('إلغاء') }}
                 </a>
             </div>
         </form>

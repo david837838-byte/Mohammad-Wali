@@ -5,10 +5,10 @@
 {% block content %}
 <div id="reportsPage" class="page-content">
     <div class="page-title">
-        <h2>التقارير والإحصائيات</h2>
+        <h2>{{ t('التقارير والإحصائيات') }}</h2>
         {% if current_user.user_role in ['admin', 'doctor'] %}
         <button class="btn btn-primary" id="generateReportBtn">
-            <i class="fas fa-chart-line"></i> إنشاء تقرير
+            <i class="fas fa-chart-line"></i> {{ t('إنشاء تقرير') }}
         </button>
         {% endif %}
     </div>
@@ -16,7 +16,7 @@
     <div class="stats-cards">
         <div class="stat-card">
             <div class="stat-header">
-                <h3>المرضى حسب الجنس</h3>
+                <h3>{{ t('المرضى حسب الجنس') }}</h3>
                 <div class="stat-icon icon-patients">
                     <i class="fas fa-venus-mars"></i>
                 </div>
@@ -29,69 +29,69 @@
         
         <div class="stat-card">
             <div class="stat-header">
-                <h3>المرضى حسب العمر</h3>
+                <h3>{{ t('المرضى حسب العمر') }}</h3>
                 <div class="stat-icon icon-doctors">
                     <i class="fas fa-user-friends"></i>
                 </div>
             </div>
             <div class="stat-value">{% if reports.age_stats.average %}{{ reports.age_stats.average|round(1) }}{% else %}0{% endif %}</div>
-            <div class="stat-label">متوسط العمر</div>
+            <div class="stat-label">{{ t('متوسط العمر') }}</div>
         </div>
         
         <div class="stat-card">
             <div class="stat-header">
-                <h3>الزيارات الشهرية</h3>
+                <h3>{{ t('الزيارات الشهرية') }}</h3>
                 <div class="stat-icon icon-visits">
                     <i class="fas fa-calendar-alt"></i>
                 </div>
             </div>
             <div class="stat-value">{{ reports.monthly_visits or 0 }}</div>
-            <div class="stat-label">زيارة هذا الشهر</div>
+            <div class="stat-label">{{ t('زيارة هذا الشهر') }}</div>
         </div>
         
         <div class="stat-card">
             <div class="stat-header">
-                <h3>التشخيصات الشائعة</h3>
+                <h3>{{ t('التشخيصات الشائعة') }}</h3>
                 <div class="stat-icon icon-reports">
                     <i class="fas fa-stethoscope"></i>
                 </div>
             </div>
             <div class="stat-value">{{ reports.common_diagnoses|length if reports.common_diagnoses else 0 }}</div>
-            <div class="stat-label">تشخيص شائع</div>
+            <div class="stat-label">{{ t('تشخيص شائع') }}</div>
         </div>
     </div>
     
     <div class="page-title">
-        <h2>التقارير التفصيلية</h2>
+        <h2>{{ t('التقارير التفصيلية') }}</h2>
     </div>
     
     <div class="form-container">
         <div class="form-row">
             <div class="form-group">
-                <label>نوع التقرير</label>
+                <label>{{ t('نوع التقرير') }}</label>
                 <select id="reportType" class="form-control">
-                    <option value="patients">تقرير المرضى</option>
-                    <option value="visits">تقرير الزيارات</option>
-                    <option value="medical">تقرير السجلات الطبية</option>
-                    <option value="users">تقرير المستخدمين</option>
+                    <option value="patients">{{ t('تقرير المرضى') }}</option>
+                    <option value="visits">{{ t('تقرير الزيارات') }}</option>
+                    <option value="medical">{{ t('تقرير السجلات الطبية') }}</option>
+                    <option value="users">{{ t('تقرير المستخدمين') }}</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>من تاريخ</label>
+                <label>{{ t('من تاريخ') }}</label>
                 <input type="date" id="reportFromDate" class="form-control">
             </div>
             <div class="form-group">
-                <label>إلى تاريخ</label>
+                <label>{{ t('إلى تاريخ') }}</label>
                 <input type="date" id="reportToDate" class="form-control">
             </div>
         </div>
         
         <div class="form-actions">
             <button class="btn btn-success" id="downloadReportBtn">
-                <i class="fas fa-file-excel"></i> تصدير إلى Excel
+                <i class="fas fa-file-excel"></i> {{ t('تصدير إلى Excel') }}
             </button>
             <button class="btn btn-primary" id="viewReportBtn">
-                <i class="fas fa-eye"></i> عرض التقرير
+                <i class="fas fa-eye"></i> {{ t('عرض التقرير') }}
             </button>
         </div>
     </div>

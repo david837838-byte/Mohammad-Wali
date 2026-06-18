@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ t('بوابة المريض - لوحة التحكم') }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; }
+        .portal-header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .portal-container { padding: 30px; }
+    </style>
+</head>
+<body>
+    <div class="portal-header">
+        <h3><i class="fas fa-hospital"></i> {{ t('بوابة المريض') }}</h3>
+        <div>
+            <span>أهلاً بك، {{ patient.name }}</span>
+            <a href="{{ url_for('portal.logout') }}" class="btn btn-danger" style="margin-right: 15px;">{{ t('تسجيل الخروج') }}</a>
+        </div>
+    </div>
+    
+    <div class="portal-container">
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fas fa-user"></i> {{ t('بياناتك الشخصية') }}</h3>
+            </div>
+            <div class="card-body">
+                <p><strong>{{ t('رقم الملف:') }}</strong> {{ patient.file_number }}</p>
+                <p><strong>{{ t('العمر:') }}</strong> {{ patient.age }}</p>
+                <p><strong>{{ t('رقم الهاتف:') }}</strong> {{ patient.phone }}</p>
+                <p><strong>{{ t('التشخيص الأساسي:') }}</strong> {{ patient.diagnosis }}</p>
+            </div>
+        </div>
+        
+        <div class="card" style="margin-top: 20px;">
+            <div class="card-header">
+                <h3><i class="fas fa-info-circle"></i> {{ t('تنويه') }}</h3>
+            </div>
+            <div class="card-body">
+                <p>{{ t('مرحباً بك في النسخة التجريبية من بوابة المريض. سيتم إضافة المواعيد ونتائج التحاليل قريباً.') }}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,114 +1,186 @@
 {% extends "base.html" %}
 
-{% block title %}لوحة التحكم - بيت المسيح{% endblock %}
+{% block title %}{{ t('Dashboard') }} - {{ t('Beit Al-Masih') }}{% endblock %}
 
 {% block content %}
-<div id="dashboardPage" class="page-content">
-    <div class="page-title">
-        <h2>لوحة التحكم</h2>
-        <div>مرحباً <span id="greetingName">{{ current_user.user_full_name.split(' ')[0] }}</span>, اليوم <span id="currentDate">{{ current_date }}</span></div>
-    </div>
-    
-    <div class="stats-cards">
-        <div class="stat-card">
-            <div class="stat-header">
-                <h3>المرضى</h3>
-                <div class="stat-icon icon-patients">
-                    <i class="fas fa-procedures"></i>
-                </div>
+<div id="dashboardPage" class="page-content dashboard-page">
+    <section class="hero-panel">
+        <div class="hero-copy">
+            <span class="eyebrow">{{ t('Operations Dashboard') }}</span>
+            <h1>{{ t('Welcome') }} {{ current_user.user_full_name.split(' ')[0] if current_user.user_full_name else '' }}</h1>
+            <p>{{ t('Track patient status, scheduled visits, and team activity from one workspace.') }}</p>
+            <div class="hero-actions">
+                {% if current_user.user_role != 'view' %}
+                <a href="{{ url_for('patient.add') }}" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i>
+                    <span>{{ t('Add Patient') }}</span>
+                </a>
+                {% endif %}
+                {% if current_user.user_role in ['admin', 'doctor'] %}
+                <a href="{{ url_for('visit.add') }}" class="btn btn-secondary">
+                    <i class="fas fa-calendar-plus"></i>
+                    <span>{{ t('Schedule Visit') }}</span>
+                </a>
+                {% endif %}
             </div>
-            <div class="stat-value" id="totalPatients">{{ stats.total_patients }}</div>
-            <div class="stat-label">مريض مسجل في النظام</div>
         </div>
-        
-        <div class="stat-card">
-            <div class="stat-header">
-                <h3>الأطباء</h3>
-                <div class="stat-icon icon-doctors">
-                    <i class="fas fa-user-md"></i>
-                </div>
+
+        <div class="hero-insight">
+            <div class="insight-card">
+                <span>{{ t('Today') }}</span>
+                <strong class="current-date">{{ current_local_date }}</strong>
             </div>
-            <div class="stat-value" id="totalDoctors">{{ stats.total_doctors }}</div>
-            <div class="stat-label">طبيب نشط في النظام</div>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-header">
-                <h3>المستخدمون</h3>
-                <div class="stat-icon icon-users">
-                    <i class="fas fa-users"></i>
-                </div>
+            <div class="insight-card">
+                <span>{{ t('Current Role') }}</span>
+                <strong>{{ current_user.user_role|role_display }}</strong>
             </div>
-            <div class="stat-value" id="totalUsers">{{ stats.total_users }}</div>
-            <div class="stat-label">مستخدم مسجل في النظام</div>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-header">
-                <h3>الزيارات اليوم</h3>
-                <div class="stat-icon icon-visits">
-                    <i class="fas fa-calendar-check"></i>
-                </div>
+            <div class="insight-card">
+                <span>{{ t('Overall Status') }}</span>
+                <strong>{{ t('The center is operating normally') }}</strong>
             </div>
-            <div class="stat-value" id="todayVisits">{{ stats.today_visits }}</div>
-            <div class="stat-label">زيارة مبرمجة لهذا اليوم</div>
         </div>
-    </div>
-    
-    <div class="page-title">
-        <h2>آخر المرضى المسجلين</h2>
-        {% if current_user.user_role != 'view' %}
-        <a href="{{ url_for('patient.add') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> إضافة مريض جديد
-        </a>
-        {% endif %}
-    </div>
-    
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>رقم الملف</th>
-                    <th>اسم المريض</th>
-                    <th>العمر</th>
-                    <th>التشخيص الأولي</th>
-                    <th>الحالة</th>
-                    <th>الإجراءات</th>
-                </tr>
-            </thead>
-            <tbody id="patientsTableBody">
-                {% for patient in recent_patients %}
-                <tr>
-                    <td>{{ patient.file_number }}</td>
-                    <td>{{ patient.name }}</td>
-                    <td>{{ patient.age }}</td>
-                    <td>{{ patient.diagnosis or 'غير محدد' }}</td>
-                    <td>
-                        <span class="status-badge {{ patient.status|status_class }}">
-                            {{ patient.status }}
-                        </span>
-                    </td>
-                    <td>
-                        <div class="action-btns">
-                            <a href="{{ url_for('patient.view', id=patient.id) }}" class="action-btn btn-view">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            {% if current_user.user_role != 'view' %}
-                            <a href="{{ url_for('patient.edit', id=patient.id) }}" class="action-btn btn-edit">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            {% endif %}
-                            {% if current_user.user_role == 'admin' %}
-                            <button class="action-btn btn-delete" onclick="confirmDelete('patient', {{ patient.id }}, '{{ patient.name }}')">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            {% endif %}
+    </section>
+
+    <section class="metric-grid stats-cards">
+        <article class="metric-card">
+            <div class="metric-icon icon-patients"><i class="fas fa-bed-pulse"></i></div>
+            <div class="metric-copy">
+                <span>{{ t('Total Patients') }}</span>
+                <strong id="totalPatients">{{ stats.total_patients }}</strong>
+                <small>{{ t('Registered files in the system') }}</small>
+            </div>
+        </article>
+        <article class="metric-card">
+            <div class="metric-icon icon-doctors"><i class="fas fa-user-doctor"></i></div>
+            <div class="metric-copy">
+                <span>{{ t('Active Doctors') }}</span>
+                <strong id="totalDoctors">{{ stats.total_doctors }}</strong>
+                <small>{{ t('Doctor accounts currently active') }}</small>
+            </div>
+        </article>
+        <article class="metric-card">
+            <div class="metric-icon icon-users"><i class="fas fa-users"></i></div>
+            <div class="metric-copy">
+                <span>{{ t('Total Users') }}</span>
+                <strong id="totalUsers">{{ stats.total_users }}</strong>
+                <small>{{ t('All workspace accounts') }}</small>
+            </div>
+        </article>
+        <article class="metric-card">
+            <div class="metric-icon icon-visits"><i class="fas fa-calendar-check"></i></div>
+            <div class="metric-copy">
+                <span>{{ t("Today's Visits") }}</span>
+                <strong id="todayVisits">{{ stats.today_visits }}</strong>
+                <small>{{ t('Scheduled for today') }}</small>
+            </div>
+        </article>
+    </section>
+
+    <section class="dashboard-grid">
+        <article class="surface">
+            <div class="surface-header">
+                <div>
+                    <h2>{{ t('Latest Registered Patients') }}</h2>
+                    <p>{{ t('Quick view of the latest patient files with direct access to details.') }}</p>
+                </div>
+                <a href="{{ url_for('patient.index') }}" class="text-link">{{ t('View All') }}</a>
+            </div>
+            <div class="table-container elevated">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>{{ t('File No.') }}</th>
+                            <th>{{ t('Name') }}</th>
+                            <th>{{ t('Age') }}</th>
+                            <th>{{ t('Initial Diagnosis') }}</th>
+                            <th>{{ t('Status') }}</th>
+                            <th>{{ t('Actions') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for patient in recent_patients %}
+                        <tr>
+                            <td>{{ patient.file_number }}</td>
+                            <td>{{ patient.name }}</td>
+                            <td>{{ patient.age }}</td>
+                            <td>{{ patient.diagnosis or t('Unknown') }}</td>
+                            <td><span class="status-badge {{ patient.status|status_class }}">{{ patient.status|status_display }}</span></td>
+                            <td>
+                                <div class="action-btns">
+                                    <a href="{{ url_for('patient.view', id=patient.id) }}" class="action-btn btn-view"><i class="fas fa-eye"></i></a>
+                                    {% if current_user.user_role != 'view' %}
+                                    <a href="{{ url_for('patient.edit', id=patient.id) }}" class="action-btn btn-edit"><i class="fas fa-pen"></i></a>
+                                    {% endif %}
+                                    {% if current_user.user_role == 'admin' %}
+                                    <button class="action-btn btn-delete" type="button" onclick="confirmDelete('patient', {{ patient.id }}, '{{ patient.name }}')"><i class="fas fa-trash"></i></button>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6">
+                                <div class="empty-state compact">
+                                    <i class="fas fa-folder-open"></i>
+                                    <p>{{ t('No patient files have been registered yet.') }}</p>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </article>
+
+        <div class="stacked-panels">
+            <article class="surface">
+                <div class="surface-header">
+                    <div>
+                        <h2>{{ t('Upcoming Visits') }}</h2>
+                        <p>{{ t('Next seven days.') }}</p>
+                    </div>
+                </div>
+                <div class="surface-body">
+                    <div id="upcomingVisitsList" class="activity-list">
+                        <div class="empty-state compact">
+                            <i class="fas fa-calendar-week"></i>
+                            <p>{{ t('Loading upcoming visits...') }}</p>
                         </div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="surface">
+                <div class="surface-header">
+                    <div>
+                        <h2>{{ t('Quick Actions') }}</h2>
+                        <p>{{ t('Shortcuts that reduce movement between daily workflows.') }}</p>
+                    </div>
+                </div>
+                <div class="quick-grid">
+                    <a href="{{ url_for('patient.index') }}" class="quick-card">
+                        <i class="fas fa-address-book"></i>
+                        <strong>{{ t('Patient Registry') }}</strong>
+                        <span>{{ t('Search, update, and follow patient files.') }}</span>
+                    </a>
+                    <a href="{{ url_for('medical.index') }}" class="quick-card">
+                        <i class="fas fa-notes-medical"></i>
+                        <strong>{{ t('Clinical Records') }}</strong>
+                        <span>{{ t('Review diagnoses and treatments.') }}</span>
+                    </a>
+                    <a href="{{ url_for('visit.index') }}" class="quick-card">
+                        <i class="fas fa-clock"></i>
+                        <strong>{{ t('Visit Schedule') }}</strong>
+                        <span>{{ t("Today's and upcoming appointments.") }}</span>
+                    </a>
+                    <a href="{{ url_for('report.index') }}" class="quick-card">
+                        <i class="fas fa-file-export"></i>
+                        <strong>{{ t('Analytics & Export') }}</strong>
+                        <span>{{ t('Operational statistics with Excel export.') }}</span>
+                    </a>
+                </div>
+            </article>
+        </div>
+    </section>
 </div>
 {% endblock %}

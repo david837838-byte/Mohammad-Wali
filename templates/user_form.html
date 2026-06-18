@@ -7,7 +7,7 @@
     <div class="page-title">
         <h2>{{ 'تعديل' if user else 'إضافة' }} مستخدم جديد</h2>
         <a href="{{ url_for('user.index') }}" class="btn">
-            <i class="fas fa-arrow-right"></i> رجوع
+            <i class="fas fa-arrow-right"></i> {{ t('رجوع') }}
         </a>
     </div>
     
@@ -19,12 +19,12 @@
             
             <div class="form-row">
                 <div class="form-group">
-                    <label for="userFullName">الاسم الكامل *</label>
+                    <label for="userFullName">{{ t('الاسم الكامل *') }}</label>
                     <input type="text" id="userFullName" name="full_name" class="form-control" 
                            value="{{ user.full_name if user else '' }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="userUsername">اسم المستخدم *</label>
+                    <label for="userUsername">{{ t('اسم المستخدم *') }}</label>
                     <input type="text" id="userUsername" name="username" class="form-control" 
                            value="{{ user.username if user else '' }}" required>
                 </div>
@@ -37,40 +37,40 @@
                            {{ 'required' if not user else '' }}>
                 </div>
                 <div class="form-group">
-                    <label for="userConfirmPassword">تأكيد كلمة المرور</label>
+                    <label for="userConfirmPassword">{{ t('تأكيد كلمة المرور') }}</label>
                     <input type="password" id="userConfirmPassword" name="confirm_password" class="form-control">
                 </div>
             </div>
             
             <div class="form-row">
                 <div class="form-group">
-                    <label for="userEmail">البريد الإلكتروني</label>
+                    <label for="userEmail">{{ t('البريد الإلكتروني') }}</label>
                     <input type="email" id="userEmail" name="email" class="form-control" 
                            value="{{ user.email if user else '' }}">
                 </div>
                 <div class="form-group">
-                    <label for="userPhone">رقم الهاتف</label>
+                    <label for="userPhone">{{ t('رقم الهاتف') }}</label>
                     <input type="tel" id="userPhone" name="phone" class="form-control" 
                            value="{{ user.phone if user else '' }}">
                 </div>
             </div>
             
             <div class="form-group">
-                <label for="userRole">دور المستخدم *</label>
+                <label for="userRole">{{ t('دور المستخدم *') }}</label>
                 <select id="userRole" name="role" class="form-control" required>
-                    <option value="">اختر الدور</option>
-                    <option value="admin" {% if user and user.role == 'admin' %}selected{% endif %}>مدير النظام</option>
-                    <option value="doctor" {% if user and user.role == 'doctor' %}selected{% endif %}>طبيب</option>
-                    <option value="nurse" {% if user and user.role == 'nurse' %}selected{% endif %}>ممرض/ممرضة</option>
-                    <option value="view" {% if user and user.role == 'view' %}selected{% endif %}>مشاهد فقط</option>
+                    <option value="">{{ t('اختر الدور') }}</option>
+                    <option value="admin" {% if user and user.role == 'admin' %}selected{% endif %}>{{ t('مدير النظام') }}</option>
+                    <option value="doctor" {% if user and user.role == 'doctor' %}selected{% endif %}>{{ t('طبيب') }}</option>
+                    <option value="nurse" {% if user and user.role == 'nurse' %}selected{% endif %}>{{ t('ممرض/ممرضة') }}</option>
+                    <option value="view" {% if user and user.role == 'view' %}selected{% endif %}>{{ t('مشاهد فقط') }}</option>
                 </select>
             </div>
             
             <div class="form-group">
-                <label for="userStatus">حالة الحساب</label>
+                <label for="userStatus">{{ t('حالة الحساب') }}</label>
                 <select id="userStatus" name="status" class="form-control">
-                    <option value="نشط" {% if user and user.status == 'نشط' %}selected{% endif %}>نشط</option>
-                    <option value="غير نشط" {% if user and user.status == 'غير نشط' %}selected{% endif %}>غير نشط</option>
+                    <option value="نشط" {% if user and user.status == 'نشط' %}selected{% endif %}>{{ t('نشط') }}</option>
+                    <option value="غير نشط" {% if user and user.status == 'غير نشط' %}selected{% endif %}>{{ t('غير نشط') }}</option>
                 </select>
             </div>
             
@@ -79,7 +79,7 @@
                     <i class="fas fa-save"></i> {{ 'تحديث' if user else 'حفظ' }} المستخدم
                 </button>
                 <a href="{{ url_for('user.index') }}" class="btn" style="background-color: #f1f3f4;">
-                    إلغاء
+                    {{ t('إلغاء') }}
                 </a>
             </div>
         </form>

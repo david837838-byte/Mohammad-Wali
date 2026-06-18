@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}الوصفات الطبية{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <h2><i class="fas fa-receipt"></i> {{ t('الوصفات الطبية') }}</h2>
+    <div class="header-actions">
+        <a href="{{ url_for('pharmacy.index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-right"></i> {{ t('عودة للصيدلية') }}
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>{{ t('التاريخ') }}</th>
+                    <th>{{ t('المريض') }}</th>
+                    <th>{{ t('الطبيب') }}</th>
+                    <th>{{ t('الحالة') }}</th>
+                    <th>{{ t('ملاحظات') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prescription in prescriptions %}
+                <tr>
+                    <td>{{ prescription.date|date_format }}</td>
+                    <td>{{ prescription.patient_name }}</td>
+                    <td>{{ prescription.doctor_name }}</td>
+                    <td><span class="status-badge">{{ prescription.status }}</span></td>
+                    <td>{{ prescription.notes }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">{{ t('لا توجد وصفات طبية') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,63 +1,52 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="{{ current_lang }}" dir="{{ 'rtl' if is_rtl else 'ltr' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}بيت المسيح{% endblock %}</title>
+    <title>{% block title %}{{ t('بيت المسيح') }}{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% block extra_css %}{% endblock %}
 </head>
-<body>
+<body class="{{ 'authenticated' if current_user.user_id else 'guest' }}" data-lang="{{ current_lang }}">
     {% if current_user.user_id %}
-        <!-- Main Application -->
-        <div id="appContainer">
+        <div id="appContainer" class="app-shell">
             {% include 'includes/header.html' %}
-            
-            <div class="main-content">
+
+            <div class="app-layout">
                 {% include 'includes/sidebar.html' %}
-                
-                <main class="content">
+
+                <main class="content-shell">
                     {% with messages = get_flashed_messages(with_categories=true) %}
                         {% if messages %}
-                            {% for category, message in messages %}
-                                <div class="notification notification-{{ category }} show">
-                                    <i class="fas fa-{{ 'check-circle' if category == 'success' else 'exclamation-circle' if category == 'warning' else 'times-circle' if category == 'error' else 'info-circle' }}"></i>
-                                    <span>{{ message }}</span>
-                                </div>
-                            {% endfor %}
+                            <div class="flash-stack">
+                                {% for category, message in messages %}
+                                    <div class="inline-alert inline-alert-{{ category }}">
+                                        <i class="fas fa-{{ 'check-circle' if category == 'success' else 'exclamation-circle' if category == 'warning' else 'times-circle' if category == 'error' else 'info-circle' }}"></i>
+                                        <span>{{ t(message) }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         {% endif %}
                     {% endwith %}
-                    
-                    {% block content %}{% endblock %}
+
+                    <div class="content-inner">
+                        {% block content %}{% endblock %}
+                    </div>
                 </main>
             </div>
         </div>
-        
+
         {% include 'includes/delete_modal.html' %}
     {% else %}
-        <!-- Login Page -->
-        {% block login_content %}
-        {% endblock %}
+        {% block login_content %}{% endblock %}
     {% endif %}
-    
+
+    <div id="toastRegion" class="toast-region" aria-live="polite" aria-atomic="true"></div>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <script>
-        // إخفاء رسائل النجاح والتحذيرات تلقائياً
-        document.addEventListener('DOMContentLoaded', function() {
-            const notifications = document.querySelectorAll('.notification');
-            notifications.forEach(notification => {
-                // انتظر 3 ثوان قبل الإخفاء
-                setTimeout(function() {
-                    notification.classList.remove('show');
-                    // حذف العنصر بعد انتهاء الحركة
-                    setTimeout(function() {
-                        notification.remove();
-                    }, 300);
-                }, 3000);
-            });
-        });
-    </script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>
