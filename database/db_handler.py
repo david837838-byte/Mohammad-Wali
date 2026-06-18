@@ -9,8 +9,12 @@ def get_db_connection():
     
     if db_url.startswith('sqlite'):
         # SQLite محلي
+        # تحديد المسار المطلق لقاعدة البيانات لتجنب مشاكل مسار التشغيل
+        BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+        db_path = os.path.join(BASE_DIR, 'hospital.db')
+        
         # إضافة timeout لتجنب "database is locked" error
-        conn = sqlite3.connect('hospital.db', timeout=30.0)
+        conn = sqlite3.connect(db_path, timeout=30.0)
         conn.row_factory = sqlite3.Row
         # تحسين الأداء
         conn.execute('PRAGMA journal_mode=WAL')
